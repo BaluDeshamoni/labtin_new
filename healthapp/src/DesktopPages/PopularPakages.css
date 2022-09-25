@@ -1,0 +1,111 @@
+.pakage_box {
+    position: relative;
+    padding: 1rem 0.5rem;
+    margin: 2rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    max-width: 20rem;
+    border-radius: 0.4rem;
+
+}
+
+.pakage_box:nth-child(even) {
+    background-color: #deffde;
+
+}
+
+.pakage_box:nth-child(odd) {
+    background-color: #f3e4ff;
+
+}
+
+.card_offer {
+    position: absolute;
+    top: 0;
+    right: 0;
+    border-top-right-radius: 0.4rem;
+}
+
+.pakage_details,
+.pakage_price {
+    padding: 0rem 0.5rem;
+
+}
+
+.pakagesName {
+    margin-bottom: 0.5rem;
+}
+
+.pakage_details {
+    margin-bottom: 1rem;
+}
+
+.pakage_details>p,
+.pakage_about>p {
+    font-size: 0.9rem;
+}
+
+.pakage_about>p {
+    margin: 0;
+}
+
+.pakage_details .IPara {
+    font-weight: 600;
+}
+
+.pakage_about>button {
+    margin: 1rem 0;
+    background-color: white;
+    border: none;
+    cursor: pointer;
+    border-radius: 0.2rem;
+    padding: 0.4rem 0.8rem;
+    font-weight: 600;
+}
+
+.pakage_price>span {
+    font-size: 1.2rem;
+}
+
+.BookNowButton {
+    width: 100%;
+    padding: 0.6rem;
+    font-size: 1.1rem;
+    font-weight: 600;
+    border: none;
+    margin-top: 0.4rem;
+    color: white;
+    background-color: #000C83;
+    border-radius: 0.4rem;
+    max-width: 20rem;
+    margin-bottom: 0.5rem;
+
+}
+
+.RemoveNowButton {
+    width: 100%;
+    padding: 0.6rem;
+    font-size: 1.1rem;
+    font-weight: 600;
+    border: none;
+    margin-top: 0.4rem;
+    border-radius: 0.4rem;
+    max-width: 20rem;
+    margin-bottom: 0.5rem;
+    color: rgb(6, 6, 6);
+    background-color: rgb(192, 195, 216);
+}
+
+
+.MuiPaper-root.MuiPaper-elevation.MuiPaper-elevation6.MuiSnackbarContent-root.css-1gz1y6s {
+    background-color: #0EB6FF;
+    font-size: 1.2rem;
+
+}
+
+.checkoutButton {
+    background-color: #000C83;
+    color: white;
+    font-size: 1.2rem;
+}

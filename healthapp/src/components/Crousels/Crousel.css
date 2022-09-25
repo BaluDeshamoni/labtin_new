@@ -1,0 +1,6 @@
+.slick-arrow.slick-prev::before,
+.slick-arrow.slick-next::before {
+    font-size: 1.5rem;
+    background-color: black;
+    border-radius: 50%;
+}

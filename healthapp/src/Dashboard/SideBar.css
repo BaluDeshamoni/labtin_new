@@ -1,0 +1,34 @@
+.box_sm {
+    display: none;
+}
+
+.box_lg {
+    display: block;
+    height: 100vh;
+    overflow-y: scroll;
+}
+
+
+.menu_container h3 {
+    padding-left: 15px;
+}
+
+.menu_container .labtin_logo {
+  text-align: center;
+  padding-top: 30px;
+}
+
+.menu_container .labtin_logo img{
+    width: 200px;
+    height: 200px;
+}
+
+@media only screen and (max-width: 900px) {
+    .box_sm {
+        display: block;
+    }
+
+    .box_lg {
+        display: none;
+    }
+}

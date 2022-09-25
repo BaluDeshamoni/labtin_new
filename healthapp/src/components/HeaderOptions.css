@@ -1,0 +1,16 @@
+.header__options {
+    text-align: center;
+    margin-right: 30px;
+    color: rgb(82, 82, 82);
+}
+
+.header__options p {
+    font-size: 12px;
+    font-weight: bold;
+    margin: 0;
+}
+
+.header__options:hover {
+    color: black;
+    cursor: pointer;
+}

@@ -1,0 +1,103 @@
+.tabPakage_main {
+    max-width: 40rem;
+    padding: 0.2rem 1rem;
+    margin: 0.5rem auto;
+    background-color: #F5F5F5;
+
+}
+
+
+
+[role="tablist"] {
+    padding: 0;
+    display: flex;
+    list-style: none;
+    margin-bottom: 0;
+}
+
+[role="tablist"] li {
+    flex: 1 0 50%;
+    max-width: 50%;
+}
+
+[role="tablist"] a {
+    display: block;
+    text-decoration: none;
+    font-size: 1.3rem;
+    font-weight: 600;
+    padding: 0.8rem 0.5rem;
+    text-align: center;
+    /* border-bottom: 2px solid; */
+    /* border-right: 2px solid; */
+    border-top-left-radius: 0.4rem;
+    border-top-right-radius: 0.4rem;
+}
+
+.noBorder a {
+    border-right: 0;
+}
+
+[role="tablist"] [aria-selected] {
+    /* border-top: 2px solid; */
+    background: #fff;
+    /* border-bottom: 0; */
+
+
+}
+
+[role="tabpanel"] {
+    padding: 1.5rem;
+    background-color: white;
+    border-radius: 0.4rem;
+}
+
+*:focus {
+    outline: none;
+}
+
+
+@media (max-width: 500px) {
+    [role="tabpanel"] {
+        padding: 0.8rem;
+    }
+}
+
+@media (min-width: 1000px) {
+    .tabPakage_main {
+        max-width: 90%;
+    }
+
+    [role="tablist"] li {
+        flex: 1 0;
+        max-width: 100%;
+    }
+
+    [role="tabpanel"] {
+        display: grid;
+        grid-template-columns: auto auto auto;
+        align-items: center;
+        row-gap: 2rem;
+        padding: 3rem 1rem;
+
+    }
+
+
+}
+
+@media (max-width: 1500px) {
+    [role="tabpanel"] {
+        display: grid;
+        grid-template-columns: auto auto;
+        align-items: center;
+        row-gap: 2rem;
+    }
+}
+
+@media (max-width: 1200px) {
+    [role="tabpanel"] {
+        display: grid;
+        grid-template-columns: auto;
+        align-items: center;
+        row-gap: 2rem;
+    }
+}

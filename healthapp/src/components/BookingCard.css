@@ -1,0 +1,81 @@
+.booking_card {
+   margin-left: 15px;
+   display: flex;
+   gap: 2rem;
+   margin-bottom: 15px;
+   box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 6px 6px rgba(0, 0, 0, 0.23);
+   width: 100%;
+   border-radius: 2px;
+}
+
+.price_display {
+    display: flex;
+    align-items: baseline;
+}
+
+.booking_details {
+    display: flex;
+    gap: 1rem;
+    flex: 0.95;
+}
+
+.other_details > p {
+    color: blue;
+}
+
+.borderline {
+    border-color: blue;
+}
+
+.price_display > s {
+    color: red;
+}
+
+.price {
+    font-weight: bolder;
+}
+
+.discount {
+    color: green;
+}
+
+.other_details {
+ flex: 0.95;
+ align-self: center;
+}
+
+.payment_details {
+    align-self: center;
+}
+
+.payment_details > button {
+ border: 1px solid var(--color-light);
+ cursor: pointer;
+ background-color: blue;
+ color: white;
+ font-family: cursive;
+ width: 130px;
+ height: 30px;
+ font-size: 15px;
+}
+
+.payment_details > p {
+    color: rgb(60, 53, 53);
+    font-weight: bold;
+}
+
+@media (max-width: 800px) {
+    .booking_card {
+        width: fit-content;
+        margin: 10px;
+        margin-right: 10px;
+    }
+    
+    .payment_details > p {
+        margin-right: 5px;
+    }
+
+    .payment_details > button {
+        margin-right: 5px;
+    }
+}

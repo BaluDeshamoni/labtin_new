@@ -1,0 +1,9 @@
+.bottomNavigation {
+    display: none;
+}
+
+@media (max-width:550px) {
+    .bottomNavigation {
+        display: block;
+    }
+}

@@ -1,0 +1,37 @@
+[
+    {
+        "title": "packages 1",
+        "details": "details details details details details details details details details details details details details details",
+        "parameters": 90,
+        "originalPrice": 100,
+        "discountPrice ": 50
+    },
+    {
+        "title": "packages 2",
+        "details": "details details details details details details details details details details details details details details",
+        "parameters": 90,
+        "originalPrice": 100,
+        "discountPrice ": 50
+    },
+    {
+        "title": "packages 3",
+        "details": "details details details details details details details details details details details details details details",
+        "parameters": 90,
+        "originalPrice": 100,
+        "discountPrice ": 50
+    },
+    {
+        "title": "packages 4",
+        "details": "details details details details details details details details details details details details details details",
+        "parameters": 90,
+        "originalPrice": 100,
+        "discountPrice ": 50
+    },
+    {
+        "title": "packages 5",
+        "details": "details details details details details details details details details details details details details details",
+        "parameters": 90,
+        "originalPrice": 100,
+        "discountPrice ": 50
+    }
+]

@@ -1,0 +1,49 @@
+.dateCrousel {
+    width: 80%;
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+    justify-content: space-between;
+    margin: 1rem 0;
+}
+
+.firstDate,
+.secondDate,
+.thirdDate {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 0.2rem 0.6rem;
+    border-radius: 0.4rem;
+}
+
+.secondDate {
+    border: 1px solid black;
+}
+
+
+.firstDate>p,
+.secondDate>p,
+.thirdDate>p {
+    font-size: 1rem;
+    margin: 0.1rem;
+    font-weight: 600;
+}
+
+.firstDate {
+    background-color: #F3FFF3;
+}
+
+.secondDate {
+    background-color: rgb(207, 255, 239);
+}
+
+.thirdDate {
+    background-color: #FAF4FF;
+}
+
+@media (max-width : 600px) {
+    .dateCrousel {
+        width: 98%;
+    }
+}

@@ -1,0 +1,55 @@
+.testpakages {
+    margin-bottom: 5rem;
+    /* background-color: #F5F5F5; */
+}
+
+.labtest_cards {
+
+    display: grid;
+    grid-template-columns: auto auto;
+    align-items: center;
+
+}
+
+.indiTan {
+    font-size: 1.3rem;
+    font-weight: bold;
+    margin: 0 4rem;
+}
+
+/* .tablist_all.tab_one:hover {
+    background-color: black;
+} */
+
+
+@media (max-width:1200px) {
+    .labtest_cards {
+
+        display: grid;
+        grid-template-columns: auto;
+        align-items: center;
+    }
+}
+
+@media (max-width:500px) {
+    .labtest_cards {
+
+        display: grid;
+        grid-template-columns: auto;
+        align-items: center;
+    }
+
+    .indiTan {
+        font-size: 1.2rem;
+        font-weight: bolder;
+        margin: 0 0.5rem;
+    }
+}
+
+@media (max-width:400px) {
+
+    .indiTan {
+        font-size: 1rem;
+        font-weight: bolder;
+    }
+}

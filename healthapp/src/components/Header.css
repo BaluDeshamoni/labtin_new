@@ -1,0 +1,344 @@
+.header_div {
+    position: sticky;
+    top: 0;
+    z-index: 1;
+
+}
+
+
+.header_main {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.5rem 3rem;
+    background-color: white;
+}
+
+.header_div_desktop {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-top: 1px solid rgb(210, 210, 210);
+    background-color: white;
+}
+
+.headerforDesktop {
+    display: flex;
+    align-items: center;
+    margin-left: 2rem;
+}
+
+.header_profile {
+    margin-right: 4rem;
+    display: flex;
+    align-items: center;
+    font-size: 1.3rem;
+    padding: 0.2rem 1rem;
+    cursor: pointer;
+
+}
+
+
+.header_profile>p {
+    margin: 0;
+    font-weight: 600;
+}
+
+.headerforDesktop>button {
+    border: none;
+    border-right: 1px solid black;
+    padding: 0.5rem 2rem;
+    margin: 0.5rem;
+    background-color: white;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.headerforDesktop>button:hover,
+.header_profile:hover {
+    background-color: #E7EDFF;
+}
+
+.header_logo>img {
+    width: 12rem;
+    object-fit: contain;
+}
+
+
+.menuItems {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.menuItems>a {
+    text-decoration: none;
+}
+
+.searchwithPrescreption {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+
+.searchbar {
+    width: 60%;
+    display: flex;
+    align-items: center;
+    border: 1px solid rgb(181, 181, 181);
+    border-radius: 0.4rem;
+    /* margin-right: 0.5rem; */
+    background-color: #E7EDFF;
+    margin-left: 8rem;
+
+}
+
+
+.searchbar_icon {
+    padding: 0 0.8rem;
+}
+
+
+.searchbar_input {
+    border: none;
+    font-size: 1rem;
+    margin: 0.3rem;
+    width: 100%;
+    background-color: #E7EDFF;
+    padding: 0.5rem 0.5rem;
+}
+
+.searchbar_input:focus {
+    outline: none;
+}
+
+.searchbar_input::placeholder {
+    color: grey;
+}
+
+.searchIcon {
+    font-size: 1.8rem;
+    padding-top: 0.2rem;
+    color: grey;
+}
+
+.uploadPrescription {
+    padding: 0.25rem;
+    margin-right: 9rem;
+}
+
+.selectState>select {
+    border: none;
+    font-size: 1rem;
+    font-weight: bold;
+    padding: 0.5rem;
+}
+
+.selectState>select:focus {
+    outline: none;
+}
+
+.header_profile:hover~#action .menu,
+#action:hover .menu {
+    display: block;
+    opacity: 1;
+    top: 120px;
+    visibility: visible;
+}
+
+
+/* For DropDown Profile Menu */
+
+.action {
+    position: fixed;
+    right: 30px;
+    top: 13px;
+
+}
+
+.action .menu {
+    background-color: #ffffff;
+    box-sizing: 0 5px 25px rgba(0, 0, 0, 0.1);
+    border-radius: 15px;
+    padding: 10px 20px;
+    position: absolute;
+    right: -10px;
+    width: 230px;
+    transition: 0.5s;
+    top: 80px;
+    visibility: hidden;
+    opacity: 0;
+    display: none;
+    transition: 0.2s;
+
+}
+
+
+
+.action .menu.active {
+    opacity: 1;
+    top: 120px;
+    visibility: visible;
+    display: block;
+}
+
+.action .menu::before {
+    background-color: #fff;
+    content: '';
+    height: 20px;
+    position: absolute;
+    right: 30px;
+    transform: rotate(45deg);
+    top: -5px;
+    width: 20px;
+}
+
+.action .menu h3 {
+    color: #555;
+    font-size: 16px;
+    font-weight: 600;
+    line-height: 1.3em;
+    padding: 20px 0px;
+    text-align: left;
+    width: 100%;
+}
+
+.action .menu h3 div {
+    color: #818181;
+    font-size: 14px;
+    font-weight: 400;
+}
+
+.action .menu ul li {
+    align-items: center;
+    border-top: 1px solid rgba(0, 0, 0, 0.05);
+    display: flex;
+    justify-content: left;
+    list-style: none;
+    padding: 10px 0px;
+}
+
+.action .menu ul li img {
+    max-width: 20px;
+    margin-right: 10px;
+    opacity: 0.5;
+    transition: 0.25s
+}
+
+.action .menu ul li a {
+    display: inline-block;
+    color: #555;
+    font-size: 14px;
+    font-weight: 600;
+    padding-left: 15px;
+    text-decoration: none;
+    text-transform: uppercase;
+    transition: 0.5s;
+}
+
+.action .menu ul li:hover img {
+    opacity: 1;
+}
+
+.action .menu ul li:hover a {
+    color: #000C83;
+}
+
+.action .menu ul li:last-child:hover a {
+    color: rgb(216, 5, 5);
+}
+
+.sidebar_icons1 {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.sidebar_icons1 .icon_name1 {
+    margin-left: 0.8rem;
+}
+
+@media (max-width : 1000px) {
+    .searchbar {
+        margin-left: 5rem;
+
+    }
+
+    .uploadPrescription {
+        padding: 0.25rem;
+        margin-right: 5rem;
+    }
+}
+
+@media(max-width : 900px) {
+    .header_main {
+        padding: 0.5rem;
+    }
+
+    .header_logo>img {
+        width: 8.5rem;
+        object-fit: contain;
+    }
+
+    .uploadPrescription {
+        padding: 0.25rem;
+        margin-right: 3rem;
+    }
+
+}
+
+@media(max-width : 550px) {
+    .searchbar {
+        width: 100%;
+        margin-left: 0rem;
+
+    }
+
+    .uploadPrescription {
+        padding: 0.25rem;
+        margin-right: 0rem;
+    }
+
+    .header_main {
+        flex-wrap: wrap;
+    }
+
+    .header_div_desktop {
+        display: none;
+    }
+
+    .header_menu {
+        display: none;
+    }
+
+    .searchwithPrescreption {
+        width: 100%;
+        position: relative;
+    }
+
+    .selectState {
+        position: absolute;
+        top: -3rem;
+        right: 0;
+    }
+
+    .uploadPrescription>.header__options {
+        margin: 0;
+    }
+
+    .searchbar {
+        margin-right: 0.5rem;
+    }
+
+    .selectState>select {
+        font-size: 0.8rem;
+    }
+
+    .searchbar_input {
+        font-size: 0.9rem;
+    }
+
+}

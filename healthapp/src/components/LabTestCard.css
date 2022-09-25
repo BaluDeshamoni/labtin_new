@@ -1,0 +1,194 @@
+.labtest_card {
+    margin: 1rem;
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+    border-radius: 0.4rem;
+    padding: 1rem 1rem;
+    padding-bottom: 2rem;
+    position: relative;
+
+}
+
+.card_offer {
+    position: absolute;
+    top: 0;
+    right: 0;
+    border-top-right-radius: 0.4rem;
+}
+
+.labtest_card:first-child {
+    margin-top: 0;
+}
+
+.labtest_card:nth-child(even) {
+    background-color: #deffde;
+
+}
+
+.labtest_card:nth-child(odd) {
+    background-color: #f3e4ff;
+
+}
+
+.card_firstSection,
+.card_secondSection,
+.card_thirdSection {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.card_heading>h3,
+.card_heading>h4 {
+    margin: 0;
+}
+
+.card_offer {
+    background-color: #10B7FF;
+    padding: 0.2rem 0.4rem;
+    color: white;
+}
+
+.card_price {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.card_description {
+    width: 18rem;
+}
+
+.card_price>h3,
+.card_availabity>h3 {
+    font-size: 1rem;
+    margin: 0;
+    font-weight: 600;
+}
+
+.card_price>div {
+    font-size: 1.3rem;
+    display: flex;
+    align-items: center;
+}
+
+.labtest_addButton {
+    font-size: 1rem;
+    border: none;
+    border-radius: 0.4rem;
+    padding: 0.5rem 0.6rem;
+    width: 100%;
+    background-color: #000C83;
+    color: white;
+    font-weight: bold;
+    margin-bottom: 0.5rem;
+    cursor: pointer;
+}
+
+.card_availabity {
+    text-align: center;
+}
+
+.card_knowMore {
+    font-size: 1rem;
+    border: none;
+    padding: 0.5rem;
+    font-weight: bold;
+    border-radius: 0.4rem;
+    cursor: pointer;
+    background-color: rgb(255, 255, 255);
+
+}
+
+.card_knowMore:hover {
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+
+
+}
+
+
+
+@media (max-width:1350px) {
+    .card_description {
+        width: 20rem;
+    }
+}
+
+@media (max-width:1200px) {
+    .card_description {
+        width: 25rem;
+    }
+}
+
+
+
+@media (max-width:700px) {
+    .card_description {
+        width: 15rem;
+    }
+
+
+    .labtest_card {
+        margin: 1rem auto;
+        padding: 1rem;
+        width: 90%;
+        box-shadow: none;
+    }
+}
+
+@media (max-width:500px) {
+
+    .card_price>h3 {
+        font-size: 0.8rem;
+    }
+
+    .card_price>div>span {
+        font-size: 1rem;
+        font-weight: bold;
+    }
+
+    .card_availabity>h3,
+    .card_availabity>span {
+        font-size: 0.7rem;
+        font-weight: bolder;
+    }
+
+    .card_knowMore {
+        font-size: 0.7rem;
+        padding: 0.5rem;
+    }
+
+
+    .card_heading>h3 {
+        font-size: 0.9rem;
+    }
+
+    .card_offer {
+        font-size: 0.8rem;
+        /* margin: 0.5rem 0.25rem; */
+    }
+
+    .card_heading>h4,
+    .card_description>p {
+        font-size: 0.7rem;
+    }
+}
+
+@media (max-width:400px) {
+    .card_description {
+        width: 13rem;
+    }
+
+
+    .card_offer {
+        font-size: 0.7rem;
+        /* margin: 0.5rem 0.25rem; */
+    }
+
+    .labtest_card {
+        padding: 0.5rem 1rem;
+    }
+
+    .card_price>div>h3 {
+        font-size: 0.8rem;
+    }
+}

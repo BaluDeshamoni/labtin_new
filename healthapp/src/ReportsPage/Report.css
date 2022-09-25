@@ -1,0 +1,105 @@
+.reports_div {
+    text-align: center;
+    /* margin-top: 2rem; */
+    padding: 1rem 4rem;
+    background-color: #f5f5f5;
+    height: 100vh;
+}
+
+.report_heading {
+    display: flex;
+    align-items: center;
+    background-color: white;
+}
+
+.backArrow_nav {
+    color: rgb(37, 20, 132);
+    border: 2px solid rgb(37, 20, 132);
+    border-radius: 50%;
+    margin: 0 1rem;
+}
+
+.report_heading>h3 {
+    color: rgb(37, 20, 132);
+    font-weight: 500;
+    font-size: 1.3rem;
+    margin: 0.5rem 0;
+
+}
+
+.report_person {
+    display: flex;
+    align-items: center;
+    margin-top: 1rem;
+}
+
+.reports_download {
+    margin-top: 2rem;
+    display: grid;
+    grid-template-columns: auto auto auto auto;
+    box-sizing: content-box;
+}
+
+.pdf_download_div {
+    position: relative;
+    background-color: #c1c1c1;
+    margin-right: 1rem;
+    margin-left: 1rem;
+
+}
+
+.threeDots {
+    position: absolute;
+    right: 0;
+    top: 0.2rem;
+    cursor: pointer;
+    color: rgba(44, 44, 44, 0.812);
+}
+
+.pdf_image {
+    padding: 0.4rem;
+
+}
+
+.pdf_image>img {
+    width: 8rem;
+    height: 8rem;
+    object-fit: contain;
+}
+
+.pdf_download_div_footer {
+    box-sizing: border-box;
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0.2rem 1rem;
+    background-color: rgba(69, 69, 69, 0.689);
+}
+
+.pdf_download_div_footer>p {
+    font-size: 1rem;
+    font-weight: bold;
+    color: rgba(255, 255, 255, 0.812);
+}
+
+.download_icon {
+    color: rgba(255, 255, 255, 0.812);
+}
+
+@media (max-width: 800px) {
+    .reports_div {
+        padding: 1rem;
+    }
+
+    .reports_download {
+        margin-top: 2rem;
+        grid-template-columns: auto auto;
+    }
+
+    .pdf_download_div_footer {
+        padding: 0.2rem 0.5rem;
+    }
+}

@@ -1,0 +1,386 @@
+.landing_div {
+    padding-bottom: 5rem;
+    background-color: #F5F5F5;
+    padding-top: 0.5rem;
+    overflow: hidden;
+}
+
+.firstForDesktop {
+    display: grid;
+    grid-template-columns: auto auto;
+    align-items: center;
+    padding: 0rem 3rem;
+}
+
+.first_section {
+    background-color: #0EB6FF;
+    padding: 2rem 2.5rem;
+    margin: 0.5rem 1rem;
+    border-radius: 0.4rem;
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+}
+
+.first_section_heading {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+
+.headingfirst {
+    margin: 0;
+    font-size: 2rem;
+}
+
+
+.Section_Icon {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-top: 1.5rem;
+}
+
+.Section_Icon>img {
+    width: 12rem;
+    object-fit: contain;
+}
+
+.buttonStyle1 {
+    font-size: 1.2rem;
+    border: none;
+    border-radius: 0.4rem;
+    padding: 0.8rem 0.6rem;
+    background-color: #000C83;
+    color: white;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.second_section {
+    display: grid;
+    grid-template-rows: auto auto;
+    align-items: center;
+}
+
+.secondsection_first,
+.secondsection_Second {
+    flex: 1;
+    padding: 0.25rem;
+    margin: 0.5rem 1rem;
+    text-align: center;
+    /* height: 11rem; */
+    border-radius: 0.4rem;
+    cursor: pointer;
+    position: relative;
+}
+
+.text_blue.desktopElement {
+    position: absolute;
+    top: 0;
+    right: 0;
+    border-top-right-radius: 0.4rem;
+
+
+}
+
+.subflex_text>h2 {
+    font-size: 1.2rem;
+    margin: 0;
+    margin: 0.5rem 0;
+}
+
+.secondsection_first>h2,
+.secondsection_Second>h2 {
+    margin: 0;
+    margin-bottom: 1rem;
+}
+
+.secondsection_first {
+    background-color: #F3FFF3;
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 6px 6px rgba(0, 0, 0, 0.23);
+}
+
+.subflex_icon>img {
+    height: 7rem;
+    object-fit: contain;
+}
+
+.secondsection_Second {
+    background-color: #FAF4FF;
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 6px 6px rgba(0, 0, 0, 0.23);
+}
+
+.text_blue {
+    padding: 0.4rem;
+    font-size: 0.8rem;
+    background-color: #000C83;
+    color: white;
+}
+
+.subflex_text>h4 {
+    margin: 0rem;
+    font-weight: 500;
+}
+
+.secondsection_subflex {
+    display: flex;
+    align-items: center;
+}
+
+.subflex_icon {
+    flex: 1;
+}
+
+.subflex_text {
+    flex: 3;
+}
+
+
+
+.fourth_section {
+    /* margin: 1rem 2rem; */
+    padding: 2rem;
+    /* overflow: hidden; */
+}
+
+.fourth_section_heading,
+.fifth_section_heading {
+    margin: 1rem 2rem;
+    font-size: 1.5rem;
+    font-weight: bold;
+    /* margin: 0.8rem 0; */
+    color: #000C83;
+}
+
+.SelfCheck_slider {
+    display: flex;
+    overflow-x: scroll;
+    box-sizing: content-box;
+}
+
+.SelfCheck_slider::-webkit-scrollbar {
+    display: none;
+}
+
+.fifth_section {
+    /* margin: 1rem 2rem; */
+    padding: 2rem;
+}
+
+.fifth_section_heading>button {
+    border-radius: 0.8rem;
+    border: none;
+    color: white;
+    padding: 0.3rem;
+    background-color: #0EB6FF;
+}
+
+.labtest_cards_list {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.bottomNavigation {
+    display: none;
+}
+
+.mobileElement {
+    display: none;
+}
+
+.desktopElement {
+    display: block;
+}
+
+@media(max-width: 900px) {
+    .firstForDesktop {
+        display: block;
+        padding: 0;
+    }
+
+    .desktopElement {
+        display: none;
+    }
+
+    .labtest_cards_list.desktopElement {
+        display: none;
+    }
+
+    .mobileElement {
+        display: block;
+    }
+
+    .second_section {
+        display: flex;
+        align-items: center;
+        flex-direction: row;
+    }
+
+    .secondsection_first,
+    .first_section,
+    .secondsection_Second {
+        padding: 1rem;
+        margin: 1rem;
+    }
+
+    .first_section {
+        padding: 2rem 3rem;
+    }
+
+    .fourth_section_heading,
+    .fifth_section_heading {
+        margin: 1rem;
+    }
+
+    .fourth_section,
+    .fifth_section {
+        padding: 1rem;
+    }
+
+    .labtest_cards {
+        display: flex;
+        justify-content: center;
+        flex-direction: column;
+    }
+
+
+}
+
+@media (max-width: 800px) {
+
+    .secondsection_first,
+    .first_section,
+    .secondsection_Second {
+        padding: 0.5rem;
+        margin: 0.5rem;
+    }
+
+    .first_section {
+        padding: 2rem 1.5rem;
+    }
+
+    .fourth_section_heading,
+    .fifth_section_heading {
+        margin: 1rem 0.5rem;
+    }
+
+    .fourth_section,
+    .fifth_section {
+        padding: 0.5rem;
+    }
+
+    .Section_Icon>img {
+        width: 10rem;
+        object-fit: contain;
+    }
+
+}
+
+@media(max-width:700px) {
+
+    .secondsection_first,
+    .secondsection_Second {
+        font-size: 80%;
+    }
+
+    .text_blue {
+        padding: 0.4rem;
+    }
+
+    .fourth_section {
+        padding-right: 0;
+    }
+}
+
+@media (max-width:550px) {
+    .bottomNavigation {
+        display: block;
+    }
+
+    .Section_Icon>img {
+        width: 8rem;
+        object-fit: contain;
+    }
+
+    .subflex_icon>img {
+        height: 5rem;
+        object-fit: contain;
+    }
+
+    .text_blue {
+        padding: 0.2rem;
+    }
+
+    .secondsection_first>h2,
+    .secondsection_Second>h2 {
+        margin-bottom: 0.2rem;
+        font-size: 0.8rem;
+        font-weight: 600;
+    }
+
+    .subflex_text {
+        font-size: 0.6rem;
+        font-weight: 400;
+    }
+
+    .labtest_cards_list {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+    }
+
+}
+
+
+@media(max-width:500px) {
+
+    .secondsection_first,
+    .secondsection_Second {
+        font-size: 65%;
+        height: 6.5rem;
+    }
+
+    .subflex_text>h4 {
+        margin: 0;
+    }
+
+    .buttonStyle1 {
+        padding: 0.6rem 0.5rem;
+        font-size: 0.9rem;
+    }
+
+    .first_section {
+        padding: 1rem;
+    }
+
+    .bottomDrawer {
+        margin-top: 0.5rem;
+    }
+
+    .Section_Icon>img {
+        width: 7.5rem;
+        object-fit: contain;
+    }
+
+    .headingfirst {
+        font-size: 1rem;
+        font-weight: bolder;
+    }
+
+    .fifth_section_heading,
+    .fourth_section_heading {
+        font-size: 1rem;
+    }
+
+
+}
+
+@media(max-width:400px) {
+    .Section_Icon>img {
+        width: 6.5rem;
+        object-fit: contain;
+    }
+}

@@ -1,0 +1,50 @@
+.add_banner {
+    padding: 10px;
+}
+
+.add_banner form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.add_banner form input, textarea{
+    border: none;
+    border-bottom: 2px solid rgb(41, 39, 39);
+    font-size: 25px;
+    margin-bottom: 20px;
+}
+
+.add_banner form input{
+    padding-bottom: 10px;
+}
+
+.add_banner form .banner_input{
+    background-color: rgb(201, 198, 198);
+    padding: 15px 10px;
+    border-radius: 5px;
+    font-size: 18px;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.add_banner form .banner_input .img_name{
+    color: cornflowerblue;
+}
+
+.add_banner form input, textarea:focus{
+    outline: none;
+}
+
+.add_banner form .add_package_btn{
+    border: none;
+    background-color: #000C83;
+    color: white;
+    font-weight: 600;
+    font-size: 20px;
+    padding: 10px 0px;
+    border-radius: 10px;
+    width: 200px;
+    cursor: pointer;
+    margin-top: 20px;
+}

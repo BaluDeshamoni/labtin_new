@@ -1,0 +1,96 @@
+.sidebar_menu {
+    padding-left: 8rem;
+    margin: 2rem 0;
+
+}
+
+.sidebar_menu>a {
+    text-decoration: none;
+    color: black;
+}
+
+.sidebar_icons {
+    display: flex;
+    align-items: center;
+    font-size: 1.3rem;
+    margin: 1rem 0;
+    cursor: pointer;
+}
+
+.icon_name {
+    margin-left: 1.5rem;
+}
+
+.menuModal {
+    display: none;
+    /* Hidden by default */
+    position: fixed;
+    /* Stay in place */
+    /* Sit on top */
+    padding-top: 10rem;
+    /* Location of the box */
+    left: 0;
+    top: 0;
+    width: 100%;
+    /* Full width */
+    height: 100%;
+    /* Full height */
+    overflow: auto;
+    /* Enable scroll if needed */
+    background-color: rgb(0, 0, 0);
+    /* Fallback color */
+    background-color: rgb(255, 255, 255);
+    /* Black w*/
+}
+
+
+.menuModal.activeModal {
+    display: block;
+    z-index: 11;
+
+}
+
+.closeIcon {
+    position: absolute;
+    margin: 1rem 2rem;
+    right: 0;
+    top: 3rem;
+}
+
+.selfCheck_icons_modal {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 0.5rem 2rem;
+}
+
+.selfCheck_circle_modal>img {
+    height: 4.5rem;
+    width: 4.5rem;
+    border-radius: 50%;
+    background-color: #ffffff;
+    text-align: center;
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+    padding: 0.5rem;
+}
+
+.selfCheck_icons_modal>h3 {
+    font-weight: bold;
+    color: #000C83;
+    margin: 0;
+
+}
+
+
+@media (max-width: 500px) {
+    .selfCheck_circle_modal>img {
+        height: 6rem;
+        width: 6rem;
+    }
+
+    .selfCheck_icons_modal>h3 {
+        font-weight: bold;
+        font-size: 1.2rem;
+        margin-top: 0.2rem;
+    }
+}
