@@ -16,6 +16,9 @@ export const createPackage = (newPost) => API.post("/package", newPost);
 export const fetchTests = () => API.get("/test");
 export const createTest = (newTest) => API.post("/test", newTest);
 
+export const editTest = (newTest) => API.put("/test", newTest);
+export const editPackage = (newPackage) => API.put("/package", newPackage);
+
 export const fetchRadTests = () => API.get("/radTest");
 export const createRadTest = (newRadTest) => API.post("/radTest", newRadTest);
 
@@ -44,3 +47,9 @@ export const createScrollmenu = (newScrollmenu) =>
 export const fetchPrescriptions = () => API.get("/prescriptions");
 export const addPrescription = (newPrescription) =>
   API.post("/prescriptions", newPrescription);
+
+export const createOrder = (order, config) => API.post("/order", order, config);
+export const fetchOrders = (config) => API.get("/order/all", config);
+export const fetchMyOrders = (config) => API.get("/order", config);
+export const uploadReports = (data, config) =>
+  API.put("/order/uploadReports", data, config);

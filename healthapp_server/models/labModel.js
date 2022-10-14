@@ -1,4 +1,4 @@
-import mongoose from 'mongoose'
+import mongoose from "mongoose";
 
 const labSchema = mongoose.Schema(
   {
@@ -6,13 +6,12 @@ const labSchema = mongoose.Schema(
     logo: String,
     accrediation: String,
     time: String,
-    price: String,
     state: String,
   },
   {
     timestamps: true,
   }
-)
+);
 const radLabSchema = mongoose.Schema(
   {
     title: String,
@@ -25,9 +24,9 @@ const radLabSchema = mongoose.Schema(
   {
     timestamps: true,
   }
-)
+);
 
-var Lab = mongoose.model('Lab', labSchema)
-var RadLab = mongoose.model('RadLab', radLabSchema)
+var Lab = mongoose.model("Lab", labSchema);
+var RadLab = mongoose.model("RadLab", radLabSchema);
 
-export { Lab, RadLab }
+export { Lab, RadLab };

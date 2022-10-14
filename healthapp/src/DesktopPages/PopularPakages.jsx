@@ -3,14 +3,10 @@ import "./PopularPakages.css";
 import Snackbar, { SnackbarOrigin } from "@mui/material/Snackbar";
 import { Link, useNavigate } from "react-router-dom";
 
-export interface State extends SnackbarOrigin {
-  open: boolean;
-}
-
-const PopularPakages = (props: any) => {
+const PopularPakages = (props) => {
   const navigate = useNavigate();
 
-  const [state, setState] = React.useState<State>({
+  const [state, setState] = React.useState({
     open: false,
     vertical: "bottom",
     horizontal: "center",
@@ -26,12 +22,15 @@ const PopularPakages = (props: any) => {
     setState({ ...state, open: false });
   };
   const action = (
-    <Link className="checkoutButton" to="/selectlab/data" state={props.data}>
+    <div
+      className="checkoutButton"
+      onClick={() => navigate("/selectlab", { state: { data: props.data } })}
+    >
       Show Labs
-    </Link>
+    </div>
   );
 
-  const handleBooking = (e: any) => {
+  const handleBooking = (e) => {
     if (e.target.innerHTML === "Book Now") {
       e.target.classList.remove("BookNowButton");
       e.target.classList.add("RemoveNowButton");
@@ -45,6 +44,9 @@ const PopularPakages = (props: any) => {
       setState({ ...state, open: false });
     }
   };
+  const { availableIn } = props.data;
+  const discount = Math.min(...availableIn.map((m) => m.discountPrice));
+  const original = Math.min(...availableIn.map((m) => m.originalPrice));
 
   return (
     <div>
@@ -55,17 +57,34 @@ const PopularPakages = (props: any) => {
           <p style={{ color: "red", fontSize: "80%", marginTop: "0.5rem " }}>
             REQUIRED FASTING
           </p>
-          <p className="IPara">Includes : {props.data.parameters} Parameters</p>
+          {props.data.parameters && (
+            <p className="IPara">
+              Includes : {props.data.parameters} Parameters
+            </p>
+          )}
           <div className="pakage_about">
-            <p>{props.data.details}</p>
+            <p>{props.data.details.slice(0, 150)} . . .</p>
             <button>(Know more)</button>
           </div>
         </div>
-        <div className="pakage_price">
-          <span style={{ textDecoration: "line-through", color: "red" }}>
-            {props.data.originalPrice}
-          </span>{" "}
-          <span style={{ color: "purple" }}>₹{props.data.discountPrice}/-</span>
+        <div className="pakage_bottom">
+          {props.type == "tests" && (
+            <div className="test_available">
+              <div>Available In</div>
+              <div>2 Diagnostics</div>
+            </div>
+          )}
+          <div className="pakage_price">
+            {props.type == "tests" && (
+              <div className="test_price">starts from</div>
+            )}
+            <div>
+              <span style={{ textDecoration: "line-through", color: "red" }}>
+                {original}
+              </span>{" "}
+              <span style={{ color: "purple" }}>₹{discount}/-</span>
+            </div>
+          </div>
         </div>
         <button className="BookNowButton" onClick={handleBooking}>
           Book Now

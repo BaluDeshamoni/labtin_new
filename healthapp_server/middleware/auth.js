@@ -1,36 +1,36 @@
-import jwt from 'jsonwebtoken'
-import User from '../models/userModel.js'
-import asyncHandler from 'express-async-handler'
+import jwt from "jsonwebtoken";
+import User from "../models/userModel.js";
+import asyncHandler from "express-async-handler";
 
 export const protect = asyncHandler(async (req, res, next) => {
-  let token
+  let token;
   if (
     req.headers.authorization &&
-    req.headers.authorization.startsWith('Bearer')
+    req.headers.authorization.startsWith("Bearer")
   ) {
     try {
-      token = req.headers.authorization.split(' ')[1]
-      const decode = jwt.verify(token, 'Labtin')
+      token = req.headers.authorization.split(" ")[1];
 
-      req.user = await User.findById(decode.id).select('-password')
+      const decode = jwt.verify(token, "Labtin");
+      req.user = await User.findById(decode.id).select("-password");
 
-      next()
+      next();
     } catch (error) {
-      res.status(401)
-      throw new Error('Not authorized,no token')
+      res.status(401);
+      throw new Error("Not authorized,no token");
     }
   }
   if (!token) {
-    res.status(401)
-    throw new Error('Not authorized,no token')
+    res.status(401);
+    throw new Error("Not authorized,no token");
   }
-})
+});
 
 export const admin = asyncHandler(async (req, res, next) => {
   if (req.user && req.user.isAdmin) {
-    next()
+    next();
   } else {
-    res.status(401)
-    throw new Error('Not authorized as an admin')
+    res.status(401);
+    throw new Error("Not authorized as an admin");
   }
-})
+});

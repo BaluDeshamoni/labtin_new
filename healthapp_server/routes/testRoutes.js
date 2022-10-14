@@ -1,10 +1,15 @@
-import express from 'express'
+import express from "express";
 
-import { getTests, createTest } from '../controllers/TestsController.js'
+import {
+  getTests,
+  createTest,
+  editTest,
+} from "../controllers/TestsController.js";
 
-const router = express.Router()
+const router = express.Router();
 
-router.get('/', getTests)
-router.post('/', createTest)
+router.get("/", getTests);
+router.post("/", createTest);
+router.put("/", editTest);
 
-export default router
+export default router;

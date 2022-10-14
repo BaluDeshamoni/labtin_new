@@ -26,6 +26,42 @@ export const createPackage = async (req, res) => {
   }
 };
 
+export const editPackage = async (req, res) => {
+  const { _id, present, lab } = req.body;
+
+  try {
+    const pack = await Package.findById(_id);
+    if (pack) {
+      pack.title = req.body.title || pack.title;
+      pack.details = req.body.details || pack.details;
+      pack.parameters = req.body.parameters || pack.parameters;
+
+      if (present) {
+        for (let x in pack.availableIn) {
+          if (pack.availableIn[x].lab == lab) {
+            pack.availableIn[x].originalPrice =
+              req.body.originalPrice || pack.originalPrice;
+            pack.availableIn[x].discountPrice =
+              req.body.discountPrice || pack.discountPrice;
+          }
+        }
+      } else {
+        pack.availableIn.push({
+          lab,
+          originalPrice: req.body.originalPrice,
+          discountPrice: req.body.discountPrice,
+        });
+      }
+
+      const updatedPack = await pack.save();
+
+      res.status(201).json(updatedPack);
+    }
+  } catch (error) {
+    res.status(409).json({ message: error.message });
+  }
+};
+
 export const getDiscounts = async (req, res) => {
   try {
     const discounts = await Discount.find();

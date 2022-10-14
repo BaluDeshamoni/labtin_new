@@ -5,12 +5,7 @@ const ScrollmenuRow: React.FC<any> = ({ banner }) => {
   return (
     <tr>
       <td>
-        <img
-          src={`//localhost:5000/${icon}`}
-          height="50px"
-          width="80px"
-          alt=""
-        />
+        <img src={icon} height="50px" width="80px" alt="" />
       </td>
       <td>{title}</td>
       {/* <td>

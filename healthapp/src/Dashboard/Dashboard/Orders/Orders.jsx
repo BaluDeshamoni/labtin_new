@@ -1,86 +1,68 @@
-import React, { useEffect } from 'react'
-import '../../../App.css'
-import '../../Manage/ManagePackage/ManagePackage.css'
-import { useNavigate } from 'react-router-dom'
+import React, { useEffect, useState } from "react";
+import "../../../App.css";
+import "../../Manage/ManagePackage/ManagePackage.css";
+import { useNavigate } from "react-router-dom";
+import { getOrders } from "../../../actions/orderActions";
+import { useDispatch, useSelector } from "react-redux";
 
 const Orders = () => {
-  const navigate = useNavigate()
-  const Orders = [
-    {
-      _id: 1,
-      Customer: 'Customer 1',
-      name: 'package 1',
-      details:
-        'details details details details details details details details details details details details details details',
-      totalPrice: 100,
-      Address: 'Address Address',
-    },
-    {
-      _id: 2,
-      Customer: 'Customer 2',
-      name: 'package 2',
-      details:
-        'details details details details details details details details details details details details details details',
-      totalPrice: 100,
-      Address: 'Address Address',
-    },
-    {
-      _id: 3,
-      Customer: 'Customer 3',
-      name: 'package 3',
-      details:
-        'details details details details details details details details details details details details details details',
-      totalPrice: 100,
-      Address: 'Address Address',
-    },
-    {
-      _id: 4,
-      Customer: 'Customer 4',
-      name: 'package 4',
-      details:
-        'details details details details details details details details details details details details details details',
-      totalPrice: 100,
-      Address: 'Address Address',
-    },
-    {
-      _id: 5,
-      Customer: 'Customer 5',
-      name: 'package 5',
-      details:
-        'details details details details details details details details details details details details details details',
-      totalPrice: 100,
-      Address: 'Address Address',
-    },
-  ]
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const { orders } = useSelector((state) => state.orders);
 
+  useEffect(() => {
+    dispatch(getOrders());
+  }, [dispatch]);
+  console.log(orders);
+  const l = ["Ordered", "Shipped", "On the way", "Delivered"];
+  const [active, setActive] = useState(false);
   return (
-    <div className='manage-package'>
-      <div className='table-container'>
+    <div className="manage-package">
+      <div className="table-container">
         <table>
           <thead>
             <tr>
               <th>Customer</th>
-              <th>Name</th>
-              <th>Details</th>
-              <th>Total Price</th>
+              <th>item</th>
+              <th>Lab </th>
               <th>Address</th>
+              <th>Total Price</th>
+              <th>status </th>
+              <th>Upload Reports</th>
             </tr>
           </thead>
           <tbody>
-            {Orders.map(({ Customer, name, details, totalPrice, Address }) => (
-              <tr>
-                <td>{Customer}</td>
-                <td>{name}</td>
-                <td>{details}</td>
-                <td>{totalPrice}</td>
-                <td>{Address}</td>
-              </tr>
-            ))}
+            {orders.map(
+              (
+                { userName, orderedItem, totalPrice, address, status },
+                index
+              ) => (
+                <tr>
+                  <td>{userName}</td>
+                  <td>{orderedItem.item}</td>
+                  <td>{orderedItem.lab}</td>
+                  <td>{address.state}</td>
+                  <td>{totalPrice}</td>
+                  <td>
+                    {status} : {l[status - 1]}
+                  </td>
+                  <td
+                    onClick={() =>
+                      navigate("/dashboard/uploadReports", {
+                        state: { order: orders[index] },
+                      })
+                    }
+                  >
+                    Add
+                  </td>
+                </tr>
+              )
+            )}
           </tbody>
         </table>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default Orders
+export default Orders;

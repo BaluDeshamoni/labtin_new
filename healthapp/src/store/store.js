@@ -11,6 +11,7 @@ import {
 } from "../reducer/packageReducer";
 import prescriptionReducer from "../reducer/prescriptionReducer";
 import {
+  userDetailsReducer,
   userListReducer,
   userLoginReducer,
   userRegisterReducer,
@@ -19,6 +20,7 @@ import testReducer from "../reducer/testReducer";
 import radTestReducer from "../reducer/radTestReducer";
 import { labReducer, radLabReducer } from "../reducer/labReducer";
 import { bannerReducer, scrollmenuReducer } from "../reducer/appreanceReducer";
+import orderReducer from "../reducer/orderReducer";
 
 const reducer = combineReducers({
   customers: customerReducer,
@@ -36,6 +38,8 @@ const reducer = combineReducers({
   userLogin: userLoginReducer,
   userRegister: userRegisterReducer,
   userList: userListReducer,
+  userDetails: userDetailsReducer,
+  orders: orderReducer,
 });
 
 const userInfoFromStorage = localStorage.getItem("userInfo")

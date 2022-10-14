@@ -13,6 +13,7 @@ import customerRoutes from "./routes/customerRoutes.js";
 import userRoutes from "./routes/userRoutes.js";
 import labRoutes from "./routes/labRoutes.js";
 import appearanceRoutes from "./routes/appearanceRoutes.js";
+import orderRoutes from "./routes/orderRoutes.js";
 
 const app = express();
 dotenv.config();
@@ -30,6 +31,7 @@ app.use("/radTest", radTestRoutes);
 app.use("/lab", labRoutes);
 app.use("/appearance", appearanceRoutes);
 app.use("/prescriptions", prescriptionRoutes);
+app.use("/order", orderRoutes);
 
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {

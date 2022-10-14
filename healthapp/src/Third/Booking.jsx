@@ -1,28 +1,35 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "./Booking.css";
-import Avatar from "@mui/material/Avatar";
-import Logo from "../image/LabtinLogo.png";
 import AddCircleOutlineRoundedIcon from "@mui/icons-material/AddCircleOutlineRounded";
 import LocationOnIcon from "@mui/icons-material/LocationOn";
 import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown";
-import Snackbar, { SnackbarOrigin } from "@mui/material/Snackbar";
+import Snackbar from "@mui/material/Snackbar";
 import { useLocation, useNavigate } from "react-router-dom";
 import DateCrousel from "../components/DateCrousel";
+import AddUser from "./AddUser";
+import AddAddress from "./AddAddress";
+import { useDispatch, useSelector } from "react-redux";
+import { userDetails } from "../actions/userActions";
 
 const Booking = () => {
   const loc = useLocation();
-  const data = loc.state;
+  const dispatch = useDispatch();
+  const data = loc.state.info;
   console.log(data);
+  const [info, setInfo] = useState(data);
   const [state, setState] = React.useState({
     open: false,
     vertical: "bottom",
     horizontal: "center",
   });
-
+  const [addUser, setAddUser] = useState(false);
+  const [addAddress, setAddAddress] = useState(false);
+  const [address, setAddress] = useState("");
+  const [selectedUser, setSelectedUser] = useState({});
+  const [date, setDate] = useState(0);
   const navigate = useNavigate();
   const [appointmentDetails, setAppointmentDetails] = useState({
     time: "",
-    date: "",
   });
   const { vertical, horizontal, open } = state;
 
@@ -31,8 +38,7 @@ const Booking = () => {
   };
 
   const handleClose = () => {
-    if (appointmentDetails.time === "" && appointmentDetails.date === "")
-      setState({ ...state, open: false });
+    if (appointmentDetails.time === "") setState({ ...state, open: false });
   };
   const toggleOptionsV = (e) => {
     if (e.target.parentElement.classList[0] === "appointmentSection") {
@@ -42,7 +48,7 @@ const Booking = () => {
   };
 
   const handleAppointment = (e) => {
-    setAppointmentDetails({ ...appointmentDetails, date: e.target.innerHTML });
+    setAppointmentDetails({ ...appointmentDetails, time: e.target.innerHTML });
 
     const options = document.getElementsByClassName("appointmentOption");
     for (let i = 0; i < options.length; i++) {
@@ -52,29 +58,38 @@ const Booking = () => {
     handleClick();
   };
 
-  const handleCheckOut = () => {
-    if (appointmentDetails.time !== "" && appointmentDetails.date !== "")
-      handleClick();
-  };
-
-  const handleDate = (e) => {
-    setAppointmentDetails({
-      ...appointmentDetails,
-      time: e.target.value,
-    });
-    handleCheckOut();
-  };
-
   const action = (
     <button
       className="checkoutButton"
       onClick={() => {
-        navigate("/onSummary");
+        const data = {
+          ...info,
+          address,
+          selectedUser,
+          currentDate: currentDate.toString().split(" "),
+          time: appointmentDetails.time,
+        };
+        navigate("/onSummary", { state: data });
       }}
     >
       Checkout
     </button>
   );
+
+  const { user } = useSelector((state) => state.userDetails);
+
+  console.log(user);
+  useEffect(() => {
+    if (!user._id) {
+      dispatch(userDetails());
+    }
+  }, [dispatch]);
+  console.log(selectedUser);
+  console.log(address);
+  console.log(appointmentDetails);
+  const currentDate = new Date();
+  const conDate = new Date();
+  currentDate.setDate(conDate.getDate() + date);
 
   return (
     <div className="booking_div">
@@ -86,40 +101,69 @@ const Booking = () => {
             <div className="avatars">
               <div className="add_beforeAvtar">
                 <AddCircleOutlineRoundedIcon fontSize="inherit" />
-                <h3>Add</h3>
+                <h3 onClick={() => setAddUser(true)}>Add</h3>
+                <AddUser
+                  visibility={addUser}
+                  onClose={() => setAddUser(false)}
+                />
               </div>
               <div className="addedAvatar">
-                <Avatar
-                  alt="Logo"
-                  // src={Logo}
-                  sx={{
-                    width: "4rem",
-                    height: "4rem",
-                    border: "1px solid grey",
-                    bgcolor: "purple",
-                  }}
-                >
-                  S
-                </Avatar>
-                <h3>Surya</h3>
+                {user.users &&
+                  user.users.map((u) => (
+                    <div
+                      className="avat_det"
+                      onClick={() => setSelectedUser(u)}
+                    >
+                      <img
+                        alt="Logo"
+                        src={u.img}
+                        style={{
+                          width: "4rem",
+                          height: "4rem",
+                          border: "1px solid grey",
+                          bgcolor: "purple",
+                          borderRadius: "50%",
+                        }}
+                      />
+                      <h3>{u.name}</h3>
+                    </div>
+                  ))}
               </div>
             </div>
           </div>
           <div className="pickUpLocation">
             <h3>Pick Up Location</h3>
-            <div className="iconLoaction">
-              <LocationOnIcon fontSize="inherit" color="inherit" />
-              <p>Let us know where to collect test sample from</p>
-            </div>
+            {address ? (
+              <div className="iconLoaction">
+                <p>
+                  {address.place} , {address.city} , {address.state}
+                </p>
+              </div>
+            ) : (
+              <div className="iconLoaction">
+                <LocationOnIcon fontSize="inherit" color="inherit" />
+                <p>Let us know where to collect test sample from</p>
+              </div>
+            )}
 
-            <button className="addAddressButton">Add Address</button>
+            <button
+              onClick={() => setAddAddress(true)}
+              className="addAddressButton"
+            >
+              Add Address
+            </button>
+            <AddAddress
+              visibility={addAddress}
+              onClose={() => setAddAddress(false)}
+              address={(d) => setAddress(d)}
+            />
           </div>
         </div>
         <div>
           <div className="selectBookingSlot">
             <h3>Select Booking Slot</h3>
             <div className="selectBookingSlot_div">
-              <DateCrousel />
+              <DateCrousel setdate={(d) => setDate(d)} />
               <div className="appointmentSelect">
                 <div className="appointmentSection" onClick={toggleOptionsV}>
                   <h4>

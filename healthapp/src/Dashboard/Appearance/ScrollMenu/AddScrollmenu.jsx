@@ -27,10 +27,7 @@ const AddScrollmenu = () => {
     const file = e.target.files[0];
     const formData = new FormData();
     formData.append("file", file);
-    const { data: info } = await axios.post(
-      "//localhost:5000/upload",
-      formData
-    );
+    const { data: info } = await axios.post("/upload", formData);
     console.log(info[0]);
     setData({
       ...data,

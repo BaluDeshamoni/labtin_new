@@ -52,7 +52,6 @@ th {
   width: 50px;
 }
 
-
 /* styles for all add buttons  */
 .add-btn {
   border: none;
@@ -73,4 +72,41 @@ th {
 
 .active {
   color: lightseagreen;
+}
+
+.options {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  width: 90%;
+}
+
+.options .add_lab {
+  margin-left: 8px;
+}
+
+.labs_options {
+  display: flex;
+  width: 50%;
+  justify-content: space-around;
+}
+
+.labs_false {
+  padding: 3px 20px;
+  text-align: center;
+  cursor: pointer;
+}
+.tests_false {
+  padding: 3px 20px;
+  text-align: center;
+  cursor: pointer;
+}
+
+.labs_active {
+  background-color: gainsboro;
+  padding: 3px 20px;
+}
+.tests_active {
+  background-color: gainsboro;
+  padding: 3px 20px;
 }

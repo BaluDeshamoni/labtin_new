@@ -49,6 +49,15 @@ import AddRadTest from "./Dashboard/Manage/ManageRadiologyTests/AddRadTest";
 import AddLocation from "./Dashboard/Manage/ManageLocation/AddLocation";
 import ScrollMenu from "./Dashboard/Appearance/ScrollMenu/Scrollmenu";
 import AddScrollmenu from "./Dashboard/Appearance/ScrollMenu/AddScrollmenu";
+import LabsAndPackages from "./Dashboard/Manage/ManagePartnerLabs/LabsAndPackages";
+import LabPackages from "./Dashboard/Manage/ManagePartnerLabs/LabPackages";
+import EditPackage from "./Dashboard/Manage/ManagePartnerLabs/EditPackage";
+import EditTest from "./Dashboard/Manage/ManagePartnerLabs/EditTest";
+import MyAddress from "./components/MyInfo/MyAddress";
+import MyOffers from "./components/MyInfo/MyOffers";
+import MyBookings from "./components/MyInfo/MyBookings";
+import MyReports from "./components/MyInfo/MyReports";
+import UploadReports from "./Dashboard/Dashboard/Orders/UploadReports";
 
 function App() {
   const userLogin = useSelector((state) => state.userLogin);
@@ -61,13 +70,16 @@ function App() {
           {<Header />}
           <Routes>
             <Route path="/" element={<Landingpage />} />
-            <Route path="/MyReport" element={<Report />} />
-            <Route path="/Booking/data" element={<Booking />} />
+            <Route path="/Booking" element={<Booking />} />
+            <Route path="/MyBooking" element={<MyBookings />} />
+            <Route path="/MyReport" element={<MyReports />} />
+            <Route path="/MyAddress" element={<MyAddress />} />
+            <Route path="/MyOffers" element={<MyOffers />} />
             <Route path="/TestPakage" element={<PakagesTab />} />
-            <Route path="/onSummary/data" element={<OrderSummary />} />
+            <Route path="/onSummary" element={<OrderSummary />} />
             <Route path="/Radiology" element={<Radiology />} />
             <Route path="/BookingPackages" element={<ListPakage />} />
-            <Route path="/selectLab/data" element={<ShowLabs />} />
+            <Route path="/selectLab" element={<ShowLabs />} />
 
             {/* New routes  */}
             {userInfo?.isAdmin && (
@@ -108,6 +120,10 @@ function App() {
                   path="manageRadPartners"
                   element={<ManageRadPartners />}
                 />
+
+                <Route path="LabsAndPackages" element={<LabsAndPackages />} />
+                <Route path="editPackage" element={<EditPackage />} />
+                <Route path="editTest" element={<EditTest />} />
                 <Route path="addTest" element={<AddTest />} />
                 <Route path="addRadTest" element={<AddRadTest />} />
                 <Route path="addLab" element={<AddLab />} />
@@ -117,6 +133,7 @@ function App() {
                 <Route path="addPackage" element={<AddPackage />} />
                 <Route path="addBanner" element={<AddBanner />} />
                 <Route path="addScrollmenu" element={<AddScrollmenu />} />
+                <Route path="uploadReports" element={<UploadReports />} />
               </Route>
             )}
             {/* ...............  */}

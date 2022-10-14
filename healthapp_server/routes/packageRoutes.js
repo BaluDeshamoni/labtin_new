@@ -1,4 +1,4 @@
-import express from 'express'
+import express from "express";
 
 import {
   getPackages,
@@ -7,17 +7,19 @@ import {
   createDiscount,
   getLocations,
   createLocation,
-} from '../controllers/packagesController.js'
+  editPackage,
+} from "../controllers/packagesController.js";
 
-const router = express.Router()
+const router = express.Router();
 
-router.get('/', getPackages)
-router.post('/', createPackage)
+router.get("/", getPackages);
+router.post("/", createPackage);
+router.put("/", editPackage);
 
-router.get('/discount', getDiscounts)
-router.post('/discount', createDiscount)
+router.get("/discount", getDiscounts);
+router.post("/discount", createDiscount);
 
-router.get('/location', getLocations)
-router.post('/location', createLocation)
+router.get("/location", getLocations);
+router.post("/location", createLocation);
 
-export default router
+export default router;

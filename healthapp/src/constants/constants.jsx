@@ -1,6 +1,9 @@
 export const CREATE_PACKAGE = "CREATE_PACKAGE";
 export const FETCH_ALL_PACKAGES = "FETCH_ALL_PACKAGES";
 
+export const EDIT_PACKAGE = "EDIT_PACKAGE";
+export const EDIT_TEST = "EDIT_TEST";
+
 export const CREATE_TEST = "CREATE_TEST";
 export const FETCH_ALL_TESTS = "FETCH_ALL_TESTS";
 
@@ -36,3 +39,7 @@ export const FETCH_ALL_EMPLOYEES = "FETCH_ALL_EMPLOYEES";
 
 export const END_LOADING = "END_LOADING";
 export const START_LOADING = "START_LOADING";
+
+export const CREATE_ORDER = "CREATE_ORDER";
+export const FETCH_ALL_ORDERS = "FETCH_ALL_ORDERS";
+export const FETCH_MY_ORDERS = "FETCH_MY_ORDERS";

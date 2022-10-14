@@ -2,18 +2,18 @@ import React, { useState } from "react";
 import ArrowBackIosIcon from "@mui/icons-material/ArrowBackIos";
 import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
 import "./DateCrousel.css";
-const DateCrousel = () => {
+
+const DateCrousel = (props) => {
   const [dateStep, setDateStep] = useState(0);
   const [conDate, setDate] = useState(new Date());
+
   const currentDate = new Date();
   currentDate.setDate(conDate.getDate() + dateStep);
   const currentDateList = currentDate.toString().split(" ");
-  console.log(currentDate);
 
   const previousDate = new Date();
   previousDate.setDate(conDate.getDate() - 1 + dateStep);
   const previousDateList = previousDate.toString().split(" ");
-  console.log(previousDate);
 
   const nextDate = new Date();
   nextDate.setDate(conDate.getDate() + 1 + dateStep);
@@ -26,14 +26,13 @@ const DateCrousel = () => {
   if (currentDate == conDate) {
     setDate(currentDate);
   }
-
-  console.log(dateStep);
-
-  const handleprevious = (e: any) => {
+  const handleprevious = (e) => {
     setDateStep(dateStep - 1);
+    props.setdate(dateStep - 1);
   };
-  const handlenext = (e: any) => {
+  const handlenext = (e) => {
     setDateStep(dateStep + 1);
+    props.setdate(dateStep + 1);
   };
 
   return (

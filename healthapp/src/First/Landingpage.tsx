@@ -19,13 +19,19 @@ import DSlider from "../components/DSlider";
 import Crousel from "../components/Crousels/Crousel";
 import MobileCrousel from "../components/Crousels/MobileCrousel";
 
-
 const Landingpage = () => {
   const navigate = useNavigate();
   const [value, setValue] = React.useState(0);
 
-  const navigateToIP = () => {
-    navigate("/TestPakage");
+  const navigateToPackages = () => {
+    navigate(`/BookingPackages`, {
+      state: { name: "HealthPakages" },
+    });
+  };
+  const navigateToHealth = () => {
+    navigate(`/BookingPackages`, {
+      state: { name: "Scan&Imaging" },
+    });
   };
 
   const navigateToRadiology = () => {
@@ -57,7 +63,7 @@ const Landingpage = () => {
           </div>
         </div>
         <div className="second_section">
-          <div className="secondsection_first" onClick={navigateToIP}>
+          <div className="secondsection_first" onClick={navigateToPackages}>
             <h2 className="mobileElement">Health Packages</h2>
             <div className="text_blue desktopElement">Upto 50% off</div>
 
@@ -75,7 +81,7 @@ const Landingpage = () => {
             </div>
           </div>
 
-          <div className="secondsection_Second" onClick={navigateToIP}>
+          <div className="secondsection_Second" onClick={navigateToHealth}>
             <h2 className="mobileElement">Health Scans & Imagings</h2>
             <div className="text_blue desktopElement">Upto 30% off</div>
             <div className="secondsection_subflex">

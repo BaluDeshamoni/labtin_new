@@ -10,7 +10,7 @@ const ManageLocations = () => {
   const dispatch = useDispatch();
 
   const { locationList } = useSelector((state) => state.locations);
-  console.log(locationList);
+
   useEffect(() => {
     dispatch(getLocations());
   }, [dispatch]);

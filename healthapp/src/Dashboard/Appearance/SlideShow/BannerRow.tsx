@@ -5,12 +5,7 @@ const BannerRow: React.FC<any> = ({ banner }) => {
   return (
     <tr>
       <td>
-        <img
-          src={`//localhost:5000/${img}`}
-          height="50px"
-          width="80px"
-          alt=""
-        />
+        <img src={img} height="50px" width="80px" alt="" />
       </td>
       <td>{title}</td>
       <td>{secTitle}</td>

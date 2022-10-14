@@ -4,9 +4,16 @@ const testSchema = mongoose.Schema(
   {
     title: String,
     details: String,
-    originalPrice: Number,
-    parameters: Number,
-    discountPrice: Number,
+    availableIn: [
+      {
+        originalPrice: { type: Number, default: 0 },
+        discountPrice: { type: Number, default: 0 },
+        lab: {
+          type: mongoose.Schema.Types.ObjectId,
+          ref: "Lab",
+        },
+      },
+    ],
     isHighlight: { type: Boolean, default: false },
   },
   {

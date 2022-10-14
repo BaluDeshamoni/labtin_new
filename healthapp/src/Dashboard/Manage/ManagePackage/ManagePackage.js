@@ -35,9 +35,6 @@ const ManagePackage = () => {
               <th>Name</th>
               <th>Details</th>
               <th>Parameters</th>
-              <th>Original Price</th>
-              <th>Discount Price</th>
-              {/* <th>Action</th> */}
             </tr>
           </thead>
           <tbody>
