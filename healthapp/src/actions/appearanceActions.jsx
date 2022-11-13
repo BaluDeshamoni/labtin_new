@@ -58,3 +58,30 @@ export const createScrollmenu = (Scrollmenu, navigate) => async (dispatch) => {
     console.log(error);
   }
 };
+
+export const editScrollMenu = (data, navigate) => async (dispatch) => {
+  try {
+    await api.editScrollMenu(data);
+    navigate("/dashboard/LabsPack", {
+      state: { _id: data.menu._id, title: data.menu.title, type: data.type },
+    });
+  } catch (error) {
+    console.log(error);
+  }
+};
+export const addHighlightPackage = (id, navigate) => async (dispatch) => {
+  try {
+    await api.addHighlightPackage({ id });
+    navigate("/dashboard/highlightPackages");
+  } catch (error) {
+    console.log(error);
+  }
+};
+export const addHighlightTest = (id, navigate) => async (dispatch) => {
+  try {
+    await api.addHighlightTest({ id });
+    navigate("/dashboard/highlightTests");
+  } catch (error) {
+    console.log(error);
+  }
+};

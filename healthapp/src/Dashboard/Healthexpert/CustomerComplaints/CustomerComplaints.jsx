@@ -2,60 +2,46 @@ import React, { useEffect } from "react";
 import "../../../App.css";
 import "../../Manage/ManagePackage/ManagePackage.css";
 import { useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { getComplaints } from "../../../actions/userActions";
 
 const CustomerComplaints = () => {
   const navigate = useNavigate();
-  const complaints = [
-    {
-      _id: 1,
-      Customer: "Customer 1",
-      details:
-        "details details details details details details details details details details details details details details",
-    },
-    {
-      _id: 2,
-      Customer: "Customer 2",
-      details:
-        "details details details details details details details details details details details details details details",
-    },
-    {
-      _id: 3,
-      Customer: "Customer 3",
-      details:
-        "details details details details details details details details details details details details details details",
-    },
-    {
-      _id: 4,
-      Customer: "Customer 4",
-      details:
-        "details details details details details details details details details details details details details details",
-    },
-    {
-      _id: 5,
-      Customer: "Customer 5",
-      details:
-        "details details details details details details details details details details details details details details",
-    },
-  ];
+  const dispatch = useDispatch();
+
+  const { complaintList } = useSelector((state) => state.complaints);
+  useEffect(() => {
+    dispatch(getComplaints());
+  }, [dispatch]);
 
   return (
     <div className="manage-package">
+      <p className="btn-container">
+        <button
+          onClick={() => navigate("/dashboard/addComplaint")}
+          className="add-btn"
+        >
+          + Add Complaint
+        </button>
+      </p>
       <div className="table-container">
         <table>
           <thead>
             <tr>
               <th>Customer</th>
-              <th>Details</th>
+              <th>Mobile Number</th>
+              <th>Complaint</th>
             </tr>
           </thead>
           <tbody>
-            {complaints.map(({ Customer, details }) => (
-              <tr>
-                <td>{Customer}</td>
-
-                <td>{details}</td>
-              </tr>
-            ))}
+            {complaintList &&
+              complaintList.map(({ customer, number, complaint }) => (
+                <tr>
+                  <td>{customer}</td>
+                  <td>{number}</td>
+                  <td>{complaint}</td>
+                </tr>
+              ))}
           </tbody>
         </table>
       </div>

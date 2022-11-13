@@ -1,9 +1,8 @@
 import React, { useEffect } from "react";
 import "./ShowLabs.css";
 import DSlider from "./DSlider";
-import Snackbar, { SnackbarOrigin } from "@mui/material/Snackbar";
-import { Link, useLocation, useNavigate, useParams } from "react-router-dom";
-import { convertToObject } from "typescript";
+import Snackbar from "@mui/material/Snackbar";
+import { useLocation, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { getLabs } from "../actions/labActions";
 
@@ -29,10 +28,16 @@ const ShowLabs = () => {
   const handleClose = () => {
     setState({ ...state, open: false });
   };
+  const { availableIn } = data;
+  const availableInArray = availableIn.map((m) => m.lab);
+  const available_labs = labList.filter((f) =>
+    availableInArray.includes(f._id)
+  );
 
   const handlecheckbox = (e) => {
     const l = available_labs.find((l) => l._id == e.target.value);
-    setInfo({ ...info, lab: l });
+    const r = availableIn.find((l) => l.lab == e.target.value);
+    setInfo({ ...info, lab: l, price: r });
     setState({ ...state, open: true });
   };
 
@@ -43,11 +48,6 @@ const ShowLabs = () => {
     >
       Next
     </div>
-  );
-  const { availableIn } = data;
-  const availableInArray = availableIn.map((m) => m.lab);
-  const available_labs = labList.filter((f) =>
-    availableInArray.includes(f._id)
   );
 
   const Labsdiv = (lab) => {
@@ -60,7 +60,7 @@ const ShowLabs = () => {
           <p>E-Report : {lab.time}Hours</p>
         </div>
         <div className="labs_price">
-          <h3>₹{availableIn.find((f) => f.lab == lab._id).originalPrice}</h3>
+          <h3>₹{availableIn.find((f) => f.lab == lab._id).discountPrice}</h3>
           <input
             className="selectLabRadio"
             type="radio"

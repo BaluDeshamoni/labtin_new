@@ -34,7 +34,7 @@ const SlideShow = () => {
             <tr>
               <th>Banner</th>
               <th>Title</th>
-              <th>Secondary Title</th>
+              <th>Link</th>
               <th>Description</th>
               {/* <th>Action</th> */}
             </tr>

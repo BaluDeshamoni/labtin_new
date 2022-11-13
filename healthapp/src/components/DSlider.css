@@ -1,25 +1,24 @@
 .sliderImage {
-    padding: 2rem 3rem;
+  padding: 2rem 3rem;
 }
 
 .slick-slide {
-    transform: scale(1);
-    transition: .3s ease-in-out all;
+  transform: scale(1);
+  transition: 0.3s ease-in-out all;
 
-    opacity: 0.9;
+  opacity: 0.9;
 }
 
 .slick-slide.slick-center {
-    opacity: 1;
-    transform: scale(1.2);
+  opacity: 1;
+  transform: scale(1.2);
 }
-
-.sliderImage>img {
-    width: 80%;
-    object-fit: contain;
-    border-radius: 0.4rem;
-    box-shadow: rgba(9, 42, 7, 0.64) 0px 3px 8px;
-
+.sliderImage > img {
+  width: 80%;
+  height: 200px;
+  object-fit: fill;
+  border-radius: 0.4rem;
+  box-shadow: rgba(9, 42, 7, 0.64) 0px 3px 8px;
 }
 
 /* @media (max-width: 1500px) {

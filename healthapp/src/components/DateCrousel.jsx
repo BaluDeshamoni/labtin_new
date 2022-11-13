@@ -27,8 +27,10 @@ const DateCrousel = (props) => {
     setDate(currentDate);
   }
   const handleprevious = (e) => {
-    setDateStep(dateStep - 1);
-    props.setdate(dateStep - 1);
+    if (dateStep > 0) {
+      setDateStep(dateStep - 1);
+      props.setdate(dateStep - 1);
+    }
   };
   const handlenext = (e) => {
     setDateStep(dateStep + 1);

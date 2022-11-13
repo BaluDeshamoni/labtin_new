@@ -14,34 +14,23 @@ const MyOffers = () => {
   }, [dispatch]);
 
   return (
-    <div className="address_info">
-      <div className="manage-package">
-        <div className="table-container">
-          <table>
-            <thead>
-              <tr>
-                <th>Name</th>
-                <th>Promo code</th>
-                <th>Discount Percentage</th>
-                <th>Limit</th>
-              </tr>
-            </thead>
-            <tbody>
-              {discountList &&
-                discountList.map(
-                  ({ name, promoCode, discountPercentage, limit }) => (
-                    <tr>
-                      <td>{name}</td>
-                      <td>{promoCode}</td>
-                      <td>{discountPercentage}</td>
-                      <td>{limit}</td>
-                    </tr>
-                  )
-                )}
-            </tbody>
-          </table>
+    <div className="myOffers">
+      {discountList.map((data, index) => (
+        <div className="orderSummary_box">
+          <h3 className="headingOrder">Offer No #0{index + 1}</h3>
+          <h3 className="offerName">
+            Name : <span>{data.name}</span>
+          </h3>
+          <div className="offerDetails">
+            <h3>
+              PromoCode : <span>{data.promoCode}</span>
+            </h3>
+            <h3>
+              Discount : <span>{data.discountPercentage}%</span>
+            </h3>
+          </div>
         </div>
-      </div>
+      ))}
     </div>
   );
 };

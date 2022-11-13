@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Slider from "react-slick";
 
 import "./DSlider.css";
@@ -6,8 +6,18 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 
 import Slide1 from "../image/CrouselImage.png";
+import { useDispatch, useSelector } from "react-redux";
+import { getBanners } from "../actions/appearanceActions";
 
 const DSlider = () => {
+  const dispatch = useDispatch();
+
+  const { bannerList } = useSelector((state) => state.banners);
+  console.log(bannerList);
+
+  useEffect(() => {
+    dispatch(getBanners());
+  }, [dispatch]);
   const sliderSettings = {
     centerMode: true,
     centerPadding: "350px",
@@ -70,21 +80,14 @@ const DSlider = () => {
   return (
     <div>
       <Slider {...sliderSettings}>
-        <div className="sliderImage">
-          <img src={Slide1} alt="SliderImage one" />
-        </div>
-        <div className="sliderImage">
-          <img src={Slide1} alt="SliderImage one" />
-        </div>
-        <div className="sliderImage">
-          <img src={Slide1} alt="SliderImage one" />
-        </div>
-        <div className="sliderImage">
-          <img src={Slide1} alt="SliderImage one" />
-        </div>
-        <div className="sliderImage">
-          <img src={Slide1} alt="SliderImage one" />
-        </div>
+        {bannerList.map((m) => (
+          <div
+            className="sliderImage"
+            onClick={() => window.open(m.link, "_blank")}
+          >
+            <img src={m.img} alt="SliderImage one" />
+          </div>
+        ))}
       </Slider>
     </div>
   );

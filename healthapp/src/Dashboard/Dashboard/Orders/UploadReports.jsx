@@ -14,7 +14,8 @@ const UploadReports = () => {
   const info = loc.state;
   const handleUploadRoutes = async (e) => {
     e.preventDefault();
-    dispatch(uploadReports({ ...info.order, ...rep }, navigate));
+    dispatch(uploadReports({ ...info.order, ...rep }));
+    navigate("/dashboard/orders");
   };
   const [rep, setRep] = useState({
     report: "",

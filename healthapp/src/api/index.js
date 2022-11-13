@@ -2,14 +2,6 @@ import axios from "axios";
 
 const API = axios.create({ baseURL: "http://localhost:5000" });
 
-export const fetchCustomers = () => API.get("/customer");
-export const createCustomer = (newCustomer) =>
-  API.post("/customer", newCustomer);
-
-export const fetchEmployees = () => API.get("/employee");
-export const createEmployee = (newEmployee) =>
-  API.post("/employee", newEmployee);
-
 export const fetchPackages = () => API.get("/package");
 export const createPackage = (newPost) => API.post("/package", newPost);
 
@@ -43,6 +35,8 @@ export const createBanner = (newBanner) =>
 export const fetchScrollmenus = () => API.get("/appearance/scrollmenu");
 export const createScrollmenu = (newScrollmenu) =>
   API.post("/appearance/scrollmenu", newScrollmenu);
+export const editScrollMenu = (newScrollmenu) =>
+  API.put("/appearance/scrollmenu", newScrollmenu);
 
 export const fetchPrescriptions = () => API.get("/prescriptions");
 export const addPrescription = (newPrescription) =>
@@ -53,3 +47,9 @@ export const fetchOrders = (config) => API.get("/order/all", config);
 export const fetchMyOrders = (config) => API.get("/order", config);
 export const uploadReports = (data, config) =>
   API.put("/order/uploadReports", data, config);
+export const changeStatus = (data, config) =>
+  API.put("/order/changeStatus", data, config);
+
+export const addHighlightPackage = (data) =>
+  API.put("/package/highlight", data);
+export const addHighlightTest = (data) => API.put("/test/highlight", data);

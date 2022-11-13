@@ -1,6 +1,5 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getCustomers } from "../../../actions/customerActions";
 import { usersList } from "../../../actions/userActions";
 import CustomerRow from "./CustomerRow";
 
@@ -22,7 +21,7 @@ const ManageCustomers = () => {
           <thead>
             <tr>
               <th>Name</th>
-              <th>Email</th>
+              <th>Mobile Number</th>
               <th>Bookings</th>
               <th>Address</th>
               <th>Reports</th>

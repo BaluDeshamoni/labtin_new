@@ -72,7 +72,7 @@ export const createOrder = (order, navigate) => async (dispatch, getState) => {
   }
 };
 
-export const uploadReports = (data, navigate) => async (dispatch, getState) => {
+export const uploadReports = (data) => async (dispatch, getState) => {
   try {
     const {
       userLogin: { userInfo },
@@ -85,8 +85,23 @@ export const uploadReports = (data, navigate) => async (dispatch, getState) => {
     };
 
     await api.uploadReports(data, config);
+  } catch (error) {
+    console.log(error);
+  }
+};
+export const changeStatus = (data) => async (dispatch, getState) => {
+  try {
+    const {
+      userLogin: { userInfo },
+    } = getState();
 
-    navigate("/dashboard/orders");
+    const config = {
+      headers: {
+        Authorization: `Bearer ${userInfo.token}`,
+      },
+    };
+
+    await api.changeStatus(data, config);
   } catch (error) {
     console.log(error);
   }

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import "../../../App.css";
 import "../../Manage/ManagePackage/ManagePackage.css";
 import { useNavigate } from "react-router-dom";
@@ -15,7 +15,7 @@ const Orders = () => {
   }, [dispatch]);
   console.log(orders);
   const l = ["Ordered", "Shipped", "On the way", "Delivered"];
-  const [active, setActive] = useState(false);
+
   return (
     <div className="manage-package">
       <div className="table-container">
@@ -28,7 +28,7 @@ const Orders = () => {
               <th>Address</th>
               <th>Total Price</th>
               <th>status </th>
-              <th>Upload Reports</th>
+              <th>Reports</th>
             </tr>
           </thead>
           <tbody>
@@ -41,9 +41,15 @@ const Orders = () => {
                   <td>{userName}</td>
                   <td>{orderedItem.item}</td>
                   <td>{orderedItem.lab}</td>
-                  <td>{address.state}</td>
+                  <td>{address?.state}</td>
                   <td>{totalPrice}</td>
-                  <td>
+                  <td
+                    onClick={() =>
+                      navigate("/dashboard/changeStatus", {
+                        state: { order: orders[index] },
+                      })
+                    }
+                  >
                     {status} : {l[status - 1]}
                   </td>
                   <td

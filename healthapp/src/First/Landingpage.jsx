@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import "./LandingPage.css";
 // import Slider from "../components/Slider";
 import CircleImage from "../components/CircleImage";
@@ -18,9 +18,12 @@ import InSlider from "../components/InSlider";
 import DSlider from "../components/DSlider";
 import Crousel from "../components/Crousels/Crousel";
 import MobileCrousel from "../components/Crousels/MobileCrousel";
+import { useDispatch, useSelector } from "react-redux";
+import { getScrollmenus } from "../actions/appearanceActions";
 
 const Landingpage = () => {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
   const [value, setValue] = React.useState(0);
 
   const navigateToPackages = () => {
@@ -37,6 +40,12 @@ const Landingpage = () => {
   const navigateToRadiology = () => {
     navigate("/Radiology");
   };
+  const { scrollmenuList } = useSelector((state) => state.scrollmenus);
+  console.log(scrollmenuList);
+
+  useEffect(() => {
+    dispatch(getScrollmenus());
+  }, [dispatch]);
 
   return (
     <div className="landing_div">
@@ -109,13 +118,9 @@ const Landingpage = () => {
       <div className="fourth_section">
         <div className="fourth_section_heading">Most Common Self Checks</div>
         <div className="SelfCheck_slider">
-          <CircleImage name="Brain" image={SFirstIcon} />
-          <CircleImage name="Heart" image={SSecondIcon} />
-          <CircleImage name="Lungs" image={SThirdIcon} />
-          <CircleImage name="Kideny" image={SFourthIcon} />
-          <CircleImage name="Liver" image={SFifthIcon} />
-          <CircleImage name="Heart" image={SSecondIcon} />
-          <CircleImage name="Lungs" image={SThirdIcon} />
+          {scrollmenuList.map((m) => (
+            <CircleImage name={m.title} image={m.icon} />
+          ))}
         </div>
       </div>
       <div className="fifth_section">

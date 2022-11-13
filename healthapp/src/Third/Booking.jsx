@@ -43,7 +43,7 @@ const Booking = () => {
   const toggleOptionsV = (e) => {
     if (e.target.parentElement.classList[0] === "appointmentSection") {
       e.target.parentElement.nextSibling.classList.toggle("hideOptions");
-      e.target.parentElement.children[1].classList.toggle("rotate");
+      e.target.parentElement.children[2].classList.toggle("rotate");
     }
   };
 
@@ -77,13 +77,17 @@ const Booking = () => {
   );
 
   const { user } = useSelector((state) => state.userDetails);
-
+  const userLogin = useSelector((state) => state.userLogin);
+  const { userInfo } = userLogin;
   console.log(user);
   useEffect(() => {
+    if (!userInfo) {
+      navigate("/login");
+    }
     if (!user._id) {
       dispatch(userDetails());
     }
-  }, [dispatch]);
+  }, [dispatch, navigate]);
   console.log(selectedUser);
   console.log(address);
   console.log(appointmentDetails);
@@ -111,7 +115,9 @@ const Booking = () => {
                 {user.users &&
                   user.users.map((u) => (
                     <div
-                      className="avat_det"
+                      className={
+                        selectedUser == u ? "avat_det_active" : "avat_det"
+                      }
                       onClick={() => setSelectedUser(u)}
                     >
                       <img
@@ -120,7 +126,6 @@ const Booking = () => {
                         style={{
                           width: "4rem",
                           height: "4rem",
-                          border: "1px solid grey",
                           bgcolor: "purple",
                           borderRadius: "50%",
                         }}
@@ -133,30 +138,43 @@ const Booking = () => {
           </div>
           <div className="pickUpLocation">
             <h3>Pick Up Location</h3>
-            {address ? (
+            <div className="locs">
+              {user.address &&
+                user.address.map((add, index) => (
+                  <div
+                    className={address == add ? "loc_active" : "loc"}
+                    onClick={() => setAddress(add)}
+                  >
+                    <div
+                      style={{
+                        fontSize: "large",
+                        fontWeight: "bold",
+                        margin: "3px",
+                      }}
+                    >
+                      Address {index + 1}{" "}
+                    </div>
+                    <div>{add.place.slice(0, 30)} . . .</div>
+                    <div>
+                      {add.city}-{add.pinCode}
+                    </div>
+                    <div>{add.state}</div>
+                  </div>
+                ))}
               <div className="iconLoaction">
-                <p>
-                  {address.place} , {address.city} , {address.state}
-                </p>
+                <LocationOnIcon fontSize="large" color="inherit" />
+                <div
+                  onClick={() => setAddAddress(true)}
+                  className="addAddressButton"
+                >
+                  Add Address
+                </div>
               </div>
-            ) : (
-              <div className="iconLoaction">
-                <LocationOnIcon fontSize="inherit" color="inherit" />
-                <p>Let us know where to collect test sample from</p>
-              </div>
-            )}
-
-            <button
-              onClick={() => setAddAddress(true)}
-              className="addAddressButton"
-            >
-              Add Address
-            </button>
-            <AddAddress
-              visibility={addAddress}
-              onClose={() => setAddAddress(false)}
-              address={(d) => setAddress(d)}
-            />
+              <AddAddress
+                visibility={addAddress}
+                onClose={() => setAddAddress(false)}
+              />
+            </div>
           </div>
         </div>
         <div>
@@ -166,12 +184,17 @@ const Booking = () => {
               <DateCrousel setdate={(d) => setDate(d)} />
               <div className="appointmentSelect">
                 <div className="appointmentSection" onClick={toggleOptionsV}>
-                  <h4>
-                    Morning{" "}
-                    <span style={{ fontSize: "80%", fontWeight: "600" }}>
-                      (6:00 AM - 12:00 PM)
-                    </span>
-                  </h4>
+                  <h4>Morning </h4>
+                  <span
+                    style={{
+                      fontSize: "90%",
+                      fontWeight: "600",
+                      margin: "2px",
+                    }}
+                  >
+                    (6:00 AM - 12:00 PM)
+                  </span>
+
                   <ArrowDropDownIcon className="downArrow" fontSize="large" />
                 </div>
                 <div className="appointmentOptions hideOptions">
@@ -215,12 +238,16 @@ const Booking = () => {
               </div>
               <div className="appointmentSelect">
                 <div className="appointmentSection" onClick={toggleOptionsV}>
-                  <h4>
-                    Afternoon{" "}
-                    <span style={{ fontSize: "80%", fontWeight: "600" }}>
-                      (12:00 PM-2:00PM)
-                    </span>
-                  </h4>
+                  <h4>Afternoon</h4>
+                  <span
+                    style={{
+                      fontSize: "90%",
+                      fontWeight: "600",
+                      margin: "2px",
+                    }}
+                  >
+                    (12:00 PM-2:00PM)
+                  </span>
                   <ArrowDropDownIcon className="downArrow" fontSize="large" />
                 </div>
 

@@ -7,9 +7,15 @@ const PrescriptionRow = ({ name, mobile, img, files }) => {
       <td>{mobile}</td>
       <td>
         <div className="prec">
-          {img && img.map((d) => <img src={d} className="prec_img" />)}
+          {img &&
+            img.map((d) => (
+              <img src={`http://localhost:3000/${d}`} className="prec_img" />
+            ))}
 
-          {files && files.map((d) => <img src={d} className="prec_img" />)}
+          {files &&
+            files.map((d) => (
+              <img src={`http://localhost:3000/${d}`} className="prec_img" />
+            ))}
         </div>
       </td>
     </tr>

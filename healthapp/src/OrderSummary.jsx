@@ -12,6 +12,7 @@ const OrderSummary = () => {
   const loc = useLocation();
   const dispatch = useDispatch();
   const data = loc.state;
+  console.log(data);
   const [state, setState] = React.useState({
     open: false,
     vertical: "bottom",
@@ -43,21 +44,28 @@ const OrderSummary = () => {
   }, [dispatch]);
 
   const [discount, setDiscount] = useState({ code: "", percent: 100 });
+  const [uniDiscount, setUniDiscount] = useState({ code: "", percent: 100 });
   const [appDiscount, setAppDiscount] = useState(0);
   console.log(appDiscount);
   const [openDiscounts, setOpenDiscounts] = useState(false);
-  const [totalPrice, setTotalPrice] = useState(data.discountPrice);
 
   const action = (
     <button
       className="checkoutButton"
       onClick={() => {
         dispatch(
-          createOrder({ ...data, totalPrice, discountUsed: discount }, navigate)
+          createOrder(
+            {
+              ...data,
+              totalPrice: data.price.discountPrice - appDiscount,
+              discountUsed: discount,
+            },
+            navigate
+          )
         );
       }}
     >
-      Proceed To Pay {totalPrice && totalPrice}
+      Proceed To Pay
     </button>
   );
 
@@ -88,7 +96,11 @@ const OrderSummary = () => {
                     code: d.promoCode,
                     percent: d.discountPercentage,
                   });
-
+                  setAppDiscount(
+                    (Number(data.price.discountPrice) *
+                      Number(d.discountPercentage)) /
+                      100
+                  );
                   setOpenDiscounts(false);
                 }}
               >
@@ -135,13 +147,18 @@ const OrderSummary = () => {
                   discount
                 </h3>
                 <button
-                  onClick={() =>
+                  onClick={() => {
                     setDiscount({
                       ...discount,
                       code: discountList[0].promoCode,
                       percent: discountList[0].discountPercentage,
-                    })
-                  }
+                    });
+                    setAppDiscount(
+                      (Number(data.price.discountPrice) *
+                        Number(discountList[0].discountPercentage)) /
+                        100
+                    );
+                  }}
                 >
                   Apply
                 </button>
@@ -154,13 +171,18 @@ const OrderSummary = () => {
                   discount
                 </h3>
                 <button
-                  onClick={() =>
+                  onClick={() => {
                     setDiscount({
                       ...discount,
                       code: discountList[1].promoCode,
                       percent: discountList[1].discountPercentage,
-                    })
-                  }
+                    });
+                    setAppDiscount(
+                      (Number(data.price.discountPrice) *
+                        Number(discountList[1].discountPercentage)) /
+                        100
+                    );
+                  }}
                 >
                   Apply
                 </button>
@@ -180,13 +202,18 @@ const OrderSummary = () => {
                   discount
                 </h3>
                 <button
-                  onClick={() =>
+                  onClick={() => {
                     setDiscount({
                       ...discount,
                       code: d.promoCode,
                       percent: d.discountPercentage,
-                    })
-                  }
+                    });
+                    setAppDiscount(
+                      (Number(data.price.discountPrice) *
+                        Number(d.discountPercentage)) /
+                        100
+                    );
+                  }}
                 >
                   Apply
                 </button>
@@ -212,17 +239,18 @@ const OrderSummary = () => {
           <div className="inputCoupon desktopElement">
             <input
               type="text"
-              value={discount.code}
+              value={uniDiscount.code}
               onChange={(e) =>
-                setDiscount({ ...discount, code: e.target.value })
+                setUniDiscount({ ...uniDiscount, code: e.target.value })
               }
             />
             <button
               onClick={() => {
                 setAppDiscount(
-                  (Number(data.discountPrice) * Number(discount.percent)) / 100
+                  (Number(data.price.discountPrice) *
+                    Number(discount.percent)) /
+                    100
                 );
-                setTotalPrice((p) => p - appDiscount);
               }}
             >
               Apply
@@ -234,7 +262,7 @@ const OrderSummary = () => {
           <h3>Bill Details</h3>
           <div className="billCalc">
             <div className="billrow">
-              <p>Test Total</p> <h5>₹250</h5>
+              <p>Test Total</p> <h5>₹{data.price.discountPrice}</h5>
             </div>
             <div className="billrow">
               <p>Sample Collection Charges</p>{" "}
@@ -263,7 +291,7 @@ const OrderSummary = () => {
           anchorOrigin={{ vertical, horizontal }}
           open={true}
           onClose={handleClose}
-          message="Total ₹250"
+          message={`Total ₹${data.price.discountPrice - appDiscount}`}
           action={action}
           key={vertical + horizontal}
         />

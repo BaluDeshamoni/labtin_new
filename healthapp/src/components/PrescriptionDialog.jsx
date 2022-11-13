@@ -15,7 +15,7 @@ function PrescriptionDialog(props) {
     mobile: "",
     files: [],
   });
-
+  const [active, setActive] = useState(false);
   const hiddenFileInput = useRef(null);
   const handleClick = (event) => {
     hiddenFileInput.current.click();
@@ -38,12 +38,48 @@ function PrescriptionDialog(props) {
   const submitHandler = (e) => {
     e.preventDefault();
     dispatch(addPrescription(prescription));
+    setActive(true);
 
-    props.onClose();
     setPrescription({ name: "", mobile: "", files: [] });
+  };
+  const okHandler = (e) => {
+    e.preventDefault();
+    props.onClose();
+    setActive(false);
   };
   if (!props.visibility) {
     return null;
+  }
+  if (active) {
+    return (
+      <div className="my_modal">
+        <div className="thanku">
+          <div className="thanku_inner">
+            <div>Thank You</div>
+            <div className="thanku_info">
+              <span>Your prescription has been uploaded.</span>
+              <span>Our health advisor will get back to you within 4hrs</span>
+            </div>
+            <button
+              onClick={okHandler}
+              style={{
+                width: "100px",
+                height: "35px",
+                fontSize: "15px",
+                border: "1px solid var(--color-light)",
+                backgroundColor: "deepskyblue",
+                color: "white",
+                marginTop: "20px",
+                borderRadius: "5px",
+                marginBottom: "10px",
+              }}
+            >
+              Ok
+            </button>
+          </div>
+        </div>
+      </div>
+    );
   }
   return (
     <div className="my_modal">

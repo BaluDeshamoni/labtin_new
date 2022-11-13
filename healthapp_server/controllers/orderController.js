@@ -33,8 +33,31 @@ export const createOrder = asyncHandler(async (req, res) => {
 export const uploadReports = asyncHandler(async (req, res) => {
   try {
     const data = req.body;
-    console.log(req.body);
-
+    const order = await Order.find({ _id: data._id });
+    if (order) {
+      order[0].uploadedFiles.report = data.report;
+      order[0].uploadedFiles.eReport = data.eReport;
+    } else {
+      res.status(400);
+      throw new Error("Invalid Order");
+    }
+    await order[0].save();
+    res.status(201);
+  } catch (error) {
+    res.status(409).json({ message: error.message });
+  }
+});
+export const changeStatus = asyncHandler(async (req, res) => {
+  try {
+    const data = req.body;
+    const order = await Order.find({ _id: data._id });
+    if (order) {
+      order[0].status = data.status;
+    } else {
+      res.status(400);
+      throw new Error("Invalid Order");
+    }
+    await order[0].save();
     res.status(201);
   } catch (error) {
     res.status(409).json({ message: error.message });

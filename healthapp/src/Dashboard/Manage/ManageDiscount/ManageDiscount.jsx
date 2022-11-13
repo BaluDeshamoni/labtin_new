@@ -33,7 +33,6 @@ const ManageDiscounts = () => {
               <th>Promo code</th>
               <th>Discount Percentage</th>
               <th>Applicable To</th>
-              <th>Limit</th>
             </tr>
           </thead>
           <tbody>

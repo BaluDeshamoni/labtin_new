@@ -60,6 +60,12 @@
   font-weight: 600;
 }
 
+.pakage_about_know {
+  height: 100px;
+  overflow-y: scroll;
+  width: 100px;
+}
+
 .pakage_about > button {
   margin: 1rem 0;
   background-color: white;

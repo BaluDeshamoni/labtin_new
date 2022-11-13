@@ -19,7 +19,6 @@ const AddDiscount = () => {
     promoCode: "",
     discountPercentage: 0,
     applicableTo: "",
-    limit: 0,
   });
   return (
     <div className="add_package">
@@ -48,18 +47,14 @@ const AddDiscount = () => {
         <input
           type="text"
           list="dis"
+          placeholder="Applicable To"
           onChange={(e) => setData({ ...data, applicableTo: e.target.value })}
         />
         <datalist id="dis">
           <option>Any</option>
           <option>New</option>
         </datalist>
-        <input
-          type="number"
-          name="limit"
-          placeholder="Limit"
-          onChange={(e) => setData({ ...data, limit: e.target.value })}
-        />
+
         <button type="submit" className="add_package_btn">
           Add Discount
         </button>

@@ -19,7 +19,7 @@ const AddBanner = () => {
   };
   const [data, setData] = useState({
     title: "",
-    secTitle: "",
+    link: "",
     img: "",
     description: "",
   });
@@ -50,10 +50,10 @@ const AddBanner = () => {
         />
         <input
           type="text"
-          name="secondaryTitle"
-          placeholder="Secondary Title"
-          value={data.secTitle}
-          onChange={(e) => setData({ ...data, secTitle: e.target.value })}
+          name="link"
+          placeholder="Link"
+          value={data.link}
+          onChange={(e) => setData({ ...data, link: e.target.value })}
         />
         <textarea
           name="description"

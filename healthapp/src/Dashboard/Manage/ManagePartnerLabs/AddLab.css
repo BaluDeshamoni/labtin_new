@@ -1,0 +1,11 @@
+.banner_input {
+  background-color: rgb(201, 198, 198);
+  padding: 15px 10px;
+  border-radius: 5px;
+  font-size: 18px;
+  font-weight: 600;
+  cursor: pointer;
+}
+.banner_input .img_name {
+  color: cornflowerblue;
+}

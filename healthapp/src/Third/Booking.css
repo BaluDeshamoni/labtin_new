@@ -61,6 +61,7 @@
   align-items: center;
   justify-content: center;
   margin: 0 1rem;
+  cursor: pointer;
 }
 
 .addedAvatar .avat_det {
@@ -69,13 +70,32 @@
   justify-content: center;
   flex-direction: column;
   padding: 0 0.5rem;
+  cursor: pointer;
+}
+.addedAvatar .avat_det_active {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  padding: 0 0.5rem;
+  border: 0.8px solid gray;
+  border-radius: 10px;
+  cursor: pointer;
 }
 
 .iconLoaction {
-  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
   font-style: italic;
   font-size: 3.5rem;
   color: #000c83;
+  width: 170px;
+  padding: 10px 8px;
+  border: 1px solid gray;
+  margin: 2px;
+  cursor: pointer;
 }
 
 .pickUpLocation {
@@ -87,6 +107,35 @@
   width: 60%;
   border-radius: 0.6rem;
   background-color: white;
+}
+
+.locs {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.loc {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  padding: 12px 8px;
+  border: 1px solid gray;
+  margin: 2px;
+  width: 170px;
+  cursor: pointer;
+}
+.loc_active {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  padding: 12px 8px;
+  border: 1px solid black;
+  margin: 2px;
+  width: 170px;
+  cursor: pointer;
 }
 
 .selectBookingSlot {
@@ -110,7 +159,7 @@
 }
 
 .addAddressButton {
-  font-size: 1.3rem;
+  font-size: 1rem;
   font-weight: bold;
   color: #000c83;
   margin: 1rem 0;
@@ -198,7 +247,7 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: space-between;
+    justify-content: flex-start;
   }
 
   .bookedFor,

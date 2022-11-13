@@ -16,32 +16,22 @@ const MyAddress = () => {
   }, [dispatch]);
 
   return (
-    <div className="address_info">
-      <div className="manage-package">
-        <div className="table-container">
-          <table>
-            <thead>
-              <tr>
-                <th>place</th>
-                <th>city</th>
-                <th>Pin Code</th>
-                <th>State</th>
-              </tr>
-            </thead>
-            <tbody>
-              {address &&
-                address.map(({ place, city, pinCode, state }) => (
-                  <tr>
-                    <td>{place}</td>
-                    <td>{city}</td>
-                    <td>{pinCode}</td>
-                    <td>{state}</td>
-                  </tr>
-                ))}
-            </tbody>
-          </table>
+    <div className="myBookings">
+      {address?.map((data, index) => (
+        <div className="orderSummary_box">
+          <h3 className="headingOrder">Address No #0{index + 1}</h3>
+          <h3 className="patientName">Street : {data.place}</h3>
+          <div className="pakageName">
+            <h3>
+              {data.city}
+              {" , "}
+              {data.state}
+              {" , "}
+              {data.pinCode}
+            </h3>
+          </div>
         </div>
-      </div>
+      ))}
     </div>
   );
 };

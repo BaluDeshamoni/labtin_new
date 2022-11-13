@@ -3,7 +3,7 @@ import mongoose from "mongoose";
 const bannerSchema = mongoose.Schema(
   {
     title: String,
-    secTitle: String,
+    link: String,
     img: String,
     description: String,
   },
@@ -15,6 +15,24 @@ const scrollmenuSchema = mongoose.Schema(
   {
     title: String,
     icon: String,
+    tests: [
+      {
+        testId: {
+          type: mongoose.Schema.Types.ObjectId,
+          ref: "Test",
+        },
+        title: String,
+      },
+    ],
+    packages: [
+      {
+        packageId: {
+          type: mongoose.Schema.Types.ObjectId,
+          ref: "Package",
+        },
+        title: String,
+      },
+    ],
   },
   {
     timestamps: true,

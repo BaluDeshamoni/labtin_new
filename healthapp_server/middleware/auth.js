@@ -1,5 +1,5 @@
 import jwt from "jsonwebtoken";
-import User from "../models/userModel.js";
+import { User } from "../models/userModel.js";
 import asyncHandler from "express-async-handler";
 
 export const protect = asyncHandler(async (req, res, next) => {
@@ -12,7 +12,7 @@ export const protect = asyncHandler(async (req, res, next) => {
       token = req.headers.authorization.split(" ")[1];
 
       const decode = jwt.verify(token, "Labtin");
-      req.user = await User.findById(decode.id).select("-password");
+      req.user = await User.findById(decode.id);
 
       next();
     } catch (error) {

@@ -1,5 +1,6 @@
 import express from "express";
 import {
+  changeStatus,
   createOrder,
   getMyOrders,
   getOrders,
@@ -13,5 +14,6 @@ const router = express.Router();
 router.route("/").post(protect, createOrder).get(protect, getMyOrders);
 router.get("/all", protect, admin, getOrders);
 router.put("/uploadReports", protect, admin, uploadReports);
+router.put("/changeStatus", protect, admin, changeStatus);
 
 export default router;

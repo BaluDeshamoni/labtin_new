@@ -1,6 +1,5 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getEmployees } from "../../../actions/employeeActions";
 import { usersList } from "../../../actions/userActions";
 import EmployeeRow from "./EmployeeRow";
 
@@ -22,7 +21,7 @@ const ManageEmployees = () => {
           <thead>
             <tr>
               <th>Name</th>
-              <th>Email</th>
+              <th>Mobile Number</th>
               <th>Address</th>
               {/* <th>Action</th> */}
             </tr>

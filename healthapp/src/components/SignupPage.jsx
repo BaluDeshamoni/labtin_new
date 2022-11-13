@@ -1,82 +1,84 @@
-import { useEffect, useState } from 'react'
-import { Link } from 'react-router-dom'
-import './Login.css'
-import Logo from '../image/LabtinLogo.png'
-import { useDispatch, useSelector } from 'react-redux'
-import { register } from '../actions/userActions'
+import { useEffect, useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import "./Login.css";
+import Logo from "../image/LabtinLogo.png";
+import { useDispatch, useSelector } from "react-redux";
+import axios from "axios";
 
 const SignupPage = ({ history }) => {
-  const [email, setEmail] = useState('')
-  const [name, setName] = useState('')
-  const [password, setPassword] = useState('')
+  const [num, setNum] = useState("");
+  const [active, setActive] = useState(false);
+  const [enteredOtp, setEnteredOtp] = useState("");
+  const [genOtp, setGenOtp] = useState("");
+  const [msg, setMsg] = useState("");
+  const navigate = useNavigate();
+  const getOtp = async () => {
+    var otp = Math.floor(1000 + Math.random() * 9000);
+    setGenOtp(otp);
+    // await axios.get(
+    //   `https://api.authkey.io/request?authkey=443da4c3126af704&mobile=${num}&country_code=+91&sid=6030&otp=${otp}&company=Labtin Diagnostics`
+    // );
+    console.log(otp);
+    setActive(true);
+  };
 
-  const dispatch = useDispatch()
-  const userRegister = useSelector((state) => state.userRegister)
-  const { error, userInfo } = userRegister
-
+  const userRegister = useSelector((state) => state.userRegister);
+  const { error, userInfo } = userRegister;
   useEffect(() => {
     if (userInfo) {
-      history.push('/')
+      history.push("/");
     }
-  }, [history, userInfo])
-
+  }, [history, userInfo]);
   const submitHandler = (e) => {
-    e.preventDefault()
+    e.preventDefault();
+    enteredOtp == genOtp
+      ? navigate("/RegisterUser", { state: num })
+      : setMsg("Wrong OTP");
+  };
 
-    dispatch(register(name, email, password))
-  }
   return (
-    <div className='login_main_div'>
-      <div className='login_main'>
-        <div className='login_heading'>
+    <div className="login_main_div">
+      <div className="login_main">
+        <div className="login_heading">
           <h1>Welcome To Labtin</h1>
         </div>
-        <div className='login_form'>
-          <div className='login_form_entry'>
-            <label htmlFor='UsersName'>Name</label>
+        <div className="login_form">
+          <div className="login_form_entry">
+            <label htmlFor="email">Phone Number</label>
             <input
-              type='text'
-              name='UsersName'
-              id='UsersName'
-              placeholder='Ex - Shreyas Kumar'
-              onChange={(e) => setName(e.target.value)}
+              type="text"
+              value={num}
+              onChange={(e) => setNum(e.target.value)}
             />
+            <button onClick={getOtp}>Get Otp</button>
           </div>
-          <div className='login_form_entry'>
-            <label htmlFor='UserEmail'>Email</label>
-            <input
-              type='email'
-              name='UserEmail'
-              id='UserEmail'
-              placeholder='example@gmail.com'
-              onChange={(e) => setEmail(e.target.value)}
-            />
-          </div>
-          <div className='login_form_entry'>
-            <label htmlFor='userPassword'>Password</label>
-            <input
-              type='password'
-              name='userPassword'
-              id='userPassword'
-              placeholder='fs4353adf'
-              onChange={(e) => setPassword(e.target.value)}
-            />
-          </div>
-          <button className='submitButton' onClick={submitHandler}>
-            Sign Up
-          </button>
-          <div className='signUp_sec'>
+          {active && (
+            <div className="login_form_entry">
+              <label htmlFor="userPassword">Otp</label>
+              <input
+                type="text"
+                value={enteredOtp}
+                onChange={(e) => setEnteredOtp(e.target.value)}
+              />
+              <button className="submitButton" onClick={submitHandler}>
+                Continue
+              </button>
+            </div>
+          )}
+
+          <div className="signUp_sec">
             <p>Already have a account? </p>
-            <Link to='/'> Login</Link>
+            <Link to="/login"> Login</Link>
           </div>
         </div>
-        <div className='header_logo loginfooter'>
-          <img src={Logo} alt='Logo' />
+        <div className="header_logo loginfooter">
+          <img src={Logo} onClick={() => navigate("/")} alt="Logo" />
         </div>
       </div>
-      {error ? <p className='wError'>{error}</p> : null}
+      {msg && <h3 className="wError">{msg}</h3>}
+      {error ? <p className="wError">{error}</p> : null}
     </div>
-  )
-}
+  );
+};
 
-export default SignupPage
+export default SignupPage;

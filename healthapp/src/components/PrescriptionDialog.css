@@ -9,6 +9,33 @@
   background-color: rgba(0, 0, 0, 0.5); /* Black w/ opacity */
 }
 
+.thanku {
+  width: 400px;
+  height: 500px;
+  border-radius: 5px;
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  z-index: 1;
+  position: fixed;
+  top: 50%;
+  left: 43%;
+  right: 50%;
+  transform: translate(-50%, -50%);
+  border: 1px solid #ccc;
+  background: #fff;
+  overflow: auto;
+  border-radius: 4px;
+  outline: none;
+  position: fixed;
+}
+
+.thanku_inner {
+  margin: 20px;
+}
+
 .close_button {
   font-weight: bolder;
   cursor: pointer;

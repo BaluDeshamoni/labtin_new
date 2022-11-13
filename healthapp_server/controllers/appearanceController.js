@@ -34,6 +34,14 @@ export const getScrollmenus = async (req, res) => {
     res.status(404).json({ message: error.message });
   }
 };
+export const getScrollmenu = async (req, res) => {
+  try {
+    const scrollmenu = await Scrollmenu.findById(req.params.id);
+    res.json(scrollmenu);
+  } catch (error) {
+    res.status(404).json({ message: error.message });
+  }
+};
 
 export const createScrollmenu = async (req, res) => {
   const scrollmenu = req.body;
@@ -43,6 +51,32 @@ export const createScrollmenu = async (req, res) => {
   try {
     await newScrollmenu.save();
     res.status(201).json(newScrollmenu);
+  } catch (error) {
+    res.status(409).json({ message: error.message });
+  }
+};
+export const editScrollmenu = async (req, res) => {
+  const { id, present, menu, type, title } = req.body;
+
+  try {
+    const scrollmenu = await Scrollmenu.findById(menu._id);
+    if (scrollmenu) {
+      if (!present) {
+        type
+          ? scrollmenu.tests.push({ testId: id, title })
+          : scrollmenu.packages.push({ packageId: id, title });
+      } else {
+        type
+          ? (scrollmenu.tests = scrollmenu.tests.filter((f) => f.testId != id))
+          : (scrollmenu.packages = scrollmenu.packages.filter(
+              (f) => f.packageId != id
+            ));
+      }
+
+      const updatedScrollMenu = await scrollmenu.save();
+
+      res.status(201).json(updatedScrollMenu);
+    }
   } catch (error) {
     res.status(409).json({ message: error.message });
   }

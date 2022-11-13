@@ -60,3 +60,16 @@ export const editTest = async (req, res) => {
     res.status(409).json({ message: error.message });
   }
 };
+export const addHighlightTest = async (req, res) => {
+  const { id } = req.body;
+  try {
+    const test = await Test.findById(id);
+    if (test) {
+      test.isHighlight = !test.isHighlight;
+      const updatedTest = await test.save();
+      res.status(201).json(updatedTest);
+    }
+  } catch (error) {
+    res.status(409).json({ message: error.message });
+  }
+};

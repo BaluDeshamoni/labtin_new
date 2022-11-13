@@ -2,8 +2,6 @@ import { combineReducers, applyMiddleware, createStore } from "redux";
 import thunk from "redux-thunk";
 import { composeWithDevTools } from "redux-devtools-extension";
 
-import customerReducer from "../reducer/customerReducer";
-import employeeReducer from "../reducer/employeeReducer";
 import {
   discountReducer,
   locationReducer,
@@ -11,6 +9,7 @@ import {
 } from "../reducer/packageReducer";
 import prescriptionReducer from "../reducer/prescriptionReducer";
 import {
+  userComplaintsReducer,
   userDetailsReducer,
   userListReducer,
   userLoginReducer,
@@ -23,8 +22,6 @@ import { bannerReducer, scrollmenuReducer } from "../reducer/appreanceReducer";
 import orderReducer from "../reducer/orderReducer";
 
 const reducer = combineReducers({
-  customers: customerReducer,
-  employees: employeeReducer,
   packages: packageReducer,
   tests: testReducer,
   radTests: radTestReducer,
@@ -40,6 +37,7 @@ const reducer = combineReducers({
   userList: userListReducer,
   userDetails: userDetailsReducer,
   orders: orderReducer,
+  complaints: userComplaintsReducer,
 });
 
 const userInfoFromStorage = localStorage.getItem("userInfo")

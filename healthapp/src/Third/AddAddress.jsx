@@ -21,87 +21,13 @@ function AddAddress(props) {
     props.onClose();
     setAddress({ place: "", city: "", pinCode: "", state: "" });
   };
-  const { user } = useSelector((state) => state.userDetails);
-  const [show, setShow] = useState(true);
   if (!props.visibility) {
     return null;
-  }
-  if (show) {
-    return (
-      <div className="dialog_body" style={{ flexDirection: "column" }}>
-        <div>
-          <div
-            className="close_button"
-            onClick={() => {
-              props.onClose();
-            }}
-          >
-            <Close />
-          </div>
-          <div
-            style={{
-              display: "flex",
-              justifyContent: "center",
-              alignItems: "center",
-              gap: "1rem",
-            }}
-          ></div>
-          <div
-            style={{
-              display: "flex",
-              width: "100%",
-              justifyContent: "center",
-              paddingTop: "10px",
-            }}
-          ></div>
-          <div>
-            <div
-              style={{
-                display: "flex",
-                flexDirection: "column",
-                justifyContent: "center",
-                textAlign: "center",
-                alignItems: "center",
-                fontSize: "large",
-              }}
-            >
-              <p>Select Address</p>
-              {user.address &&
-                user.address.map((add, index) => (
-                  <p
-                    onClick={() => {
-                      props.onClose();
-                      props.address(add);
-                    }}
-                    style={{
-                      width: "350px",
-                      height: "15px",
-                      fontSize: "15px",
-                      color: "black",
-                      backgroundColor: "whitesmoke",
-
-                      borderRadius: "5px",
-                    }}
-                  >
-                    Address {index + 1} :{add.place.slice(0, 30)} . . .
-                  </p>
-                ))}
-            </div>
-          </div>
-        </div>
-        <div onClick={() => setShow(false)}>Add Address</div>
-      </div>
-    );
   }
   return (
     <div className="dialog_body">
       <div>
-        <div
-          className="close_button"
-          onClick={async () => {
-            setShow(true);
-          }}
-        >
+        <div className="close_button" onClick={() => props.onClose()}>
           <Close />
         </div>
 

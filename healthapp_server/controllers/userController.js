@@ -1,4 +1,4 @@
-import User from "../models/userModel.js";
+import { User, Complaint } from "../models/userModel.js";
 import asyncHandler from "express-async-handler";
 import jwt from "jsonwebtoken";
 
@@ -9,46 +9,35 @@ const generateToken = (id) => {
 };
 
 export const authUser = asyncHandler(async (req, res) => {
-  const { email, password } = req.body;
+  const { number } = req.body;
 
-  const user = await User.findOne({ email });
+  const user = await User.findOne({ number });
 
-  if (user && (await user.matchPassword(password))) {
-    res.json({
-      _id: user._id,
-      email: user.email,
-      name: user.name,
-      isEmployee: user.isEmployee,
-      isAdmin: user.isAdmin,
-      token: generateToken(user._id),
-    });
+  if (user) {
+    const data = { ...user };
+    res.json({ ...data._doc, token: generateToken(user._id) });
   } else {
     res.status(401);
-    throw new Error("Invalid login");
+    throw new Error("user does not exist");
   }
 });
 
 export const registerUser = asyncHandler(async (req, res) => {
-  const { name, email, password } = req.body;
-  const userExists = await User.findOne({ email });
+  const { name, number, sex, age, img } = req.body;
+  const userExists = await User.findOne({ number });
   if (userExists) {
     res.status(400);
     throw new Error("user already exists");
   }
   const user = await User.create({
     name,
-    email,
-    password,
+    number,
+    profileImage: img,
+    users: [{ name, sex, img, age }],
   });
   if (user) {
-    res.status(201).json({
-      _id: user._id,
-      email: user.email,
-      name: user.name,
-      isEmployee: user.isEmployee,
-      isAdmin: user.isAdmin,
-      token: generateToken(user._id),
-    });
+    const data = { ...user };
+    res.json({ ...data._doc, token: generateToken(user._id) });
   } else {
     res.status(400);
     throw new Error("Invalid user data");
@@ -62,7 +51,7 @@ export const getUsers = asyncHandler(async (req, res) => {
 
 export const getDetails = asyncHandler(async (req, res) => {
   try {
-    const user = await User.findById(req.user._id).select("-password");
+    const user = await User.findById(req.user._id);
     res.json(user);
   } catch (error) {
     res.status(409).json({ message: error.message });
@@ -70,7 +59,7 @@ export const getDetails = asyncHandler(async (req, res) => {
 });
 export const addUser = asyncHandler(async (req, res) => {
   try {
-    const user = await User.findById(req.user._id).select("-password");
+    const user = await User.findById(req.user._id);
     user.users.push(req.body);
     await user.save();
     res.json(user.users);
@@ -86,6 +75,30 @@ export const addAddress = asyncHandler(async (req, res) => {
     user.address.push(req.body);
     await user.save();
     res.json(user.address);
+  } catch (error) {
+    res.status(409).json({ message: error.message });
+  }
+});
+export const createComplaint = asyncHandler(async (req, res) => {
+  try {
+    const { customer, number, complaint } = req.body;
+
+    const newComplaint = await Complaint.create({
+      customer,
+      number,
+      complaint,
+    });
+    if (newComplaint) {
+      res.json(newComplaint);
+    }
+  } catch (error) {
+    res.status(409).json({ message: error.message });
+  }
+});
+export const getComplaints = asyncHandler(async (req, res) => {
+  try {
+    const complaints = await Complaint.find({});
+    res.json(complaints);
   } catch (error) {
     res.status(409).json({ message: error.message });
   }

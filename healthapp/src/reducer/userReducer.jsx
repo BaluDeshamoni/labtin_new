@@ -15,6 +15,9 @@ import {
   USER_DETAILS_SUCCESS,
   USER_DETAILS_FAIL,
   USER_DETAILS_RESET,
+  USER_COMPLAINTS_REQUEST,
+  USER_COMPLAINTS_SUCCESS,
+  USER_COMPLAINTS_FAIL,
 } from "../constants/userConstants";
 
 export const userLoginReducer = (state = {}, action) => {
@@ -70,6 +73,23 @@ export const userDetailsReducer = (state = { user: {} }, action) => {
       return { loading: false, error: action.payload };
     case USER_DETAILS_RESET:
       return { users: {} };
+    default:
+      return state;
+  }
+};
+
+export const userComplaintsReducer = (
+  state = { complaintList: [] },
+  action
+) => {
+  switch (action.type) {
+    case USER_COMPLAINTS_REQUEST:
+      return { ...state, loading: true };
+    case USER_COMPLAINTS_SUCCESS:
+      return { loading: false, complaintList: action.payload };
+    case USER_COMPLAINTS_FAIL:
+      return { loading: false, error: action.payload };
+
     default:
       return state;
   }

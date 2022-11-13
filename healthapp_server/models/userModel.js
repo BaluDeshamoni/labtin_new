@@ -7,15 +7,12 @@ const userSchema = mongoose.Schema(
       type: String,
       required: true,
     },
-    email: {
+    number: {
       type: String,
       required: true,
       unique: true,
     },
-    password: {
-      type: String,
-      required: true,
-    },
+    profileImage: String,
     users: [{ name: String, age: String, sex: String, img: String }],
     address: [{ place: String, city: String, pinCode: String, state: String }],
     isEmployee: {
@@ -46,19 +43,18 @@ const userSchema = mongoose.Schema(
     timestamps: true,
   }
 );
-
-userSchema.methods.matchPassword = async function (enteredPassword) {
-  return await bcrypt.compare(enteredPassword, this.password);
-};
-
-userSchema.pre("save", async function (next) {
-  if (!this.isModified("password")) {
-    next();
+const complaintSchema = mongoose.Schema(
+  {
+    customer: String,
+    number: String,
+    complaint: String,
+  },
+  {
+    timestamps: true,
   }
-  const salt = await bcrypt.genSalt(10);
-  this.password = await bcrypt.hash(this.password, salt);
-});
+);
 
 const User = mongoose.model("User", userSchema);
+const Complaint = mongoose.model("Complaint", complaintSchema);
 
-export default User;
+export { User, Complaint };

@@ -11,15 +11,16 @@ import {
   USER_LIST_SUCCESS,
   USER_LIST_FAIL,
   USER_LIST_RESET,
-  ADDITIONAL_INFO_USERS,
-  ADDITIONAL_INFO_ADDRESS,
   USER_DETAILS_REQUEST,
   USER_DETAILS_SUCCESS,
   USER_DETAILS_FAIL,
+  USER_COMPLAINTS_SUCCESS,
+  USER_COMPLAINTS_REQUEST,
+  USER_COMPLAINTS_FAIL,
 } from "../constants/userConstants";
 import axios from "axios";
 
-export const login = (email, password) => async (dispatch) => {
+export const login = (number) => async (dispatch) => {
   try {
     dispatch({ type: USER_LOGIN_REQUEST });
     const config = {
@@ -27,11 +28,7 @@ export const login = (email, password) => async (dispatch) => {
         "Content-Type": "application/json",
       },
     };
-    const { data } = await axios.post(
-      "/users/login",
-      { email, password },
-      config
-    );
+    const { data } = await axios.post("/users/login", { number }, config);
 
     dispatch({ type: USER_LOGIN_SUCCESS, payload: data });
 
@@ -46,7 +43,7 @@ export const login = (email, password) => async (dispatch) => {
     });
   }
 };
-export const register = (name, email, password) => async (dispatch) => {
+export const register = (regData) => async (dispatch) => {
   try {
     dispatch({ type: USER_REGISTER_REQUEST });
     const config = {
@@ -54,11 +51,7 @@ export const register = (name, email, password) => async (dispatch) => {
         "Content-Type": "application/json",
       },
     };
-    const { data } = await axios.post(
-      "/users",
-      { name, email, password },
-      config
-    );
+    const { data } = await axios.post("/users", regData, config);
 
     dispatch({ type: USER_REGISTER_SUCCESS, payload: data });
 
@@ -171,5 +164,38 @@ export const addAddress = (address) => async (dispatch, getState) => {
     dispatch({ type: USER_DETAILS_SUCCESS, payload: data });
   } catch (error) {
     console.log(error);
+  }
+};
+export const createComplaint =
+  (complaint, navigate) => async (dispatch, getState) => {
+    try {
+      const {
+        userLogin: { userInfo },
+      } = getState();
+
+      const config = {
+        headers: {
+          Authorization: `Bearer ${userInfo.token}`,
+        },
+      };
+      await axios.post("/users/complaint", complaint, config);
+      navigate("/dashboard/customerComplaints");
+    } catch (error) {
+      console.log(error);
+    }
+  };
+export const getComplaints = () => async (dispatch, getState) => {
+  try {
+    dispatch({ type: USER_COMPLAINTS_REQUEST });
+    const { data } = await axios.get("/users/complaint");
+    dispatch({ type: USER_COMPLAINTS_SUCCESS, payload: data });
+  } catch (error) {
+    dispatch({
+      type: USER_COMPLAINTS_FAIL,
+      payload:
+        error.response && error.response.data.message
+          ? error.response.data.message
+          : error.message,
+    });
   }
 };

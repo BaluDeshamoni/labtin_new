@@ -61,6 +61,22 @@ export const editPackage = async (req, res) => {
     res.status(409).json({ message: error.message });
   }
 };
+export const addHighlightPackage = async (req, res) => {
+  const { id } = req.body;
+  console.log(req.body);
+  try {
+    const pack = await Package.findById(id);
+    if (pack) {
+      console.log(pack);
+      let status = pack.isHighlight;
+      pack.isHighlight = !status;
+      const updatedPack = await pack.save();
+      res.status(201).json(updatedPack);
+    }
+  } catch (error) {
+    res.status(409).json({ message: error.message });
+  }
+};
 
 export const getDiscounts = async (req, res) => {
   try {

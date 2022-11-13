@@ -9,7 +9,6 @@ import packageRoutes from "./routes/packageRoutes.js";
 import testRoutes from "./routes/testRoutes.js";
 import radTestRoutes from "./routes/radTestRoutes.js";
 import prescriptionRoutes from "./routes/prescriptionRoutes.js";
-import customerRoutes from "./routes/customerRoutes.js";
 import userRoutes from "./routes/userRoutes.js";
 import labRoutes from "./routes/labRoutes.js";
 import appearanceRoutes from "./routes/appearanceRoutes.js";
@@ -24,7 +23,6 @@ app.use(bodyParser.urlencoded({ limit: "100mb", extended: true }));
 app.use(cors());
 
 app.use("/users", userRoutes);
-app.use("/customer", customerRoutes);
 app.use("/package", packageRoutes);
 app.use("/test", testRoutes);
 app.use("/radTest", radTestRoutes);
