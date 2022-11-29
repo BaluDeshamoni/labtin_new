@@ -50,14 +50,25 @@ const Crousel = (props) => {
   }, [dispatch]);
   const { packageList } = useSelector((state) => state.packages);
   const { testList } = useSelector((state) => state.tests);
-  const popularTests = testList.map((data, index) => {
+
+  const tests = testList.filter((f) =>
+    f.availableIn
+      .map((m) => m.stateName?.toLowerCase())
+      .includes(props?.loc?.toLowerCase())
+  );
+  const packages = packageList.filter((f) =>
+    f.availableIn
+      .map((m) => m.stateName?.toLowerCase())
+      .includes(props?.loc?.toLowerCase())
+  );
+  const popularTests = tests.map((data, index) => {
     return (
       <div key={data.title + index}>
         <PopularPakages offPercentage="30" data={data} type="tests" />
       </div>
     );
   });
-  const popularPackages = packageList.map((data, index) => {
+  const popularPackages = packages.map((data, index) => {
     return (
       <div key={data.title + index}>
         <PopularPakages offPercentage="30" data={data} type="packages" />

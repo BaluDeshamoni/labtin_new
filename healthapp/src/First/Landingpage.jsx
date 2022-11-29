@@ -3,7 +3,7 @@ import "./LandingPage.css";
 // import Slider from "../components/Slider";
 import CircleImage from "../components/CircleImage";
 import LabTestCards from "../components/LabTestCards";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import FirstIconFirst from "../image/FreeSample.png";
 import FirstIconSecond from "../image/firstIcon-2.png";
 import FirstIconThird from "../image/firstIcon-3.png";
@@ -22,6 +22,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { getScrollmenus } from "../actions/appearanceActions";
 
 const Landingpage = () => {
+  const { loc } = useParams();
+  const lo = loc || "Hyderabad";
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const [value, setValue] = React.useState(0);
@@ -119,7 +121,7 @@ const Landingpage = () => {
         <div className="fourth_section_heading">Most Common Self Checks</div>
         <div className="SelfCheck_slider">
           {scrollmenuList.map((m) => (
-            <CircleImage name={m.title} image={m.icon} />
+            <CircleImage name={m.title} image={m.icon} type="menu" id={m._id} />
           ))}
         </div>
       </div>
@@ -129,7 +131,7 @@ const Landingpage = () => {
           <button onClick={() => navigate("/TestPakage")}>see more</button>
         </div>
         <div className="labtest_cards_list desktopElement">
-          <Crousel crousalData="Tests" />
+          <Crousel crousalData="Tests" loc={lo} />
         </div>
         <div className="labtest_cards_list mobileElement">
           <LabTestCards
@@ -158,7 +160,7 @@ const Landingpage = () => {
           <button onClick={() => navigate("/TestPakage")}>see more</button>
         </div>
         <div className="labtest_cards_list desktopElement">
-          <Crousel crousalData="pakages" />
+          <Crousel crousalData="pakages" loc={lo} />
         </div>
         <div className="labtest_cards_list mobileElement">
           <LabTestCards

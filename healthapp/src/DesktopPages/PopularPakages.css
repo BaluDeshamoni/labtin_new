@@ -59,11 +59,29 @@
 .pakage_details .IPara {
   font-weight: 600;
 }
-
+.pack_ol {
+  height: 40px;
+}
+.ReactModal__Content {
+  inset: 8px !important;
+  background-color: #f3e4ff !important;
+  padding: 0 !important;
+  overflow: hidden !important;
+}
+.pakage_box_know {
+  position: relative;
+  padding: 0.5rem 0.5rem;
+  margin: 0.5rem 1rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  max-width: 20rem;
+  border-radius: 0.4rem;
+}
 .pakage_about_know {
-  height: 100px;
+  max-height: 100px;
   overflow-y: scroll;
-  width: 100px;
+  width: 200px;
 }
 
 .pakage_about > button {

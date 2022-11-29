@@ -33,9 +33,9 @@ const LabsAndPackages = () => {
           </p>
         </div>
         {active == "tests" ? (
-          <LabTests lab={state._id} name={state.title} />
+          <LabTests lab={state} />
         ) : (
-          <LabPackages lab={state._id} name={state.title} />
+          <LabPackages lab={state} />
         )}
       </div>
     </>

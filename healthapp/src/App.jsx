@@ -67,6 +67,8 @@ import LabsPack from "./Dashboard/Appearance/ScrollMenu/LabsPack";
 import EditScrollMenu from "./Dashboard/Appearance/ScrollMenu/EditScrollMenu";
 import AddHighlightTest from "./Dashboard/Appearance/HighlightTests/AddHighlightTest";
 import AddHighlightPackage from "./Dashboard/Appearance/HighlightPackages/AddHighlightPackage";
+import Search from "./components/Search/Search";
+import Scroll from "./components/Scroll/Scroll";
 
 function App() {
   const userLogin = useSelector((state) => state.userLogin);
@@ -80,8 +82,11 @@ function App() {
           <ScrollTotop>
             <Routes>
               <Route path="/" element={<Landingpage />} />
+              <Route path="/filter/:loc/" element={<Landingpage />} />
               <Route path="/BookingPackages" element={<ListPakage />} />
               <Route path="/selectLab" element={<ShowLabs />} />
+              <Route path="/search/:keyword" element={<Search />} />
+              <Route path="/scroll/:id" element={<Scroll />} />
 
               <Route path="/Booking" element={<Booking />} />
               <Route path="/MyBooking" element={<MyBookings />} />

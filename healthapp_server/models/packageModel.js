@@ -13,6 +13,7 @@ const packageSchema = mongoose.Schema(
           type: mongoose.Schema.Types.ObjectId,
           ref: "Lab",
         },
+        stateName: String,
       },
     ],
     isHighlight: { type: Boolean, default: false },

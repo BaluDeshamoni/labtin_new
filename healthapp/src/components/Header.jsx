@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import "./Header.css";
 import SearchTwoToneIcon from "@mui/icons-material/SearchTwoTone";
 import NoteAddRoundedIcon from "@mui/icons-material/NoteAddRounded";
@@ -10,7 +10,7 @@ import LocationOnRoundedIcon from "@mui/icons-material/LocationOnRounded";
 import LocalOfferIcon from "@mui/icons-material/LocalOffer";
 import HelpIcon from "@mui/icons-material/Help";
 import LogoutIcon from "@mui/icons-material/Logout";
-import { Link } from "react-router-dom";
+import { Link, useLocation, useParams } from "react-router-dom";
 import PersonIcon from "@mui/icons-material/Person";
 import PrescriptionDialog from "./PrescriptionDialog";
 import { useNavigate } from "react-router-dom";
@@ -18,16 +18,21 @@ import CircleImage from "./CircleImage";
 import Tick from "../image/21.png";
 import { useDispatch, useSelector } from "react-redux";
 import { logout } from "../actions/userActions";
+import { getLocations } from "../actions/packageActions";
 
 const Header = () => {
   const [show, setShow] = useState(false);
 
   const userLogin = useSelector((state) => state.userLogin);
+  const { locationList } = useSelector((state) => state.locations);
   const { userInfo } = userLogin;
   console.log(userInfo);
 
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(getLocations());
+  }, [dispatch]);
   const handlenav1 = (e) => {
     e.preventDefault();
     navigate(`/BookingPackages`, {
@@ -50,6 +55,16 @@ const Header = () => {
   const handleLogout = (e) => {
     dispatch(logout());
   };
+  const [keyword, setKeyword] = useState("");
+  const searchHandler = (e) => {
+    e.preventDefault();
+    if (keyword.length > 0) {
+      navigate(`/search/${keyword}`);
+    }
+  };
+  const { pathname } = useLocation();
+  const loc = pathname.split("/")[2];
+  const lo = loc || "Hyderabad";
 
   return (
     <div className="header_div">
@@ -100,6 +115,7 @@ const Header = () => {
           <div className="searchbar">
             <input
               className="searchbar_input"
+              onChange={(e) => setKeyword(e.target.value)}
               type="text"
               placeholder="Search Lab Test Eg: Tyroid, CBD, Liqid..."
             />
@@ -108,6 +124,7 @@ const Header = () => {
                 className="searchbar_icon"
                 fontSize="inherit"
                 color="inherit"
+                onClick={searchHandler}
               />
             </div>
           </div>
@@ -122,10 +139,19 @@ const Header = () => {
           </div>
 
           <div className="selectState">
-            <select name="state" id="sState">
-              <option value="Hyderabad">Hyderabad</option>
-              <option value="Hyderabad">Bengaluru</option>
-              <option value="Hyderabad">Chennai</option>
+            <select
+              onChange={(e) => navigate(`/filter/${e.target.value}/`)}
+              name="state"
+              id="sState"
+            >
+              {locationList.map((l) => (
+                <option
+                  value={l?.city}
+                  selected={l?.city.toLowerCase() == lo?.toLowerCase()}
+                >
+                  {l?.city}
+                </option>
+              ))}
             </select>
           </div>
         </div>

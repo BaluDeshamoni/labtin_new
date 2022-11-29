@@ -4,7 +4,10 @@ import "./CircleImage.css";
 const CircleImage = (props: any) => {
   const navigate = useNavigate();
   return (
-    <div className="selfCheck_icons">
+    <div
+      className="selfCheck_icons"
+      onClick={() => props.type == "menu" && navigate(`/scroll/${props.id}`)}
+    >
       <div className="selfCheck_circle">
         <img src={props.image} alt="" />
       </div>

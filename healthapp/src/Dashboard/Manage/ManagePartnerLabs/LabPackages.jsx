@@ -5,20 +5,20 @@ import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { getPackages } from "../../../actions/packageActions";
 
-const LabPackages = ({ lab, name }) => {
+const LabPackages = ({ lab }) => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
   const { isLoading, packageList } = useSelector((state) => state.packages);
   console.log(packageList);
   const lab_packages = packageList.filter((p) =>
-    p.availableIn.map((d) => d.lab).includes(lab)
+    p.availableIn.map((d) => d.lab).includes(lab._id)
   );
   console.log(lab_packages);
   const packages =
     lab_packages.length > 0
       ? packageList.filter(
-          (p) => !p.availableIn.map((d) => d.lab).includes(lab)
+          (p) => !p.availableIn.map((d) => d.lab).includes(lab._id)
         )
       : packageList;
   useEffect(() => {
@@ -48,26 +48,32 @@ const LabPackages = ({ lab, name }) => {
                       <td>{details}</td>
                       <td>{parameters}</td>
                       <td>
-                        {availableIn.find((f) => f.lab === lab).originalPrice}
+                        {
+                          availableIn.find((f) => f.lab === lab._id)
+                            .originalPrice
+                        }
                       </td>
                       <td>
-                        {availableIn.find((f) => f.lab === lab).discountPrice}
+                        {
+                          availableIn.find((f) => f.lab === lab._id)
+                            .discountPrice
+                        }
                       </td>
                       <td
                         onClick={() =>
                           navigate("/dashboard/editPackage", {
                             state: {
-                              lab,
-                              name,
+                              lab: lab._id,
+                              name: lab.name,
                               _id,
                               title,
                               details,
                               parameters,
                               originalPrice: availableIn.find(
-                                (f) => f.lab === lab
+                                (f) => f.lab === lab._id
                               ).originalPrice,
                               discountPrice: availableIn.find(
-                                (f) => f.lab === lab
+                                (f) => f.lab === lab._id
                               ).discountPrice,
                               present: true,
                             },
@@ -91,8 +97,8 @@ const LabPackages = ({ lab, name }) => {
                       onClick={() =>
                         navigate("/dashboard/editPackage", {
                           state: {
-                            lab,
-                            name,
+                            lab: lab._id,
+                            name: lab.name,
                             _id,
                             title,
                             details,

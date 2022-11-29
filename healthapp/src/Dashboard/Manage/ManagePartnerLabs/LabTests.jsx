@@ -5,19 +5,21 @@ import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { getTests } from "../../../actions/testActions";
 
-const LabTests = ({ lab, name }) => {
+const LabTests = ({ lab }) => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
   const { isLoading, testList } = useSelector((state) => state.tests);
   console.log(testList);
   const lab_tests = testList.filter((p) =>
-    p.availableIn.map((d) => d.lab).includes(lab)
+    p.availableIn.map((d) => d.lab).includes(lab._id)
   );
   console.log(lab_tests);
   const tests =
     lab_tests.length > 0
-      ? testList.filter((p) => !p.availableIn.map((d) => d.lab).includes(lab))
+      ? testList.filter(
+          (p) => !p.availableIn.map((d) => d.lab).includes(lab._id)
+        )
       : testList;
   useEffect(() => {
     dispatch(getTests());
@@ -43,25 +45,25 @@ const LabTests = ({ lab, name }) => {
                     <td>{title}</td>
                     <td>{details}</td>
                     <td>
-                      {availableIn.find((f) => f.lab === lab).originalPrice}
+                      {availableIn.find((f) => f.lab === lab._id).originalPrice}
                     </td>
                     <td>
-                      {availableIn.find((f) => f.lab === lab).discountPrice}
+                      {availableIn.find((f) => f.lab === lab._id).discountPrice}
                     </td>
                     <td
                       onClick={() =>
                         navigate("/dashboard/editTest", {
                           state: {
-                            lab,
-                            name,
+                            lab: lab._id,
+                            name: lab.name,
                             _id,
                             title,
                             details,
                             originalPrice: availableIn.find(
-                              (f) => f.lab === lab
+                              (f) => f.lab === lab._id
                             ).originalPrice,
                             discountPrice: availableIn.find(
-                              (f) => f.lab === lab
+                              (f) => f.lab === lab._id
                             ).discountPrice,
                             present: true,
                           },
@@ -84,8 +86,8 @@ const LabTests = ({ lab, name }) => {
                       onClick={() =>
                         navigate("/dashboard/editTest", {
                           state: {
-                            lab,
-                            name,
+                            lab: lab._id,
+                            name: lab.name,
                             _id,
                             title,
                             details,

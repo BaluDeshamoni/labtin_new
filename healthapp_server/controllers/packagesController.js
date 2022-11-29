@@ -1,6 +1,7 @@
 import express from "express";
 
 import { Package, Discount, Location } from "../models/packageModel.js";
+import { Lab } from "../models/LabModel.js";
 
 const router = express.Router();
 
@@ -28,6 +29,7 @@ export const createPackage = async (req, res) => {
 
 export const editPackage = async (req, res) => {
   const { _id, present, lab } = req.body;
+  const AvailableLab = await Lab.findById(lab);
 
   try {
     const pack = await Package.findById(_id);
@@ -43,6 +45,8 @@ export const editPackage = async (req, res) => {
               req.body.originalPrice || pack.originalPrice;
             pack.availableIn[x].discountPrice =
               req.body.discountPrice || pack.discountPrice;
+            pack.availableIn[x].stateName =
+              AvailableLab.state || pack.stateName;
           }
         }
       } else {
@@ -50,6 +54,7 @@ export const editPackage = async (req, res) => {
           lab,
           originalPrice: req.body.originalPrice,
           discountPrice: req.body.discountPrice,
+          stateName: AvailableLab.state,
         });
       }
 

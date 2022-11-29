@@ -51,8 +51,8 @@ const PopularPakages = (props) => {
   const original = Math.min(...availableIn.map((m) => m.originalPrice));
   const discount_per = Math.trunc(((original - discount) / original) * 100);
   const details = props.data.details.split(",");
-  const miniDetails = details.length < 4 ? details : details.slice(0, 4);
-  console.log(props.data);
+  const miniDetails = details.length < 3 ? details : details.slice(0, 3);
+
   const [active, setActive] = useState(false);
 
   return (
@@ -63,33 +63,26 @@ const PopularPakages = (props) => {
         shouldCloseOnOverlayClick={false}
         style={{
           overlay: {
-            width: 580,
-            height: 500,
-            backgroundColor: "rgba(0,0,0,0.8)",
+            width: 400,
+            height: 300,
             zIndex: "1000",
             top: "50%",
             left: "50%",
-            marginTop: "-250px",
-            marginLeft: "-350px",
+            right: "auto",
+            bottom: "auto",
+            marginRight: "-50%",
+            transform: "translate(-50%, -50%)",
             borderRadius: "10px",
           },
         }}
       >
-        <div className="pakage_box">
-          <button className="cancle" onClick={() => setActive(false)}>
-            Cancel
-          </button>
-          <div className="card_offer ">Extra {discount_per}% off</div>
+        <div className="pakage_box_know">
           <div className="pakage_details">
             <h3 className="pakagesName">{props.data.title}</h3>
-            <p style={{ color: "red", fontSize: "80%", marginTop: "0.5rem " }}>
-              REQUIRED FASTING
+            <p style={{ color: "blue", marginTop: "0.5rem " }}>
+              Additional Information
             </p>
-            {props.data.parameters && (
-              <p className="IPara">
-                Includes : {props.data.parameters} Parameters
-              </p>
-            )}
+
             <div className="pakage_about_know">
               <ol>
                 {details.map((d) => (
@@ -99,27 +92,8 @@ const PopularPakages = (props) => {
             </div>
           </div>
 
-          <div className="pakage_bottom">
-            {props.type == "tests" && (
-              <div className="test_available">
-                <div>Available In</div>
-                <div>{props.data.availableIn.length} Diagnostics</div>
-              </div>
-            )}
-            <div className="pakage_price">
-              {props.type == "tests" && (
-                <div className="test_price">starts from</div>
-              )}
-              <div>
-                <span style={{ textDecoration: "line-through", color: "red" }}>
-                  {original}
-                </span>{" "}
-                <span style={{ color: "purple" }}>₹{discount}/-</span>
-              </div>
-            </div>
-          </div>
-          <button className="BookNowButton" onClick={handleBooking}>
-            Book Now
+          <button className="BookNowButton" onClick={() => setActive(false)}>
+            Ok Got It
           </button>
         </div>
       </Modal>
@@ -136,7 +110,7 @@ const PopularPakages = (props) => {
             </p>
           )}
           <div className="pakage_about">
-            <ol>
+            <ol className="pack_ol">
               {miniDetails.map((d) => (
                 <li>{d}</li>
               ))}

@@ -1,6 +1,8 @@
 import express from "express";
 
 import Test from "../models/testsModel.js";
+import { Package } from "../models/packageModel.js";
+import { Lab } from "../models/LabModel.js";
 
 const router = express.Router();
 
@@ -28,7 +30,7 @@ export const createTest = async (req, res) => {
 
 export const editTest = async (req, res) => {
   const { _id, present, lab } = req.body;
-
+  const AvailableLab = await Lab.findById(lab);
   try {
     const test = await Test.findById(_id);
     if (test) {
@@ -42,6 +44,8 @@ export const editTest = async (req, res) => {
               req.body.originalPrice || test.originalPrice;
             test.availableIn[x].discountPrice =
               req.body.discountPrice || test.discountPrice;
+            test.availableIn[x].stateName =
+              AvailableLab.state || test.stateName;
           }
         }
       } else {
@@ -49,6 +53,7 @@ export const editTest = async (req, res) => {
           lab,
           originalPrice: req.body.originalPrice,
           discountPrice: req.body.discountPrice,
+          stateName: AvailableLab.state,
         });
       }
 
@@ -71,5 +76,23 @@ export const addHighlightTest = async (req, res) => {
     }
   } catch (error) {
     res.status(409).json({ message: error.message });
+  }
+};
+
+export const getPackagesTests = async (req, res) => {
+  const keyword = req.params.keyword
+    ? {
+        title: {
+          $regex: req.params.keyword,
+          $options: "i",
+        },
+      }
+    : {};
+  try {
+    const tests = await Test.find({ ...keyword });
+    const packages = await Package.find({ ...keyword });
+    res.json({ packages, tests });
+  } catch (error) {
+    res.status(404).json({ message: error.message });
   }
 };
