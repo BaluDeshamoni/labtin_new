@@ -28,7 +28,7 @@ const discountSchema = mongoose.Schema(
     promoCode: String,
     discountPercentage: Number,
     applicableTo: String,
-    limit: Number,
+    hidden: String,
   },
   {
     timestamps: true,

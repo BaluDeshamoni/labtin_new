@@ -19,6 +19,7 @@ import Tick from "../image/21.png";
 import { useDispatch, useSelector } from "react-redux";
 import { logout } from "../actions/userActions";
 import { getLocations } from "../actions/packageActions";
+import { filter } from "../actions/labActions";
 
 const Header = () => {
   const [show, setShow] = useState(false);
@@ -62,9 +63,6 @@ const Header = () => {
       navigate(`/search/${keyword}`);
     }
   };
-  const { pathname } = useLocation();
-  const loc = pathname.split("/")[2];
-  const lo = loc || "Hyderabad";
 
   return (
     <div className="header_div">
@@ -140,17 +138,12 @@ const Header = () => {
 
           <div className="selectState">
             <select
-              onChange={(e) => navigate(`/filter/${e.target.value}/`)}
+              onChange={(e) => dispatch(filter(e.target.value))}
               name="state"
               id="sState"
             >
               {locationList.map((l) => (
-                <option
-                  value={l?.city}
-                  selected={l?.city.toLowerCase() == lo?.toLowerCase()}
-                >
-                  {l?.city}
-                </option>
+                <option value={l?.city}>{l?.city}</option>
               ))}
             </select>
           </div>

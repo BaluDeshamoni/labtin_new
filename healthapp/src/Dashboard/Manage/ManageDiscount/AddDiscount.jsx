@@ -19,6 +19,7 @@ const AddDiscount = () => {
     promoCode: "",
     discountPercentage: 0,
     applicableTo: "",
+    hidden: "",
   });
   return (
     <div className="add_package">
@@ -54,7 +55,16 @@ const AddDiscount = () => {
           <option>Any</option>
           <option>New</option>
         </datalist>
-
+        <input
+          type="text"
+          list="hidd"
+          placeholder="Hidden"
+          onChange={(e) => setData({ ...data, hidden: e.target.value })}
+        />
+        <datalist id="hidd">
+          <option>Yes</option>
+          <option>No</option>
+        </datalist>
         <button type="submit" className="add_package_btn">
           Add Discount
         </button>

@@ -37,3 +37,5 @@ export const START_LOADING = "START_LOADING";
 export const CREATE_ORDER = "CREATE_ORDER";
 export const FETCH_ALL_ORDERS = "FETCH_ALL_ORDERS";
 export const FETCH_MY_ORDERS = "FETCH_MY_ORDERS";
+
+export const FILTER = "FILTER";

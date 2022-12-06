@@ -1,5 +1,6 @@
 import Order from "../models/orderModel.js";
 import asyncHandler from "express-async-handler";
+import { User } from "../models/userModel.js";
 
 export const createOrder = asyncHandler(async (req, res) => {
   try {
@@ -18,13 +19,20 @@ export const createOrder = asyncHandler(async (req, res) => {
 
     const order = await Order.create({
       userName: req.user.name,
+      userNo: req.user.number,
       userId: req.user._id,
       totalPrice: data.totalPrice,
       address: data.address,
       orderedOn,
       orderedFor,
       orderedItem,
+      discountUsed: data.discountUsed.code,
     });
+    if (order) {
+      const user = await User.findById(req.user._id);
+      user.newUser = false;
+      await user.save();
+    }
     res.status(201).json(order);
   } catch (error) {
     res.status(409).json({ message: error.message });

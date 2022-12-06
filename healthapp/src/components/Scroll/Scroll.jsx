@@ -7,7 +7,6 @@ import "./scroll.css";
 
 const Scroll = () => {
   const { id } = useParams();
-  console.log(id);
   const [menuData, setMenuData] = useState();
   const { packageList } = useSelector((state) => state.packages);
   const { testList } = useSelector((state) => state.tests);
@@ -16,13 +15,16 @@ const Scroll = () => {
       const { data } = await axios.get(`/appearance/scrollmenu/${id}`);
       setMenuData(data);
     };
-
     fun();
   }, []);
   const packageIds = menuData?.packages.map((d) => d.packageId);
   const testIds = menuData?.tests.map((d) => d.testId);
-  const menu_packages = packageList.filter((d) => packageIds?.includes(d._id));
-  const menu_tests = testList.filter((d) => testIds?.includes(d._id));
+  const menu_packages = packageList.filter(
+    (d) => packageIds?.includes(d._id) && d.availableIn.length > 0
+  );
+  const menu_tests = testList.filter(
+    (d) => testIds?.includes(d._id) && d.availableIn.length > 0
+  );
   const [active, setActive] = useState(false);
 
   return (

@@ -1,19 +1,10 @@
-import React, { useEffect, useState } from "react";
 import "./App.css";
 import Header from "./components/Header";
 import Landingpage from "./First/Landingpage";
 import Booking from "./Third/Booking";
-import Report from "./ReportsPage/Report";
 import OrderSummary from "./OrderSummary";
 import ShowLabs from "./components/ShowLabs";
-import {
-  BrowserRouter,
-  Routes, //replaces "Switch" used till v5
-  Route,
-  Navigate,
-  useNavigate,
-  useLocation,
-} from "react-router-dom";
+import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import BottomNavigationElement from "./components/BottomNavigationElement";
 import Radiology from "./HealthTests/Radiology/Radiology";
 import PakagesTab from "./second/PakagesTab";
@@ -50,7 +41,6 @@ import AddLocation from "./Dashboard/Manage/ManageLocation/AddLocation";
 import ScrollMenu from "./Dashboard/Appearance/ScrollMenu/Scrollmenu";
 import AddScrollmenu from "./Dashboard/Appearance/ScrollMenu/AddScrollmenu";
 import LabsAndPackages from "./Dashboard/Manage/ManagePartnerLabs/LabsAndPackages";
-import LabPackages from "./Dashboard/Manage/ManagePartnerLabs/LabPackages";
 import EditPackage from "./Dashboard/Manage/ManagePartnerLabs/EditPackage";
 import EditTest from "./Dashboard/Manage/ManagePartnerLabs/EditTest";
 import MyAddress from "./components/MyInfo/MyAddress";
@@ -59,7 +49,6 @@ import MyBookings from "./components/MyInfo/MyBookings";
 import MyReports from "./components/MyInfo/MyReports";
 import UploadReports from "./Dashboard/Dashboard/Orders/UploadReports";
 import ScrollTotop from "./ScrollTotop";
-import Otp from "./components/MyInfo/Otp";
 import ChangeStatus from "./Dashboard/Dashboard/Orders/ChangeStatus";
 import RegisterUser from "./components/RegisterUser";
 import AddComplaint from "./Dashboard/Healthexpert/CustomerComplaints/AddComplaint";
@@ -82,7 +71,6 @@ function App() {
           <ScrollTotop>
             <Routes>
               <Route path="/" element={<Landingpage />} />
-              <Route path="/filter/:loc/" element={<Landingpage />} />
               <Route path="/BookingPackages" element={<ListPakage />} />
               <Route path="/selectLab" element={<ShowLabs />} />
               <Route path="/search/:keyword" element={<Search />} />
@@ -98,9 +86,6 @@ function App() {
               <Route path="/TestPakage" element={<PakagesTab />} />
               <Route path="/Radiology" element={<Radiology />} />
 
-              <Route path="/otp" element={<Otp />} />
-
-              {/* New routes  */}
               {userInfo?.isAdmin && (
                 <Route path="/dashboard" element={<Dashboard />}>
                   <Route
@@ -166,7 +151,6 @@ function App() {
                   <Route path="addComplaint" element={<AddComplaint />} />
                 </Route>
               )}
-              {/* ...............  */}
 
               <Route path="*" element={<Navigate to="/" />} />
             </Routes>

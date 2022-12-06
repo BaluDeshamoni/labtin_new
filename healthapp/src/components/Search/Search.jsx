@@ -10,7 +10,7 @@ const Search = () => {
   useEffect(() => {
     const srch = async () => {
       const { data } = await axios.get(`/test/filter/${keyword}`);
-      console.log(data);
+
       setFilteredData(data);
     };
     srch();
@@ -30,15 +30,17 @@ const Search = () => {
       {active == false ? (
         <div className="srch-pack">
           {filterdData.packages?.length > 0 ? (
-            filterdData.packages?.map((data, index) => (
-              <div key={data.title + index}>
-                <PopularPakages
-                  offPercentage="30"
-                  data={data}
-                  type="packages"
-                />
-              </div>
-            ))
+            filterdData.packages?.map((data, index) =>
+              data.availableIn.length > 0 ? (
+                <div key={data.title + index}>
+                  <PopularPakages
+                    offPercentage="30"
+                    data={data}
+                    type="packages"
+                  />
+                </div>
+              ) : null
+            )
           ) : (
             <div>No Packages available</div>
           )}
@@ -46,11 +48,13 @@ const Search = () => {
       ) : (
         <div className="srch-test">
           {filterdData.tests?.length > 0 ? (
-            filterdData.tests?.map((data, index) => (
-              <div key={data.title + index}>
-                <PopularPakages offPercentage="30" data={data} type="tests" />
-              </div>
-            ))
+            filterdData.tests?.map((data, index) =>
+              data.availableIn.length > 0 ? (
+                <div key={data.title + index}>
+                  <PopularPakages offPercentage="30" data={data} type="tests" />
+                </div>
+              ) : null
+            )
           ) : (
             <div>No Tests available</div>
           )}

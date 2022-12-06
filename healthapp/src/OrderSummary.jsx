@@ -30,24 +30,36 @@ const OrderSummary = () => {
   };
 
   const { discountList } = useSelector((state) => state.discounts);
-  const applicableDiscounts = discountList.filter((d) => {
-    if (d.applicableTo == "new") {
-      if (data.newUser) {
-        return true;
-      } else {
-        return false;
-      }
-    }
-  });
+
+  const hiddenDiscounts = discountList.filter((d) => d.hidden == "Yes");
+  const availableDiscounts = discountList.filter((d) => d.hidden == "No");
+  const applicableDiscounts = availableDiscounts.filter((d) =>
+    d.applicableTo == "new" ? data.newUser : true
+  );
   useEffect(() => {
     dispatch(getDiscounts());
   }, [dispatch]);
 
-  const [discount, setDiscount] = useState({ code: "", percent: 100 });
-  const [uniDiscount, setUniDiscount] = useState({ code: "", percent: 100 });
-  const [appDiscount, setAppDiscount] = useState(0);
-  console.log(appDiscount);
   const [openDiscounts, setOpenDiscounts] = useState(false);
+  const [discount, setDiscount] = useState({ code: "", percent: 0 });
+  const [uniDiscount, setUniDiscount] = useState("");
+  const [appDiscount, setAppDiscount] = useState(0);
+
+  const addUniDiscount = () => {
+    const dis = hiddenDiscounts.find((f) => f.promoCode == uniDiscount);
+    setDiscount({
+      code: dis.promoCode,
+      percent: dis.discountPercentage,
+    });
+    setAppDiscount(
+      (Number(data.price.discountPrice) * Number(dis.discountPercentage)) / 100
+    );
+  };
+  const removeHandler = () => {
+    setDiscount({ code: "", percent: 0 });
+    setUniDiscount("");
+    setAppDiscount(0);
+  };
 
   const action = (
     <button
@@ -82,7 +94,7 @@ const OrderSummary = () => {
             <Close />
           </div>
 
-          {discountList.map((d) => (
+          {applicableDiscounts.map((d) => (
             <div className="Coupons_now">
               <h3>
                 Use {d.promoCode} promocode and get {d.discountPercentage}
@@ -92,7 +104,6 @@ const OrderSummary = () => {
               <button
                 onClick={() => {
                   setDiscount({
-                    ...discount,
                     code: d.promoCode,
                     percent: d.discountPercentage,
                   });
@@ -137,25 +148,24 @@ const OrderSummary = () => {
         </div>
         <div className="AvailableCoupon">
           <h2>Available Coupons</h2>
-          {discountList.length > 2 ? (
+          {applicableDiscounts.length > 2 ? (
             <>
               <div className="Coupons_now">
                 <h3>
-                  Use {discountList[0].promoCode} promocode and get{" "}
-                  {discountList[0].discountPercentage}
+                  Use {applicableDiscounts[0].promoCode} promocode and get{" "}
+                  {applicableDiscounts[0].discountPercentage}
                   {"% "}
                   discount
                 </h3>
                 <button
                   onClick={() => {
                     setDiscount({
-                      ...discount,
-                      code: discountList[0].promoCode,
-                      percent: discountList[0].discountPercentage,
+                      code: applicableDiscounts[0].promoCode,
+                      percent: applicableDiscounts[0].discountPercentage,
                     });
                     setAppDiscount(
                       (Number(data.price.discountPrice) *
-                        Number(discountList[0].discountPercentage)) /
+                        Number(applicableDiscounts[0].discountPercentage)) /
                         100
                     );
                   }}
@@ -165,21 +175,20 @@ const OrderSummary = () => {
               </div>
               <div className="Coupons_now">
                 <h3>
-                  Use {discountList[1].promoCode} promocode and get{" "}
-                  {discountList[1].discountPercentage}
+                  Use {applicableDiscounts[1].promoCode} promocode and get{" "}
+                  {applicableDiscounts[1].discountPercentage}
                   {"% "}
                   discount
                 </h3>
                 <button
                   onClick={() => {
                     setDiscount({
-                      ...discount,
-                      code: discountList[1].promoCode,
-                      percent: discountList[1].discountPercentage,
+                      code: applicableDiscounts[1].promoCode,
+                      percent: applicableDiscounts[1].discountPercentage,
                     });
                     setAppDiscount(
                       (Number(data.price.discountPrice) *
-                        Number(discountList[1].discountPercentage)) /
+                        Number(applicableDiscounts[1].discountPercentage)) /
                         100
                     );
                   }}
@@ -194,7 +203,7 @@ const OrderSummary = () => {
               </div>
             </>
           ) : (
-            discountList.map((d) => (
+            applicableDiscounts.map((d) => (
               <div className="Coupons_now">
                 <h3>
                   Use {d.promoCode} promocode and get {d.discountPercentage}
@@ -204,7 +213,6 @@ const OrderSummary = () => {
                 <button
                   onClick={() => {
                     setDiscount({
-                      ...discount,
                       code: d.promoCode,
                       percent: d.discountPercentage,
                     });
@@ -239,22 +247,10 @@ const OrderSummary = () => {
           <div className="inputCoupon desktopElement">
             <input
               type="text"
-              value={uniDiscount.code}
-              onChange={(e) =>
-                setUniDiscount({ ...uniDiscount, code: e.target.value })
-              }
+              value={uniDiscount}
+              onChange={(e) => setUniDiscount(e.target.value)}
             />
-            <button
-              onClick={() => {
-                setAppDiscount(
-                  (Number(data.price.discountPrice) *
-                    Number(discount.percent)) /
-                    100
-                );
-              }}
-            >
-              Apply
-            </button>
+            <button onClick={addUniDiscount}>Apply</button>
           </div>
         </div>
 
@@ -282,7 +278,17 @@ const OrderSummary = () => {
               </div>
             </div>
             <div className="billrow">
-              <p>Applied Discount</p> <h5>₹{appDiscount}</h5>
+              <p>Applied Discount</p>
+              <p
+                style={{
+                  color: "red",
+                  fontWeight: "bold",
+                }}
+                onClick={removeHandler}
+              >
+                Remove Discount
+              </p>{" "}
+              <h5>₹{appDiscount}</h5>
             </div>
           </div>
         </div>

@@ -5,6 +5,7 @@ import {
   CREATE_LAB,
   FETCH_ALL_RAD_LABS,
   CREATE_RAD_LAB,
+  FILTER,
 } from "../constants/constants.jsx";
 import * as api from "../api/index.js";
 
@@ -76,6 +77,14 @@ export const editTest = (test, navigate) => async (dispatch) => {
     navigate("/dashboard/LabsAndPackages", {
       state: { _id: test.lab, title: test.name, type: true },
     });
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export const filter = (filter) => async (dispatch) => {
+  try {
+    dispatch({ type: FILTER, payload: filter });
   } catch (error) {
     console.log(error);
   }

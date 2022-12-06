@@ -23,10 +23,12 @@ const Orders = () => {
           <thead>
             <tr>
               <th>Customer</th>
+              <th>Mobile No</th>
               <th>item</th>
               <th>Lab </th>
               <th>Address</th>
               <th>Total Price</th>
+              <th>Discount Used</th>
               <th>status </th>
               <th>Reports</th>
             </tr>
@@ -34,15 +36,27 @@ const Orders = () => {
           <tbody>
             {orders.map(
               (
-                { userName, orderedItem, totalPrice, address, status },
+                {
+                  userName,
+                  userNo,
+                  discountUsed,
+                  orderedItem,
+                  totalPrice,
+                  address,
+                  status,
+                },
                 index
               ) => (
                 <tr>
                   <td>{userName}</td>
+                  <td>{userNo}</td>
                   <td>{orderedItem.item}</td>
                   <td>{orderedItem.lab}</td>
-                  <td>{address?.state}</td>
+                  <td>
+                    {address?.place},{address?.city},{address?.state}
+                  </td>
                   <td>{totalPrice}</td>
+                  <td>{discountUsed}</td>
                   <td
                     onClick={() =>
                       navigate("/dashboard/changeStatus", {

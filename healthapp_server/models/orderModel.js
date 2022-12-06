@@ -4,6 +4,8 @@ const orderSchema = mongoose.Schema(
   {
     totalPrice: Number,
     userName: String,
+    userNo: String,
+    discountUsed: String,
     userId: { type: mongoose.Schema.Types.ObjectId, ref: "User" },
     orderedFor: { name: String, age: String, sex: String },
     orderedOn: String,

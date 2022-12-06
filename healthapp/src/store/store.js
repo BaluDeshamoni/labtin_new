@@ -17,7 +17,11 @@ import {
 } from "../reducer/userReducer";
 import testReducer from "../reducer/testReducer";
 import radTestReducer from "../reducer/radTestReducer";
-import { labReducer, radLabReducer } from "../reducer/labReducer";
+import {
+  filterReducer,
+  labReducer,
+  radLabReducer,
+} from "../reducer/labReducer";
 import { bannerReducer, scrollmenuReducer } from "../reducer/appreanceReducer";
 import orderReducer from "../reducer/orderReducer";
 
@@ -38,6 +42,7 @@ const reducer = combineReducers({
   userDetails: userDetailsReducer,
   orders: orderReducer,
   complaints: userComplaintsReducer,
+  filter: filterReducer,
 });
 
 const userInfoFromStorage = localStorage.getItem("userInfo")

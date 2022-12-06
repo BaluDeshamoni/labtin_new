@@ -8,6 +8,8 @@ import { getPackages } from "../actions/packageActions";
 import { getTests } from "../actions/testActions";
 
 const ListPakage = () => {
+  const { filter } = useSelector((state) => state.filter);
+  console.log(filter);
   const { state } = useLocation();
   const dispatch = useDispatch();
   useEffect(() => {
@@ -16,7 +18,17 @@ const ListPakage = () => {
   }, [dispatch]);
   const { packageList } = useSelector((state) => state.packages);
   const { testList } = useSelector((state) => state.tests);
-  const list = state?.name == "HealthPakages" ? packageList : testList;
+  const tests = testList.filter((f) =>
+    f.availableIn
+      .map((m) => m.stateName?.toLowerCase())
+      .includes(filter?.toLowerCase())
+  );
+  const packages = packageList.filter((f) =>
+    f.availableIn
+      .map((m) => m.stateName?.toLowerCase())
+      .includes(filter?.toLowerCase())
+  );
+  const list = state?.name == "HealthPakages" ? packages : tests;
   return (
     <div className="pakages_main">
       <div className="third_section desktopElement">

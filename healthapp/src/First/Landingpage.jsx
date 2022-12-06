@@ -1,20 +1,13 @@
 import React, { useEffect } from "react";
 import "./LandingPage.css";
-// import Slider from "../components/Slider";
 import CircleImage from "../components/CircleImage";
 import LabTestCards from "../components/LabTestCards";
-import { useNavigate, useParams } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import FirstIconFirst from "../image/FreeSample.png";
 import FirstIconSecond from "../image/firstIcon-2.png";
 import FirstIconThird from "../image/firstIcon-3.png";
 import secondFirst from "../image/secondfirst.png";
 import secondIcon from "../image/secondsecond.png";
-import SFirstIcon from "../image/1.png";
-import SSecondIcon from "../image/2.png";
-import SThirdIcon from "../image/3.png";
-import SFourthIcon from "../image/4.png";
-import SFifthIcon from "../image/5.png";
-import InSlider from "../components/InSlider";
 import DSlider from "../components/DSlider";
 import Crousel from "../components/Crousels/Crousel";
 import MobileCrousel from "../components/Crousels/MobileCrousel";
@@ -22,11 +15,11 @@ import { useDispatch, useSelector } from "react-redux";
 import { getScrollmenus } from "../actions/appearanceActions";
 
 const Landingpage = () => {
-  const { loc } = useParams();
-  const lo = loc || "Hyderabad";
+  const { scrollmenuList } = useSelector((state) => state.scrollmenus);
+  const { filter } = useSelector((state) => state.filter);
+
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const [value, setValue] = React.useState(0);
 
   const navigateToPackages = () => {
     navigate(`/BookingPackages`, {
@@ -42,12 +35,22 @@ const Landingpage = () => {
   const navigateToRadiology = () => {
     navigate("/Radiology");
   };
-  const { scrollmenuList } = useSelector((state) => state.scrollmenus);
-  console.log(scrollmenuList);
 
   useEffect(() => {
     dispatch(getScrollmenus());
   }, [dispatch]);
+  const handlenav1 = (e) => {
+    e.preventDefault();
+    navigate(`/BookingPackages`, {
+      state: { name: "HealthPakages" },
+    });
+  };
+  const handlenav2 = (e) => {
+    e.preventDefault();
+    navigate(`/BookingPackages`, {
+      state: { name: "IndividualTests" },
+    });
+  };
 
   return (
     <div className="landing_div">
@@ -128,10 +131,10 @@ const Landingpage = () => {
       <div className="fifth_section">
         <div className="fifth_section_heading">
           Most Commonly Booked Tests{" "}
-          <button onClick={() => navigate("/TestPakage")}>see more</button>
+          <button onClick={handlenav2}>see more</button>
         </div>
         <div className="labtest_cards_list desktopElement">
-          <Crousel crousalData="Tests" loc={lo} />
+          <Crousel crousalData="Tests" loc={filter} />
         </div>
         <div className="labtest_cards_list mobileElement">
           <LabTestCards
@@ -157,10 +160,10 @@ const Landingpage = () => {
       <div className="fifth_section">
         <div className="fifth_section_heading">
           Most Commonly Booked Pakages{" "}
-          <button onClick={() => navigate("/TestPakage")}>see more</button>
+          <button onClick={handlenav1}>see more</button>
         </div>
         <div className="labtest_cards_list desktopElement">
-          <Crousel crousalData="pakages" loc={lo} />
+          <Crousel crousalData="pakages" loc={filter} />
         </div>
         <div className="labtest_cards_list mobileElement">
           <LabTestCards

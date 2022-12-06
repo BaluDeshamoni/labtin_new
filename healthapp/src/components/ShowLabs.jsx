@@ -19,15 +19,13 @@ const ShowLabs = () => {
   });
 
   const { labList } = useSelector((state) => state.labList);
+  const { filter } = useSelector((state) => state.filter);
   useEffect(() => {
     dispatch(getLabs());
   }, [dispatch]);
 
   const { vertical, horizontal, open } = state;
 
-  const handleClose = () => {
-    setState({ ...state, open: false });
-  };
   const { availableIn } = data;
   const availableInArray = availableIn.map((m) => m.lab);
   const available_labs = labList.filter((f) =>
@@ -78,7 +76,7 @@ const ShowLabs = () => {
         <DSlider />
       </div>
       <div className="showLabs_main_div">
-        <h2>Select Labs Available in Chennai</h2>
+        <h2>Select Labs Available in {filter}</h2>
 
         <div className="showLabs_list">
           {available_labs.map((l) => Labsdiv(l))}
