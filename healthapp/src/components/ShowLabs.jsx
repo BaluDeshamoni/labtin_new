@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import "./ShowLabs.css";
 import DSlider from "./DSlider";
 import Snackbar from "@mui/material/Snackbar";
@@ -9,8 +9,11 @@ import { getLabs } from "../actions/labActions";
 const ShowLabs = () => {
   const loc = useLocation();
   const data = loc.state.data;
+  const avail_labs = loc.state.avail_labs;
+  console.log(data, "kkk");
+  console.log(avail_labs, "ppp");
   const dispatch = useDispatch();
-  const [info, setInfo] = React.useState(data);
+  const [info, setInfo] = React.useState({});
   const navigate = useNavigate();
   const [state, setState] = React.useState({
     open: false,
@@ -20,33 +23,42 @@ const ShowLabs = () => {
 
   const { labList } = useSelector((state) => state.labList);
   const { filter } = useSelector((state) => state.filter);
+
   useEffect(() => {
     dispatch(getLabs());
   }, [dispatch]);
 
   const { vertical, horizontal, open } = state;
 
-  const { availableIn } = data;
-  const availableInArray = availableIn.map((m) => m.lab);
-  const available_labs = labList.filter((f) =>
-    availableInArray.includes(f._id)
-  );
-
-  const handlecheckbox = (e) => {
-    const l = available_labs.find((l) => l._id == e.target.value);
-    const r = availableIn.find((l) => l.lab == e.target.value);
-    setInfo({ ...info, lab: l, price: r });
-    setState({ ...state, open: true });
-  };
-
-  const action = (
-    <div
-      className="checkoutButton"
-      onClick={() => navigate("/Booking", { state: { info } })}
-    >
-      Next
-    </div>
-  );
+  var available_labs;
+  const cartItems = new Map();
+  var availableIn;
+  var testTitles = [];
+  if (avail_labs) {
+    for (const x of data.values()) {
+      testTitles.push(x.title);
+      x.availableIn
+        .filter((f) => avail_labs.includes(f.lab))
+        .map((m) => {
+          if (cartItems.has(m.lab)) {
+            cartItems.set(m.lab, cartItems.get(m.lab) + m.discountPrice);
+          } else {
+            cartItems.set(m.lab, m.discountPrice);
+          }
+        });
+    }
+    available_labs = labList.filter((f) => avail_labs.includes(f._id));
+  } else {
+    var dat;
+    for (const x of data.values()) {
+      dat = x;
+      testTitles.push(x.title);
+    }
+    const { availableIn: inData } = dat;
+    availableIn = inData;
+    const availableInArray = availableIn.map((m) => m.lab);
+    available_labs = labList.filter((f) => availableInArray.includes(f._id));
+  }
 
   const Labsdiv = (lab) => {
     return (
@@ -58,7 +70,11 @@ const ShowLabs = () => {
           <p>E-Report : {lab.time}Hours</p>
         </div>
         <div className="labs_price">
-          <h3>₹{availableIn.find((f) => f.lab == lab._id).discountPrice}</h3>
+          {avail_labs ? (
+            <h3>₹{cartItems.get(lab._id)}</h3>
+          ) : (
+            <h3>₹{availableIn.find((f) => f.lab == lab._id).discountPrice}</h3>
+          )}
           <input
             className="selectLabRadio"
             type="radio"
@@ -70,6 +86,29 @@ const ShowLabs = () => {
       </div>
     );
   };
+
+  const handlecheckbox = (e) => {
+    const l = available_labs.find((l) => l._id == e.target.value);
+    const r = avail_labs
+      ? cartItems.get(e.target.value)
+      : availableIn.find((l) => l.lab == e.target.value);
+    setInfo({ ...info, test_titles: testTitles, lab: l, price: r });
+    setState({ ...state, open: true });
+  };
+
+  const action = (
+    <div
+      className="checkoutButton"
+      onClick={() => navigate("/Booking", { state: { info } })}
+    >
+      Next
+    </div>
+  );
+  const filtered_labs = available_labs.filter(
+    (m) => m.state?.toLowerCase() == filter?.toLowerCase()
+  );
+  console.log(filtered_labs, "plp");
+
   return (
     <div className="showLabs_main">
       <div className="third_section desktopElement">
@@ -77,10 +116,13 @@ const ShowLabs = () => {
       </div>
       <div className="showLabs_main_div">
         <h2>Select Labs Available in {filter}</h2>
-
-        <div className="showLabs_list">
-          {available_labs.map((l) => Labsdiv(l))}
-        </div>
+        {filtered_labs.length > 0 ? (
+          <div className="showLabs_list">
+            {filtered_labs.map((l) => Labsdiv(l))}
+          </div>
+        ) : (
+          <div className="showLabs_list">No Labs Available</div>
+        )}
       </div>
       <Snackbar
         sx={{ marginBottom: "5rem" }}

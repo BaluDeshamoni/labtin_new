@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import "./LandingPage.css";
 import CircleImage from "../components/CircleImage";
 import LabTestCards from "../components/LabTestCards";
@@ -13,6 +13,7 @@ import Crousel from "../components/Crousels/Crousel";
 import MobileCrousel from "../components/Crousels/MobileCrousel";
 import { useDispatch, useSelector } from "react-redux";
 import { getScrollmenus } from "../actions/appearanceActions";
+import { Snackbar } from "@mui/material";
 
 const Landingpage = () => {
   const { scrollmenuList } = useSelector((state) => state.scrollmenus);
@@ -51,6 +52,49 @@ const Landingpage = () => {
       state: { name: "IndividualTests" },
     });
   };
+
+  const [state, setState] = React.useState({
+    open: false,
+    vertical: "bottom",
+    horizontal: "center",
+  });
+
+  const [cart, setCart] = useState(new Map());
+  const { vertical, horizontal, open } = state;
+
+  const handleClick = () => {
+    setState({ ...state, open: true });
+  };
+
+  const handleClose = () => {
+    setState({ ...state, open: false });
+  };
+  const handle = () => {
+    const arr = [];
+    for (const x of cart.values()) {
+      arr.push(x.availableIn.map((m) => m.lab));
+    }
+    console.log(arr, "abcd");
+    const result = arr.reduce((a, b) => a.filter((c) => b.includes(c)));
+    console.log(result);
+    result.length > 0
+      ? navigate("/selectlab", {
+          state: { data: cart, avail_labs: result },
+        })
+      : alert("Combination is not available");
+  };
+  const action = (
+    <div
+      className="checkoutButton"
+      onClick={() =>
+        cart.size == 1
+          ? navigate("/selectlab", { state: { data: cart } })
+          : handle()
+      }
+    >
+      Show Labs
+    </div>
+  );
 
   return (
     <div className="landing_div">
@@ -134,7 +178,23 @@ const Landingpage = () => {
           <button onClick={handlenav2}>see more</button>
         </div>
         <div className="labtest_cards_list desktopElement">
-          <Crousel crousalData="Tests" loc={filter} />
+          <Crousel
+            crousalData="Tests"
+            loc={filter}
+            cart={cart}
+            setCart={setCart}
+            state={state}
+            setState={setState}
+          />
+          <Snackbar
+            sx={{ marginBottom: "5rem" }}
+            className="snackbar"
+            anchorOrigin={{ vertical, horizontal }}
+            open={open}
+            message={`${cart.size} item in Cart`}
+            action={action}
+            key={vertical + horizontal}
+          />
         </div>
         <div className="labtest_cards_list mobileElement">
           <LabTestCards

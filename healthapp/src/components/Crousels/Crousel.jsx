@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
@@ -7,6 +7,7 @@ import "./Crousel.css";
 import { useDispatch, useSelector } from "react-redux";
 import { getPackages } from "../../actions/packageActions";
 import { getTests } from "../../actions/testActions";
+import { useNavigate } from "react-router-dom";
 const Crousel = (props) => {
   const sliderSettings = {
     dots: true,
@@ -48,6 +49,7 @@ const Crousel = (props) => {
     dispatch(getPackages());
     dispatch(getTests());
   }, [dispatch]);
+  const navigate = useNavigate();
   const { packageList } = useSelector((state) => state.packages);
   const { testList } = useSelector((state) => state.tests);
 
@@ -64,7 +66,15 @@ const Crousel = (props) => {
   const popularTests = tests.map((data, index) => {
     return (
       <div key={data.title + index}>
-        <PopularPakages offPercentage="30" data={data} type="tests" />
+        <PopularPakages
+          offPercentage="30"
+          data={data}
+          type="tests"
+          cart={props.cart}
+          setCart={props.setCart}
+          state={props.state}
+          setState={props.setState}
+        />
       </div>
     );
   });

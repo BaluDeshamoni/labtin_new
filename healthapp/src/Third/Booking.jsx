@@ -15,7 +15,7 @@ const Booking = () => {
   const loc = useLocation();
   const dispatch = useDispatch();
   const data = loc.state.info;
-  console.log(data);
+  console.log(data, "qwer");
   const [info, setInfo] = useState(data);
   const [state, setState] = React.useState({
     open: false,

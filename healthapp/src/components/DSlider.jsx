@@ -83,7 +83,7 @@ const DSlider = () => {
         {bannerList.map((m) => (
           <div
             className="sliderImage"
-            onClick={() => window.open(m.link, "_blank")}
+            onClick={() => m.link != "#" && window.open(m.link, "_blank")}
           >
             <img src={m.img} alt="SliderImage one" />
           </div>

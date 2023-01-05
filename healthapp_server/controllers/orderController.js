@@ -15,7 +15,10 @@ export const createOrder = asyncHandler(async (req, res) => {
     data.currentDate[1] + " ";
     data.currentDate[2] + " ";
     data.currentDate[3];
-    const orderedItem = { item: data.title, lab: data.lab.title };
+    const orderedItem = {
+      item: data.test_titles.join(","),
+      lab: data.lab.title,
+    };
 
     const order = await Order.create({
       userName: req.user.name,

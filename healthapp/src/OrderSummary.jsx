@@ -52,7 +52,9 @@ const OrderSummary = () => {
       percent: dis.discountPercentage,
     });
     setAppDiscount(
-      (Number(data.price.discountPrice) * Number(dis.discountPercentage)) / 100
+      (Number(data.price.discountPrice | data.price) *
+        Number(dis.discountPercentage)) /
+        100
     );
   };
   const removeHandler = () => {
@@ -69,7 +71,7 @@ const OrderSummary = () => {
           createOrder(
             {
               ...data,
-              totalPrice: data.price.discountPrice - appDiscount,
+              totalPrice: (data.price.discountPrice | data.price) - appDiscount,
               discountUsed: discount,
             },
             navigate
@@ -108,7 +110,7 @@ const OrderSummary = () => {
                     percent: d.discountPercentage,
                   });
                   setAppDiscount(
-                    (Number(data.price.discountPrice) *
+                    (Number(data.price.discountPrice | data.price) *
                       Number(d.discountPercentage)) /
                       100
                   );
@@ -164,7 +166,7 @@ const OrderSummary = () => {
                       percent: applicableDiscounts[0].discountPercentage,
                     });
                     setAppDiscount(
-                      (Number(data.price.discountPrice) *
+                      (Number(data.price.discountPrice | data.price) *
                         Number(applicableDiscounts[0].discountPercentage)) /
                         100
                     );
@@ -187,7 +189,7 @@ const OrderSummary = () => {
                       percent: applicableDiscounts[1].discountPercentage,
                     });
                     setAppDiscount(
-                      (Number(data.price.discountPrice) *
+                      (Number(data.price.discountPrice | data.price) *
                         Number(applicableDiscounts[1].discountPercentage)) /
                         100
                     );
@@ -217,7 +219,7 @@ const OrderSummary = () => {
                       percent: d.discountPercentage,
                     });
                     setAppDiscount(
-                      (Number(data.price.discountPrice) *
+                      (Number(data.price.discountPrice | data.price) *
                         Number(d.discountPercentage)) /
                         100
                     );
@@ -258,7 +260,8 @@ const OrderSummary = () => {
           <h3>Bill Details</h3>
           <div className="billCalc">
             <div className="billrow">
-              <p>Test Total</p> <h5>₹{data.price.discountPrice}</h5>
+              <p>Test Total</p>{" "}
+              <h5>₹{data.price.discountPrice | data.price}</h5>
             </div>
             <div className="billrow">
               <p>Sample Collection Charges</p>{" "}
@@ -297,7 +300,9 @@ const OrderSummary = () => {
           anchorOrigin={{ vertical, horizontal }}
           open={true}
           onClose={handleClose}
-          message={`Total ₹${data.price.discountPrice - appDiscount}`}
+          message={`Total ₹${
+            (data.price.discountPrice | data.price) - appDiscount
+          }`}
           action={action}
           key={vertical + horizontal}
         />

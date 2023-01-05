@@ -2,50 +2,31 @@ import React, { useState } from "react";
 import "./PopularPakages.css";
 import Snackbar, { SnackbarOrigin } from "@mui/material/Snackbar";
 import { Link, useNavigate } from "react-router-dom";
-import KnowMore from "./KnowMore";
 import Modal from "react-modal";
+import { useSelector } from "react-redux";
 
 const PopularPakages = (props) => {
   const navigate = useNavigate();
+  const { filter } = useSelector((state) => state.filter);
 
-  const [state, setState] = React.useState({
-    open: false,
-    vertical: "bottom",
-    horizontal: "center",
-  });
-
-  const { vertical, horizontal, open } = state;
-
-  const handleClick = () => {
-    setState({ ...state, open: true });
-  };
-
-  const handleClose = () => {
-    setState({ ...state, open: false });
-  };
-  const action = (
-    <div
-      className="checkoutButton"
-      onClick={() => navigate("/selectlab", { state: { data: props.data } })}
-    >
-      Show Labs
-    </div>
-  );
-
-  const handleBooking = (e) => {
-    if (e.target.innerHTML === "Book Now") {
-      e.target.classList.remove("BookNowButton");
-      e.target.classList.add("RemoveNowButton");
-      e.target.innerHTML = "Remove";
-      setState({ ...state, open: true });
+  const [message, setMessage] = useState("Book Now");
+  const addToCart = (e) => {
+    if (props.cart.has(props.data._id)) {
+      props.cart.delete(props.data._id);
+      props.cart.size > 0
+        ? props.setState({ ...props.state, open: true })
+        : props.setState({ ...props.state, open: false });
+      setMessage("Book Now");
     } else {
-      e.target.innerHTML = "Book Now";
-      e.target.classList.remove("RemoveNowButton");
-
-      e.target.classList.add("BookNowButton");
-      setState({ ...state, open: false });
+      var ct = props.cart.set(props.data._id, props.data);
+      props.setCart(ct);
+      props.cart.size > 0
+        ? props.setState({ ...props.state, open: true })
+        : props.setState({ ...props.state, open: false });
+      setMessage("Remove Item");
     }
   };
+  console.log(props.cart, "hhh");
   const { availableIn } = props.data;
   const discount = Math.min(...availableIn.map((m) => m.discountPrice));
   const original = Math.min(...availableIn.map((m) => m.originalPrice));
@@ -123,7 +104,14 @@ const PopularPakages = (props) => {
           {props.type == "tests" && (
             <div className="test_available">
               <div>Available In</div>
-              <div>{props.data.availableIn.length} Diagnostics</div>
+              <div>
+                {
+                  props.data.availableIn.filter(
+                    (f) => f.stateName?.toLowerCase() == filter?.toLowerCase()
+                  ).length
+                }{" "}
+                Diagnostics
+              </div>
             </div>
           )}
           <div className="pakage_price">
@@ -138,20 +126,10 @@ const PopularPakages = (props) => {
             </div>
           </div>
         </div>
-        <button className="BookNowButton" onClick={handleBooking}>
-          Book Now
+        <button className="BookNowButton" onClick={addToCart}>
+          {message}
         </button>
       </div>
-      <Snackbar
-        sx={{ marginBottom: "5rem" }}
-        className="snackbar"
-        anchorOrigin={{ vertical, horizontal }}
-        open={open}
-        onClose={handleClose}
-        message="1 item in Cart"
-        action={action}
-        key={vertical + horizontal}
-      />
     </div>
   );
 };
