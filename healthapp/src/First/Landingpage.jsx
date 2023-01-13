@@ -62,13 +62,6 @@ const Landingpage = () => {
   const [cart, setCart] = useState(new Map());
   const { vertical, horizontal, open } = state;
 
-  const handleClick = () => {
-    setState({ ...state, open: true });
-  };
-
-  const handleClose = () => {
-    setState({ ...state, open: false });
-  };
   const handle = () => {
     const arr = [];
     for (const x of cart.values()) {
@@ -223,7 +216,23 @@ const Landingpage = () => {
           <button onClick={handlenav1}>see more</button>
         </div>
         <div className="labtest_cards_list desktopElement">
-          <Crousel crousalData="pakages" loc={filter} />
+          <Crousel
+            crousalData="pakages"
+            loc={filter}
+            cart={cart}
+            setCart={setCart}
+            state={state}
+            setState={setState}
+          />
+          <Snackbar
+            sx={{ marginBottom: "5rem" }}
+            className="snackbar"
+            anchorOrigin={{ vertical, horizontal }}
+            open={open}
+            message={`${cart.size} item in Cart`}
+            action={action}
+            key={vertical + horizontal}
+          />
         </div>
         <div className="labtest_cards_list mobileElement">
           <LabTestCards

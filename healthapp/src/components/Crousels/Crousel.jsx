@@ -81,7 +81,15 @@ const Crousel = (props) => {
   const popularPackages = packages.map((data, index) => {
     return (
       <div key={data.title + index}>
-        <PopularPakages offPercentage="30" data={data} type="packages" />
+        <PopularPakages
+          offPercentage="30"
+          data={data}
+          type="packages"
+          cart={props.cart}
+          setCart={props.setCart}
+          state={props.state}
+          setState={props.setState}
+        />
       </div>
     );
   });

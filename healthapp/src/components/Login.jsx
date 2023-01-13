@@ -12,8 +12,11 @@ const Login = ({ history }) => {
   const [enteredOtp, setEnteredOtp] = useState("");
   const [genOtp, setGenOtp] = useState("");
   const [msg, setMsg] = useState("");
+  const [disableOtpButton, setDisableOtpButton] = useState(false);
+  const [disableTimer, setDisableTimer] = useState();
   const navigate = useNavigate();
-
+  let myInterval,
+    disableOTPmilliseconds = 5000;
   const getOtp = async () => {
     var otp = Math.floor(1000 + Math.random() * 9000);
     setGenOtp(otp);
@@ -22,6 +25,18 @@ const Login = ({ history }) => {
     // );
     console.log(otp);
     setActive(true);
+    setDisableOtpButton(true);
+
+    myInterval = setInterval(() => {
+      return setDisableTimer((prev) => prev - 1);
+    }, 1000);
+
+    setTimeout(() => {
+      setDisableOtpButton(false);
+      setDisableTimer(disableOTPmilliseconds / 1000);
+
+      clearInterval(myInterval);
+    }, disableOTPmilliseconds);
   };
 
   const dispatch = useDispatch();
@@ -51,7 +66,10 @@ const Login = ({ history }) => {
               value={num}
               onChange={(e) => setNum(e.target.value)}
             />
-            <button onClick={getOtp}>Get Otp</button>
+            <button onClick={getOtp} disabled={disableOtpButton}>
+              Get Otp
+            </button>
+            {disableOtpButton && <p>Resend otp in 30sec</p>}
           </div>
           {active && (
             <div className="login_form_entry">
