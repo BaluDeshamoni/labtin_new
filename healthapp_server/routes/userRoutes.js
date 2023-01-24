@@ -8,6 +8,7 @@ import {
   getDetails,
   createComplaint,
   getComplaints,
+  verify,
 } from "../controllers/userController.js";
 import { admin, protect } from "../middleware/auth.js";
 
@@ -18,6 +19,7 @@ router.post("/login", authUser);
 router.put("/newUser", protect, addUser);
 router.put("/address", protect, addAddress);
 router.get("/details", protect, getDetails);
+router.get("/verify/:num", verify);
 router
   .route("/complaint")
   .post(protect, admin, createComplaint)

@@ -103,3 +103,14 @@ export const getComplaints = asyncHandler(async (req, res) => {
     res.status(409).json({ message: error.message });
   }
 });
+
+export const verify = asyncHandler(async (req, res) => {
+  console.log(req);
+  try {
+    const userExists = await User.findOne({ number: req.params.num });
+    console.log(userExists);
+    userExists ? res.json({ status: true }) : res.json({ status: false });
+  } catch (error) {
+    res.status(409).json({ message: error.message });
+  }
+});

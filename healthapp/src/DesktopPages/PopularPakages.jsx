@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import "./PopularPakages.css";
-import Snackbar, { SnackbarOrigin } from "@mui/material/Snackbar";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import Modal from "react-modal";
 import { useSelector } from "react-redux";
 
@@ -27,9 +26,11 @@ const PopularPakages = (props) => {
     }
   };
   console.log(props.cart, "hhh");
-  const { availableIn } = props.data;
-  const discount = Math.min(...availableIn.map((m) => m.discountPrice));
-  const original = Math.min(...availableIn.map((m) => m.originalPrice));
+  const filterAvailableIn = props.data.availableIn.filter(
+    (f) => f.stateName?.toLowerCase() == filter?.toLowerCase()
+  );
+  const discount = Math.min(...filterAvailableIn.map((m) => m.discountPrice));
+  const original = Math.min(...filterAvailableIn.map((m) => m.originalPrice));
   const discount_per = Math.trunc(((original - discount) / original) * 100);
   const details = props.data.details.split(",");
   const miniDetails = details.length < 3 ? details : details.slice(0, 3);
