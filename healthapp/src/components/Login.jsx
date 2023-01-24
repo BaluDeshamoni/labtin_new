@@ -38,6 +38,14 @@ const Login = ({ history }) => {
       clearInterval(myInterval);
     }, disableOTPmilliseconds);
   };
+  const verify = async () => {
+    const { data } = await axios.get(`users/verify/${num}`);
+    console.log(data);
+
+    data.status
+      ? dispatch(login(num))
+      : navigate("/RegisterUser", { state: num });
+  };
 
   const dispatch = useDispatch();
   const userLogin = useSelector((state) => state.userLogin);
@@ -49,7 +57,7 @@ const Login = ({ history }) => {
   }, [history, userInfo]);
   const submitHandler = (e) => {
     e.preventDefault();
-    enteredOtp == genOtp ? dispatch(login(num)) : setMsg("Wrong OTP");
+    enteredOtp == genOtp ? verify() : setMsg("Wrong OTP");
   };
 
   return (
@@ -80,14 +88,14 @@ const Login = ({ history }) => {
                 onChange={(e) => setEnteredOtp(e.target.value)}
               />
               <button className="submitButton" onClick={submitHandler}>
-                Login
+                Login / Sign Up
               </button>
             </div>
           )}
-          <div className="signUp_sec">
+          {/* <div className="signUp_sec">
             <p>Don't have a account? </p>
             <Link to="/Register"> SignUp</Link>
-          </div>
+          </div> */}
         </div>
         <div className="header_logo loginfooter">
           <img src={Logo} onClick={() => navigate("/")} alt="Logo" />
