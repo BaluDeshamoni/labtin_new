@@ -133,7 +133,7 @@ const OrderSummary = () => {
             </span>
           </h3>
           <div className="pakageName">
-            <h3>{data.title}</h3>
+            <h3>{data.test_titles.join(",")}</h3>
             <h3>10-12hr fasting is Required</h3>
           </div>
           <div className="pakageAvialability">

@@ -79,7 +79,7 @@
 }
 
 .searchbar {
-  width: 60%;
+  width: 50%;
   display: flex;
   align-items: center;
   border: 1px solid rgb(181, 181, 181);
@@ -117,8 +117,19 @@
 }
 
 .uploadPrescription {
-  padding: 0.25rem;
-  margin-right: 9rem;
+  padding: 0.1rem;
+  margin: 0 5px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #000c83;
+  border-radius: 5px;
+  cursor: pointer;
+}
+.selectState {
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .selectState > select {
@@ -130,6 +141,10 @@
 
 .selectState > select:focus {
   outline: none;
+}
+.loc_img {
+  height: 30px;
+  width: 30px;
 }
 
 .header_profile:hover ~ #action .menu,

@@ -102,23 +102,21 @@ const PopularPakages = (props) => {
         </div>
 
         <div className="pakage_bottom">
-          {props.type == "tests" && (
-            <div className="test_available">
-              <div>Available In</div>
-              <div>
-                {
-                  props.data.availableIn.filter(
-                    (f) => f.stateName?.toLowerCase() == filter?.toLowerCase()
-                  ).length
-                }{" "}
-                Diagnostics
-              </div>
+          <div className="test_available">
+            <div>Available In</div>
+            <div>
+              {
+                props.data.availableIn.filter(
+                  (f) => f.stateName?.toLowerCase() == filter?.toLowerCase()
+                ).length
+              }{" "}
+              Diagnostics
             </div>
-          )}
+          </div>
+
           <div className="pakage_price">
-            {props.type == "tests" && (
-              <div className="test_price">starts from</div>
-            )}
+            <div className="test_price">starts from</div>
+
             <div>
               <span style={{ textDecoration: "line-through", color: "red" }}>
                 {original}

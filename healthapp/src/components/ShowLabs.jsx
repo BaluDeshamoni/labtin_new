@@ -63,6 +63,9 @@ const ShowLabs = () => {
   const Labsdiv = (lab) => {
     return (
       <div className="labs_div">
+        <div className="lab_logo">
+          <img src={lab.logo} />
+        </div>
         <div className="labs_name">
           <h2>{lab.title}</h2>
           <p>{lab.accrediation} Accredited</p>
@@ -115,9 +118,9 @@ const ShowLabs = () => {
         <DSlider />
       </div>
       <div className="showLabs_main_div">
-        <h2>Select Labs Available in {filter}</h2>
         {filtered_labs.length > 0 ? (
           <div className="showLabs_list">
+            <h2>Select Labs Available in {filter}</h2>
             {filtered_labs.map((l) => Labsdiv(l))}
           </div>
         ) : (
@@ -125,7 +128,7 @@ const ShowLabs = () => {
         )}
       </div>
       <Snackbar
-        sx={{ marginBottom: "5rem" }}
+        sx={{ marginBottom: "0.2rem" }}
         anchorOrigin={{ vertical, horizontal }}
         open={open}
         message="Lab Selected"

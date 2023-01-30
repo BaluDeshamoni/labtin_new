@@ -20,6 +20,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { logout } from "../actions/userActions";
 import { getLocations } from "../actions/packageActions";
 import { filter } from "../actions/labActions";
+import FmdGoodIcon from "@mui/icons-material/FmdGood";
 
 const Header = () => {
   const [show, setShow] = useState(false);
@@ -134,9 +135,11 @@ const Header = () => {
           >
             {/* <HeaderOptions Icon={NoteAddRoundedIcon} Title={"Prescription"} /> */}
             <NoteAddRoundedIcon fontSize="large" />
+            upload Prescription
           </div>
 
           <div className="selectState">
+            <img className="loc_img" src="/imgs/loc1.avif" />
             <select
               onChange={(e) => dispatch(filter(e.target.value))}
               name="state"
@@ -161,7 +164,7 @@ const Header = () => {
         </div>
         <div className="action" id="action">
           <div className="menu ">
-            <CircleImage image={Tick} name={userInfo?.name} />
+            <CircleImage name={userInfo?.name} />
             <ul>
               <li>
                 <Link to="/">

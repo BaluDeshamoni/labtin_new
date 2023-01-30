@@ -72,7 +72,9 @@ const ManagePartnerlabs = () => {
                     >
                       {title}
                     </td>
-                    <td>{logo}</td>
+                    <td>
+                      <img src={logo} />
+                    </td>
                     <td>{accrediation}</td>
                     <td>{time}</td>
                     <td>{state}</td>

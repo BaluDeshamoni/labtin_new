@@ -21,6 +21,12 @@
   box-shadow: rgba(9, 42, 7, 0.64) 0px 3px 8px;
 }
 
+.slick-dots li.slick-active button:before {
+  font-size: 50px;
+  content: "-";
+  line-height: 0px;
+}
+
 /* @media (max-width: 1500px) {
     .sliderImage>img {
         width: 40rem;

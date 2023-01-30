@@ -122,7 +122,7 @@ const Booking = () => {
                     >
                       <img
                         alt="Logo"
-                        src={u.img}
+                        src={u.img ? u.img : "/imgs/person.jpg"}
                         style={{
                           width: "4rem",
                           height: "4rem",

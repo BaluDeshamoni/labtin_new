@@ -9,7 +9,11 @@ const CircleImage = (props: any) => {
       onClick={() => props.type == "menu" && navigate(`/scroll/${props.id}`)}
     >
       <div className="selfCheck_circle">
-        <img src={props.image} alt="" />
+        {props.image ? (
+          <img src={props.image} alt="" />
+        ) : (
+          <img src="/imgs/person.jpg" alt="" />
+        )}
       </div>
       {props.name ? (
         <h3>{props.name}</h3>
