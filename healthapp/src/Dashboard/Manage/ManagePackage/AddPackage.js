@@ -17,6 +17,7 @@ const AddPackage = () => {
   const [data, setData] = useState({
     title: "",
     details: "",
+    requirements: "",
     parameters: "",
   });
   return (
@@ -37,7 +38,13 @@ const AddPackage = () => {
           value={data.details}
           onChange={(e) => setData({ ...data, details: e.target.value })}
         />
-
+        <input
+          type="text"
+          name="requirements"
+          placeholder="Package requirements"
+          value={data.requirements}
+          onChange={(e) => setData({ ...data, requirements: e.target.value })}
+        />
         <input
           type="number"
           name="parameters"

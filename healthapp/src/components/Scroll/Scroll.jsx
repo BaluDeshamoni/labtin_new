@@ -123,7 +123,7 @@ const Scroll = () => {
         )}
       </div>
       <Snackbar
-        sx={{ marginBottom: "5rem" }}
+        sx={{ marginBottom: "-1rem" }}
         className="snackbar"
         anchorOrigin={{ vertical, horizontal }}
         open={open}

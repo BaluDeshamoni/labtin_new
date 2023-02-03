@@ -31,6 +31,7 @@ const ManageTest = () => {
             <tr>
               <th>Name</th>
               <th>Details</th>
+              <th>requirements</th>
             </tr>
           </thead>
           <tbody>

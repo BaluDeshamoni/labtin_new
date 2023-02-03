@@ -17,6 +17,7 @@ const AddTest = () => {
   const [data, setData] = React.useState({
     title: "",
     details: "",
+    requirements: "",
   });
   return (
     <div className="add_package">
@@ -34,7 +35,12 @@ const AddTest = () => {
           placeholder="test Details"
           onChange={(e) => setData({ ...data, details: e.target.value })}
         />
-
+        <input
+          type="text"
+          name="requirements"
+          placeholder="test requirements"
+          onChange={(e) => setData({ ...data, requirements: e.target.value })}
+        />
         <button type="submit" className="add_package_btn">
           Add Test
         </button>

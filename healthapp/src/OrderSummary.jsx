@@ -67,15 +67,13 @@ const OrderSummary = () => {
     <button
       className="checkoutButton"
       onClick={() => {
+        navigate("/MyBookings");
         dispatch(
-          createOrder(
-            {
-              ...data,
-              totalPrice: (data.price.discountPrice | data.price) - appDiscount,
-              discountUsed: discount,
-            },
-            navigate
-          )
+          createOrder({
+            ...data,
+            totalPrice: (data.price.discountPrice | data.price) - appDiscount,
+            discountUsed: discount,
+          })
         );
       }}
     >

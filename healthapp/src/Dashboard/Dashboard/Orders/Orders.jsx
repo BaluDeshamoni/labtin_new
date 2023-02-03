@@ -26,6 +26,7 @@ const Orders = () => {
               <th>Mobile No</th>
               <th>item</th>
               <th>Lab </th>
+              <th>orderedOn </th>
               <th>Address</th>
               <th>Total Price</th>
               <th>Discount Used</th>
@@ -41,6 +42,7 @@ const Orders = () => {
                   userNo,
                   discountUsed,
                   orderedItem,
+                  orderedOn,
                   totalPrice,
                   address,
                   status,
@@ -52,11 +54,12 @@ const Orders = () => {
                   <td>{userNo}</td>
                   <td>{orderedItem.item}</td>
                   <td>{orderedItem.lab}</td>
+                  <td>{orderedOn}</td>
                   <td>
                     {address?.place},{address?.city},{address?.state}
                   </td>
                   <td>{totalPrice}</td>
-                  <td>{discountUsed}</td>
+                  <td>{discountUsed || "None"}</td>
                   <td
                     onClick={() =>
                       navigate("/dashboard/changeStatus", {

@@ -1,6 +1,8 @@
-import React from "react";
 import { useNavigate } from "react-router-dom";
 import "./CircleImage.css";
+import Avatar from "@mui/material/Avatar";
+import { stringAvatar } from "./Avatar";
+
 const CircleImage = (props: any) => {
   const navigate = useNavigate();
   return (
@@ -12,7 +14,7 @@ const CircleImage = (props: any) => {
         {props.image ? (
           <img src={props.image} alt="" />
         ) : (
-          <img src="/imgs/person.jpg" alt="" />
+          <Avatar {...stringAvatar(props.name)} />
         )}
       </div>
       {props.name ? (

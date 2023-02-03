@@ -34,14 +34,13 @@ const ManagePackage = () => {
             <tr>
               <th>Name</th>
               <th>Details</th>
+              <th>requirements</th>
               <th>Parameters</th>
             </tr>
           </thead>
           <tbody>
             {packageList &&
-              packageList.map((singlePackage) => (
-                <PackageRow singlePackage={singlePackage} />
-              ))}
+              packageList.map((data) => <PackageRow data={data} />)}
           </tbody>
         </table>
       </div>

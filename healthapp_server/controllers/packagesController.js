@@ -37,6 +37,7 @@ export const editPackage = async (req, res) => {
       pack.title = req.body.title || pack.title;
       pack.details = req.body.details || pack.details;
       pack.parameters = req.body.parameters || pack.parameters;
+      pack.requirements = req.body.requirements || pack.requirements;
 
       if (present) {
         for (let x in pack.availableIn) {

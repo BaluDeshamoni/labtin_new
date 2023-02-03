@@ -36,6 +36,7 @@ export const editTest = async (req, res) => {
     if (test) {
       test.title = req.body.title || test.title;
       test.details = req.body.details || test.details;
+      test.requirements = req.body.requirements || test.requirements;
 
       if (present) {
         for (let x in test.availableIn) {

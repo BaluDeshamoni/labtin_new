@@ -11,10 +11,16 @@ export const createOrder = asyncHandler(async (req, res) => {
       age: data.selectedUser.age,
       sex: data.selectedUser.sex,
     };
-    const orderedOn = data.currentDate[0] + " ";
-    data.currentDate[1] + " ";
-    data.currentDate[2] + " ";
-    data.currentDate[3];
+    const orderedOn =
+      data.time +
+      "," +
+      data.currentDate[0] +
+      "," +
+      data.currentDate[1] +
+      "-" +
+      data.currentDate[2] +
+      "-" +
+      data.currentDate[3];
     const orderedItem = {
       item: data.test_titles.join(","),
       lab: data.lab.title,

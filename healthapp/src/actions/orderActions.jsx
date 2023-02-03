@@ -49,7 +49,7 @@ export const getMyOrders = () => async (dispatch, getState) => {
   }
 };
 
-export const createOrder = (order, navigate) => async (dispatch, getState) => {
+export const createOrder = (order) => async (dispatch, getState) => {
   try {
     const {
       userLogin: { userInfo },
@@ -65,8 +65,6 @@ export const createOrder = (order, navigate) => async (dispatch, getState) => {
 
     dispatch({ type: CREATE_ORDER, payload: data });
     dispatch({ type: END_LOADING });
-
-    navigate("/MyBookings");
   } catch (error) {
     console.log(error);
   }

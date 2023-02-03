@@ -1,16 +1,10 @@
-import React from "react";
-import { Package } from "../../../modals/Package";
-
-interface Props {
-  singlePackage: Package;
-}
-
-const PackageRow: React.FC<Props> = ({ singlePackage }) => {
-  const { title, details, parameters } = singlePackage;
+const PackageRow = ({ data }) => {
+  const { title, details, requirements, parameters } = data;
   return (
     <tr>
       <td>{title}</td>
       <td>{details}</td>
+      <td>{requirements}</td>
       <td>{parameters}</td>
       {/* <td>
                 <button className='delete-btn'>Delete</button>

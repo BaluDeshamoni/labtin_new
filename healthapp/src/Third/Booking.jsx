@@ -10,6 +10,8 @@ import AddUser from "./AddUser";
 import AddAddress from "./AddAddress";
 import { useDispatch, useSelector } from "react-redux";
 import { userDetails } from "../actions/userActions";
+import Avatar from "@mui/material/Avatar";
+import { stringAvatar } from "../components/Avatar";
 
 const Booking = () => {
   const loc = useLocation();
@@ -120,16 +122,21 @@ const Booking = () => {
                       }
                       onClick={() => setSelectedUser(u)}
                     >
-                      <img
-                        alt="Logo"
-                        src={u.img ? u.img : "/imgs/person.jpg"}
-                        style={{
-                          width: "4rem",
-                          height: "4rem",
-                          bgcolor: "purple",
-                          borderRadius: "50%",
-                        }}
-                      />
+                      {u.img ? (
+                        <img
+                          alt="Logo"
+                          src={u.img}
+                          style={{
+                            width: "4rem",
+                            height: "4rem",
+                            bgcolor: "purple",
+                            borderRadius: "50%",
+                          }}
+                        />
+                      ) : (
+                        <Avatar {...stringAvatar(u.name)} />
+                      )}
+
                       <h3>{u.name}</h3>
                     </div>
                   ))}

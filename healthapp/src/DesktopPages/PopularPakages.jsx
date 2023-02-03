@@ -84,7 +84,7 @@ const PopularPakages = (props) => {
         <div className="pakage_details">
           <h3 className="pakagesName">{props.data.title}</h3>
           <p style={{ color: "red", fontSize: "80%", marginTop: "0.5rem " }}>
-            REQUIRED FASTING
+            {props.data.requirements || "REQUIRED FASTING"}
           </p>
           {props.data.parameters && (
             <p className="IPara">
